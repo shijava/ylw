@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.SurveyItemOptionMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.SurveyItemOption" >
+    <constructor >
+      <arg column="SurveyItemOptionID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ItemOptionName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SurveyItemID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SurveyItemOptionID, ItemOptionName, SurveyItemID, ListID, AdminID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.SurveyItemOptionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_surveyitemoption
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.SurveyItemOptionExample" >
+    delete from t_surveyitemoption
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.SurveyItemOption" >
+    insert into t_surveyitemoption (SurveyItemOptionID, ItemOptionName, 
+      SurveyItemID, ListID, AdminID
+      )
+    values (#{surveyitemoptionid,jdbcType=INTEGER}, #{itemoptionname,jdbcType=VARCHAR}, 
+      #{surveyitemid,jdbcType=INTEGER}, #{listid,jdbcType=INTEGER}, #{adminid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.SurveyItemOption" >
+    insert into t_surveyitemoption
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyitemoptionid != null" >
+        SurveyItemOptionID,
+      </if>
+      <if test="itemoptionname != null" >
+        ItemOptionName,
+      </if>
+      <if test="surveyitemid != null" >
+        SurveyItemID,
+      </if>
+      <if test="listid != null" >
+        ListID,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyitemoptionid != null" >
+        #{surveyitemoptionid,jdbcType=INTEGER},
+      </if>
+      <if test="itemoptionname != null" >
+        #{itemoptionname,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyitemid != null" >
+        #{surveyitemid,jdbcType=INTEGER},
+      </if>
+      <if test="listid != null" >
+        #{listid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.SurveyItemOptionExample" resultType="java.lang.Integer" >
+    select count(*) from t_surveyitemoption
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_surveyitemoption
+    <set >
+      <if test="record.surveyitemoptionid != null" >
+        SurveyItemOptionID = #{record.surveyitemoptionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.itemoptionname != null" >
+        ItemOptionName = #{record.itemoptionname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.surveyitemid != null" >
+        SurveyItemID = #{record.surveyitemid,jdbcType=INTEGER},
+      </if>
+      <if test="record.listid != null" >
+        ListID = #{record.listid,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminid != null" >
+        AdminID = #{record.adminid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_surveyitemoption
+    set SurveyItemOptionID = #{record.surveyitemoptionid,jdbcType=INTEGER},
+      ItemOptionName = #{record.itemoptionname,jdbcType=VARCHAR},
+      SurveyItemID = #{record.surveyitemid,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      AdminID = #{record.adminid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

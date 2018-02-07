@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.DownloadMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.Download" >
+    <constructor >
+      <arg column="DownloadID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ClassID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DownName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DownPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DownUrl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DownSize" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="Keywords" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Description" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Details" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IsRecommend" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ClickNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DownloadID, ClassID, DownName, DownPic, DownUrl, DownSize, Keywords, Description, 
+    Details, IsRecommend, ClickNum, ListID, AdminID, AddTime, IsClose
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.DownloadExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_download
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.DownloadExample" >
+    delete from t_download
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.Download" >
+    insert into t_download (DownloadID, ClassID, DownName, 
+      DownPic, DownUrl, DownSize, 
+      Keywords, Description, Details, 
+      IsRecommend, ClickNum, ListID, 
+      AdminID, AddTime, IsClose
+      )
+    values (#{downloadid,jdbcType=INTEGER}, #{classid,jdbcType=INTEGER}, #{downname,jdbcType=VARCHAR}, 
+      #{downpic,jdbcType=VARCHAR}, #{downurl,jdbcType=VARCHAR}, #{downsize,jdbcType=DOUBLE}, 
+      #{keywords,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR}, 
+      #{isrecommend,jdbcType=INTEGER}, #{clicknum,jdbcType=INTEGER}, #{listid,jdbcType=INTEGER}, 
+      #{adminid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, #{isclose,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.Download" >
+    insert into t_download
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="downloadid != null" >
+        DownloadID,
+      </if>
+      <if test="classid != null" >
+        ClassID,
+      </if>
+      <if test="downname != null" >
+        DownName,
+      </if>
+      <if test="downpic != null" >
+        DownPic,
+      </if>
+      <if test="downurl != null" >
+        DownUrl,
+      </if>
+      <if test="downsize != null" >
+        DownSize,
+      </if>
+      <if test="keywords != null" >
+        Keywords,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="details != null" >
+        Details,
+      </if>
+      <if test="isrecommend != null" >
+        IsRecommend,
+      </if>
+      <if test="clicknum != null" >
+        ClickNum,
+      </if>
+      <if test="listid != null" >
+        ListID,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="isclose != null" >
+        IsClose,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="downloadid != null" >
+        #{downloadid,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="downname != null" >
+        #{downname,jdbcType=VARCHAR},
+      </if>
+      <if test="downpic != null" >
+        #{downpic,jdbcType=VARCHAR},
+      </if>
+      <if test="downurl != null" >
+        #{downurl,jdbcType=VARCHAR},
+      </if>
+      <if test="downsize != null" >
+        #{downsize,jdbcType=DOUBLE},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="isrecommend != null" >
+        #{isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="clicknum != null" >
+        #{clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="listid != null" >
+        #{listid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isclose != null" >
+        #{isclose,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.DownloadExample" resultType="java.lang.Integer" >
+    select count(*) from t_download
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_download
+    <set >
+      <if test="record.downloadid != null" >
+        DownloadID = #{record.downloadid,jdbcType=INTEGER},
+      </if>
+      <if test="record.classid != null" >
+        ClassID = #{record.classid,jdbcType=INTEGER},
+      </if>
+      <if test="record.downname != null" >
+        DownName = #{record.downname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downpic != null" >
+        DownPic = #{record.downpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downurl != null" >
+        DownUrl = #{record.downurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downsize != null" >
+        DownSize = #{record.downsize,jdbcType=DOUBLE},
+      </if>
+      <if test="record.keywords != null" >
+        Keywords = #{record.keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        Description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.details != null" >
+        Details = #{record.details,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isrecommend != null" >
+        IsRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="record.clicknum != null" >
+        ClickNum = #{record.clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="record.listid != null" >
+        ListID = #{record.listid,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminid != null" >
+        AdminID = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isclose != null" >
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_download
+    set DownloadID = #{record.downloadid,jdbcType=INTEGER},
+      ClassID = #{record.classid,jdbcType=INTEGER},
+      DownName = #{record.downname,jdbcType=VARCHAR},
+      DownPic = #{record.downpic,jdbcType=VARCHAR},
+      DownUrl = #{record.downurl,jdbcType=VARCHAR},
+      DownSize = #{record.downsize,jdbcType=DOUBLE},
+      Keywords = #{record.keywords,jdbcType=VARCHAR},
+      Description = #{record.description,jdbcType=VARCHAR},
+      Details = #{record.details,jdbcType=VARCHAR},
+      IsRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      ClickNum = #{record.clicknum,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsClose = #{record.isclose,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

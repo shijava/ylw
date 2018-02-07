@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.TaskCampaignDesignMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.TaskCampaignDesign" >
+    <constructor >
+      <arg column="TCDesignID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TaskCampaignID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DesignTaskID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DesignWorksID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsBid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TCDesignID, TaskCampaignID, DesignTaskID, DesignWorksID, AddTime, IsClose, AdminID, 
+    IsBid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.TaskCampaignDesignExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_taskcampaigndesign
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.TaskCampaignDesignExample" >
+    delete from t_taskcampaigndesign
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.TaskCampaignDesign" >
+    insert into t_taskcampaigndesign (TCDesignID, TaskCampaignID, DesignTaskID, 
+      DesignWorksID, AddTime, IsClose, 
+      AdminID, IsBid)
+    values (#{tcdesignid,jdbcType=INTEGER}, #{taskcampaignid,jdbcType=INTEGER}, #{designtaskid,jdbcType=INTEGER}, 
+      #{designworksid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, #{isclose,jdbcType=INTEGER}, 
+      #{adminid,jdbcType=INTEGER}, #{isbid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.TaskCampaignDesign" >
+    insert into t_taskcampaigndesign
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tcdesignid != null" >
+        TCDesignID,
+      </if>
+      <if test="taskcampaignid != null" >
+        TaskCampaignID,
+      </if>
+      <if test="designtaskid != null" >
+        DesignTaskID,
+      </if>
+      <if test="designworksid != null" >
+        DesignWorksID,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="isclose != null" >
+        IsClose,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="isbid != null" >
+        IsBid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tcdesignid != null" >
+        #{tcdesignid,jdbcType=INTEGER},
+      </if>
+      <if test="taskcampaignid != null" >
+        #{taskcampaignid,jdbcType=INTEGER},
+      </if>
+      <if test="designtaskid != null" >
+        #{designtaskid,jdbcType=INTEGER},
+      </if>
+      <if test="designworksid != null" >
+        #{designworksid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isclose != null" >
+        #{isclose,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="isbid != null" >
+        #{isbid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.TaskCampaignDesignExample" resultType="java.lang.Integer" >
+    select count(*) from t_taskcampaigndesign
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_taskcampaigndesign
+    <set >
+      <if test="record.tcdesignid != null" >
+        TCDesignID = #{record.tcdesignid,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskcampaignid != null" >
+        TaskCampaignID = #{record.taskcampaignid,jdbcType=INTEGER},
+      </if>
+      <if test="record.designtaskid != null" >
+        DesignTaskID = #{record.designtaskid,jdbcType=INTEGER},
+      </if>
+      <if test="record.designworksid != null" >
+        DesignWorksID = #{record.designworksid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isclose != null" >
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminid != null" >
+        AdminID = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isbid != null" >
+        IsBid = #{record.isbid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_taskcampaigndesign
+    set TCDesignID = #{record.tcdesignid,jdbcType=INTEGER},
+      TaskCampaignID = #{record.taskcampaignid,jdbcType=INTEGER},
+      DesignTaskID = #{record.designtaskid,jdbcType=INTEGER},
+      DesignWorksID = #{record.designworksid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      IsBid = #{record.isbid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

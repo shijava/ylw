@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.DesignWorksMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.DesignWorks" >
+    <constructor >
+      <arg column="DesignWorksID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Category" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CaseStyle" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Price" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="PriceRange" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsRecommend" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EditTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="InitIsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsPutAway" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ClickNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="SalesVolume" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.DesignWorksWithBLOBs" >
+    <constructor >
+      <arg column="DesignWorksID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Category" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CaseStyle" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Price" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="PriceRange" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsRecommend" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EditTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="InitIsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsPutAway" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ClickNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="SalesVolume" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Title" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="Details" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="SmallPic" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DesignWorksID, UserID, Category, CaseStyle, Price, PriceRange, ListID, IsRecommend, 
+    AddTime, EditTime, AdminID, IsClose, InitIsClose, IsPutAway, ClickNum, SalesVolume
+  </sql>
+  <sql id="Blob_Column_List" >
+    Title, Details, SmallPic
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.DesignWorksExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_designworks
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.DesignWorksExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_designworks
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.DesignWorksExample" >
+    delete from t_designworks
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.DesignWorksWithBLOBs" >
+    insert into t_designworks (DesignWorksID, UserID, Category, 
+      CaseStyle, Price, PriceRange, 
+      ListID, IsRecommend, AddTime, 
+      EditTime, AdminID, IsClose, 
+      InitIsClose, IsPutAway, ClickNum, 
+      SalesVolume, Title, Details, 
+      SmallPic)
+    values (#{designworksid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{category,jdbcType=INTEGER}, 
+      #{casestyle,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{pricerange,jdbcType=INTEGER}, 
+      #{listid,jdbcType=INTEGER}, #{isrecommend,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{edittime,jdbcType=TIMESTAMP}, #{adminid,jdbcType=INTEGER}, #{isclose,jdbcType=INTEGER}, 
+      #{initisclose,jdbcType=INTEGER}, #{isputaway,jdbcType=INTEGER}, #{clicknum,jdbcType=INTEGER}, 
+      #{salesvolume,jdbcType=INTEGER}, #{title,jdbcType=LONGVARCHAR}, #{details,jdbcType=LONGVARCHAR}, 
+      #{smallpic,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.DesignWorksWithBLOBs" >
+    insert into t_designworks
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="designworksid != null" >
+        DesignWorksID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="category != null" >
+        Category,
+      </if>
+      <if test="casestyle != null" >
+        CaseStyle,
+      </if>
+      <if test="price != null" >
+        Price,
+      </if>
+      <if test="pricerange != null" >
+        PriceRange,
+      </if>
+      <if test="listid != null" >
+        ListID,
+      </if>
+      <if test="isrecommend != null" >
+        IsRecommend,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="edittime != null" >
+        EditTime,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="isclose != null" >
+        IsClose,
+      </if>
+      <if test="initisclose != null" >
+        InitIsClose,
+      </if>
+      <if test="isputaway != null" >
+        IsPutAway,
+      </if>
+      <if test="clicknum != null" >
+        ClickNum,
+      </if>
+      <if test="salesvolume != null" >
+        SalesVolume,
+      </if>
+      <if test="title != null" >
+        Title,
+      </if>
+      <if test="details != null" >
+        Details,
+      </if>
+      <if test="smallpic != null" >
+        SmallPic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="designworksid != null" >
+        #{designworksid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=INTEGER},
+      </if>
+      <if test="casestyle != null" >
+        #{casestyle,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="pricerange != null" >
+        #{pricerange,jdbcType=INTEGER},
+      </if>
+      <if test="listid != null" >
+        #{listid,jdbcType=INTEGER},
+      </if>
+      <if test="isrecommend != null" >
+        #{isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        #{edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="isclose != null" >
+        #{isclose,jdbcType=INTEGER},
+      </if>
+      <if test="initisclose != null" >
+        #{initisclose,jdbcType=INTEGER},
+      </if>
+      <if test="isputaway != null" >
+        #{isputaway,jdbcType=INTEGER},
+      </if>
+      <if test="clicknum != null" >
+        #{clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="salesvolume != null" >
+        #{salesvolume,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="details != null" >
+        #{details,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="smallpic != null" >
+        #{smallpic,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.DesignWorksExample" resultType="java.lang.Integer" >
+    select count(*) from t_designworks
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_designworks
+    <set >
+      <if test="record.designworksid != null" >
+        DesignWorksID = #{record.designworksid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.category != null" >
+        Category = #{record.category,jdbcType=INTEGER},
+      </if>
+      <if test="record.casestyle != null" >
+        CaseStyle = #{record.casestyle,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        Price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pricerange != null" >
+        PriceRange = #{record.pricerange,jdbcType=INTEGER},
+      </if>
+      <if test="record.listid != null" >
+        ListID = #{record.listid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isrecommend != null" >
+        IsRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.edittime != null" >
+        EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adminid != null" >
+        AdminID = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isclose != null" >
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+      <if test="record.initisclose != null" >
+        InitIsClose = #{record.initisclose,jdbcType=INTEGER},
+      </if>
+      <if test="record.isputaway != null" >
+        IsPutAway = #{record.isputaway,jdbcType=INTEGER},
+      </if>
+      <if test="record.clicknum != null" >
+        ClickNum = #{record.clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="record.salesvolume != null" >
+        SalesVolume = #{record.salesvolume,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        Title = #{record.title,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.details != null" >
+        Details = #{record.details,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.smallpic != null" >
+        SmallPic = #{record.smallpic,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_designworks
+    set DesignWorksID = #{record.designworksid,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      Category = #{record.category,jdbcType=INTEGER},
+      CaseStyle = #{record.casestyle,jdbcType=INTEGER},
+      Price = #{record.price,jdbcType=DOUBLE},
+      PriceRange = #{record.pricerange,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      IsRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      InitIsClose = #{record.initisclose,jdbcType=INTEGER},
+      IsPutAway = #{record.isputaway,jdbcType=INTEGER},
+      ClickNum = #{record.clicknum,jdbcType=INTEGER},
+      SalesVolume = #{record.salesvolume,jdbcType=INTEGER},
+      Title = #{record.title,jdbcType=LONGVARCHAR},
+      Details = #{record.details,jdbcType=LONGVARCHAR},
+      SmallPic = #{record.smallpic,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_designworks
+    set DesignWorksID = #{record.designworksid,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      Category = #{record.category,jdbcType=INTEGER},
+      CaseStyle = #{record.casestyle,jdbcType=INTEGER},
+      Price = #{record.price,jdbcType=DOUBLE},
+      PriceRange = #{record.pricerange,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      IsRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      InitIsClose = #{record.initisclose,jdbcType=INTEGER},
+      IsPutAway = #{record.isputaway,jdbcType=INTEGER},
+      ClickNum = #{record.clicknum,jdbcType=INTEGER},
+      SalesVolume = #{record.salesvolume,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

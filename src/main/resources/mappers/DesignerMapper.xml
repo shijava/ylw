@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.DesignerMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.Designer" >
+    <constructor >
+      <arg column="DesigneerID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Specialty" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Seniority" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EditTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsAudit" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ClickNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsRecommend" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.DesignerWithBLOBs" >
+    <constructor >
+      <arg column="DesigneerID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Specialty" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Seniority" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EditTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsAudit" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ClickNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsRecommend" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="BannerPic" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="Description" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DesigneerID, UserID, Specialty, Seniority, AddTime, EditTime, IsAudit, IsClose, ClickNum, 
+    AdminID, ListID, IsRecommend
+  </sql>
+  <sql id="Blob_Column_List" >
+    BannerPic, Description
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.DesignerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_designer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.DesignerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_designer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.DesignerExample" >
+    delete from t_designer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.DesignerWithBLOBs" >
+    insert into t_designer (DesigneerID, UserID, Specialty, 
+      Seniority, AddTime, EditTime, 
+      IsAudit, IsClose, ClickNum, 
+      AdminID, ListID, IsRecommend, 
+      BannerPic, Description)
+    values (#{designeerid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{specialty,jdbcType=VARCHAR}, 
+      #{seniority,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, #{edittime,jdbcType=TIMESTAMP}, 
+      #{isaudit,jdbcType=INTEGER}, #{isclose,jdbcType=INTEGER}, #{clicknum,jdbcType=INTEGER}, 
+      #{adminid,jdbcType=INTEGER}, #{listid,jdbcType=INTEGER}, #{isrecommend,jdbcType=INTEGER}, 
+      #{bannerpic,jdbcType=LONGVARCHAR}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.DesignerWithBLOBs" >
+    insert into t_designer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="designeerid != null" >
+        DesigneerID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="specialty != null" >
+        Specialty,
+      </if>
+      <if test="seniority != null" >
+        Seniority,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="edittime != null" >
+        EditTime,
+      </if>
+      <if test="isaudit != null" >
+        IsAudit,
+      </if>
+      <if test="isclose != null" >
+        IsClose,
+      </if>
+      <if test="clicknum != null" >
+        ClickNum,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="listid != null" >
+        ListID,
+      </if>
+      <if test="isrecommend != null" >
+        IsRecommend,
+      </if>
+      <if test="bannerpic != null" >
+        BannerPic,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="designeerid != null" >
+        #{designeerid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="specialty != null" >
+        #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="seniority != null" >
+        #{seniority,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        #{edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isaudit != null" >
+        #{isaudit,jdbcType=INTEGER},
+      </if>
+      <if test="isclose != null" >
+        #{isclose,jdbcType=INTEGER},
+      </if>
+      <if test="clicknum != null" >
+        #{clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="listid != null" >
+        #{listid,jdbcType=INTEGER},
+      </if>
+      <if test="isrecommend != null" >
+        #{isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="bannerpic != null" >
+        #{bannerpic,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.DesignerExample" resultType="java.lang.Integer" >
+    select count(*) from t_designer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_designer
+    <set >
+      <if test="record.designeerid != null" >
+        DesigneerID = #{record.designeerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.specialty != null" >
+        Specialty = #{record.specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seniority != null" >
+        Seniority = #{record.seniority,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.edittime != null" >
+        EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isaudit != null" >
+        IsAudit = #{record.isaudit,jdbcType=INTEGER},
+      </if>
+      <if test="record.isclose != null" >
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+      <if test="record.clicknum != null" >
+        ClickNum = #{record.clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminid != null" >
+        AdminID = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.listid != null" >
+        ListID = #{record.listid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isrecommend != null" >
+        IsRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="record.bannerpic != null" >
+        BannerPic = #{record.bannerpic,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.description != null" >
+        Description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_designer
+    set DesigneerID = #{record.designeerid,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      Specialty = #{record.specialty,jdbcType=VARCHAR},
+      Seniority = #{record.seniority,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      IsAudit = #{record.isaudit,jdbcType=INTEGER},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      ClickNum = #{record.clicknum,jdbcType=INTEGER},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      IsRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      BannerPic = #{record.bannerpic,jdbcType=LONGVARCHAR},
+      Description = #{record.description,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_designer
+    set DesigneerID = #{record.designeerid,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      Specialty = #{record.specialty,jdbcType=VARCHAR},
+      Seniority = #{record.seniority,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      IsAudit = #{record.isaudit,jdbcType=INTEGER},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      ClickNum = #{record.clicknum,jdbcType=INTEGER},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      IsRecommend = #{record.isrecommend,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

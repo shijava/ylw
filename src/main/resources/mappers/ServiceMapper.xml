@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.ServiceMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.Service" >
+    <constructor >
+      <arg column="ServiceID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ServiceNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SellerUserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RealPayPrices" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="BackPrice" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EditTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ServiceState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShipName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShipNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Consignee" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ConsigneeMobilePhone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ConsigneTelephone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ConsignePostcode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ProvinceID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CityID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="District" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ConsigneeAdress" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShipCertificate" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShipCertificate2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ServiceType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.ServiceWithBLOBs" >
+    <constructor >
+      <arg column="ServiceID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ServiceNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SellerUserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RealPayPrices" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="BackPrice" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EditTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ServiceState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShipName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShipNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Consignee" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ConsigneeMobilePhone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ConsigneTelephone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ConsignePostcode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ProvinceID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CityID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="District" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ConsigneeAdress" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShipCertificate" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShipCertificate2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ServiceType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ProductName" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="BuyerBackReson" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="SellerRefuseReson" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="YLWRefuseReson" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ServiceID, ServiceNO, OrderID, OrderNO, SellerUserID, UserID, RealPayPrices, BackPrice, 
+    AddTime, EditTime, ServiceState, ShipName, ShipNO, Consignee, ConsigneeMobilePhone, 
+    ConsigneTelephone, ConsignePostcode, ProvinceID, CityID, District, ConsigneeAdress, 
+    ShipCertificate, ShipCertificate2, ServiceType
+  </sql>
+  <sql id="Blob_Column_List" >
+    ProductName, BuyerBackReson, SellerRefuseReson, YLWRefuseReson
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.ServiceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_service
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.ServiceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_service
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.ServiceExample" >
+    delete from t_service
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.ServiceWithBLOBs" >
+    insert into t_service (ServiceID, ServiceNO, OrderID, 
+      OrderNO, SellerUserID, UserID, 
+      RealPayPrices, BackPrice, AddTime, 
+      EditTime, ServiceState, ShipName, 
+      ShipNO, Consignee, ConsigneeMobilePhone, 
+      ConsigneTelephone, ConsignePostcode, ProvinceID, 
+      CityID, District, ConsigneeAdress, 
+      ShipCertificate, ShipCertificate2, ServiceType, 
+      ProductName, BuyerBackReson, SellerRefuseReson, 
+      YLWRefuseReson)
+    values (#{serviceid,jdbcType=INTEGER}, #{serviceno,jdbcType=VARCHAR}, #{orderid,jdbcType=INTEGER}, 
+      #{orderno,jdbcType=VARCHAR}, #{selleruserid,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, 
+      #{realpayprices,jdbcType=DOUBLE}, #{backprice,jdbcType=DOUBLE}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{edittime,jdbcType=TIMESTAMP}, #{servicestate,jdbcType=INTEGER}, #{shipname,jdbcType=VARCHAR}, 
+      #{shipno,jdbcType=VARCHAR}, #{consignee,jdbcType=VARCHAR}, #{consigneemobilephone,jdbcType=VARCHAR}, 
+      #{consignetelephone,jdbcType=VARCHAR}, #{consignepostcode,jdbcType=VARCHAR}, #{provinceid,jdbcType=INTEGER}, 
+      #{cityid,jdbcType=INTEGER}, #{district,jdbcType=INTEGER}, #{consigneeadress,jdbcType=VARCHAR}, 
+      #{shipcertificate,jdbcType=VARCHAR}, #{shipcertificate2,jdbcType=VARCHAR}, #{servicetype,jdbcType=INTEGER}, 
+      #{productname,jdbcType=LONGVARCHAR}, #{buyerbackreson,jdbcType=LONGVARCHAR}, #{sellerrefusereson,jdbcType=LONGVARCHAR}, 
+      #{ylwrefusereson,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.ServiceWithBLOBs" >
+    insert into t_service
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        ServiceID,
+      </if>
+      <if test="serviceno != null" >
+        ServiceNO,
+      </if>
+      <if test="orderid != null" >
+        OrderID,
+      </if>
+      <if test="orderno != null" >
+        OrderNO,
+      </if>
+      <if test="selleruserid != null" >
+        SellerUserID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="realpayprices != null" >
+        RealPayPrices,
+      </if>
+      <if test="backprice != null" >
+        BackPrice,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="edittime != null" >
+        EditTime,
+      </if>
+      <if test="servicestate != null" >
+        ServiceState,
+      </if>
+      <if test="shipname != null" >
+        ShipName,
+      </if>
+      <if test="shipno != null" >
+        ShipNO,
+      </if>
+      <if test="consignee != null" >
+        Consignee,
+      </if>
+      <if test="consigneemobilephone != null" >
+        ConsigneeMobilePhone,
+      </if>
+      <if test="consignetelephone != null" >
+        ConsigneTelephone,
+      </if>
+      <if test="consignepostcode != null" >
+        ConsignePostcode,
+      </if>
+      <if test="provinceid != null" >
+        ProvinceID,
+      </if>
+      <if test="cityid != null" >
+        CityID,
+      </if>
+      <if test="district != null" >
+        District,
+      </if>
+      <if test="consigneeadress != null" >
+        ConsigneeAdress,
+      </if>
+      <if test="shipcertificate != null" >
+        ShipCertificate,
+      </if>
+      <if test="shipcertificate2 != null" >
+        ShipCertificate2,
+      </if>
+      <if test="servicetype != null" >
+        ServiceType,
+      </if>
+      <if test="productname != null" >
+        ProductName,
+      </if>
+      <if test="buyerbackreson != null" >
+        BuyerBackReson,
+      </if>
+      <if test="sellerrefusereson != null" >
+        SellerRefuseReson,
+      </if>
+      <if test="ylwrefusereson != null" >
+        YLWRefuseReson,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        #{serviceid,jdbcType=INTEGER},
+      </if>
+      <if test="serviceno != null" >
+        #{serviceno,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="selleruserid != null" >
+        #{selleruserid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="realpayprices != null" >
+        #{realpayprices,jdbcType=DOUBLE},
+      </if>
+      <if test="backprice != null" >
+        #{backprice,jdbcType=DOUBLE},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        #{edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="servicestate != null" >
+        #{servicestate,jdbcType=INTEGER},
+      </if>
+      <if test="shipname != null" >
+        #{shipname,jdbcType=VARCHAR},
+      </if>
+      <if test="shipno != null" >
+        #{shipno,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null" >
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneemobilephone != null" >
+        #{consigneemobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="consignetelephone != null" >
+        #{consignetelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="consignepostcode != null" >
+        #{consignepostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null" >
+        #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="cityid != null" >
+        #{cityid,jdbcType=INTEGER},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=INTEGER},
+      </if>
+      <if test="consigneeadress != null" >
+        #{consigneeadress,jdbcType=VARCHAR},
+      </if>
+      <if test="shipcertificate != null" >
+        #{shipcertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="shipcertificate2 != null" >
+        #{shipcertificate2,jdbcType=VARCHAR},
+      </if>
+      <if test="servicetype != null" >
+        #{servicetype,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="buyerbackreson != null" >
+        #{buyerbackreson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sellerrefusereson != null" >
+        #{sellerrefusereson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ylwrefusereson != null" >
+        #{ylwrefusereson,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.ServiceExample" resultType="java.lang.Integer" >
+    select count(*) from t_service
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_service
+    <set >
+      <if test="record.serviceid != null" >
+        ServiceID = #{record.serviceid,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceno != null" >
+        ServiceNO = #{record.serviceno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderid != null" >
+        OrderID = #{record.orderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderno != null" >
+        OrderNO = #{record.orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.selleruserid != null" >
+        SellerUserID = #{record.selleruserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realpayprices != null" >
+        RealPayPrices = #{record.realpayprices,jdbcType=DOUBLE},
+      </if>
+      <if test="record.backprice != null" >
+        BackPrice = #{record.backprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.edittime != null" >
+        EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.servicestate != null" >
+        ServiceState = #{record.servicestate,jdbcType=INTEGER},
+      </if>
+      <if test="record.shipname != null" >
+        ShipName = #{record.shipname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipno != null" >
+        ShipNO = #{record.shipno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consignee != null" >
+        Consignee = #{record.consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consigneemobilephone != null" >
+        ConsigneeMobilePhone = #{record.consigneemobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consignetelephone != null" >
+        ConsigneTelephone = #{record.consignetelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consignepostcode != null" >
+        ConsignePostcode = #{record.consignepostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceid != null" >
+        ProvinceID = #{record.provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityid != null" >
+        CityID = #{record.cityid,jdbcType=INTEGER},
+      </if>
+      <if test="record.district != null" >
+        District = #{record.district,jdbcType=INTEGER},
+      </if>
+      <if test="record.consigneeadress != null" >
+        ConsigneeAdress = #{record.consigneeadress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipcertificate != null" >
+        ShipCertificate = #{record.shipcertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipcertificate2 != null" >
+        ShipCertificate2 = #{record.shipcertificate2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicetype != null" >
+        ServiceType = #{record.servicetype,jdbcType=INTEGER},
+      </if>
+      <if test="record.productname != null" >
+        ProductName = #{record.productname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.buyerbackreson != null" >
+        BuyerBackReson = #{record.buyerbackreson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.sellerrefusereson != null" >
+        SellerRefuseReson = #{record.sellerrefusereson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.ylwrefusereson != null" >
+        YLWRefuseReson = #{record.ylwrefusereson,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_service
+    set ServiceID = #{record.serviceid,jdbcType=INTEGER},
+      ServiceNO = #{record.serviceno,jdbcType=VARCHAR},
+      OrderID = #{record.orderid,jdbcType=INTEGER},
+      OrderNO = #{record.orderno,jdbcType=VARCHAR},
+      SellerUserID = #{record.selleruserid,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=VARCHAR},
+      RealPayPrices = #{record.realpayprices,jdbcType=DOUBLE},
+      BackPrice = #{record.backprice,jdbcType=DOUBLE},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      ServiceState = #{record.servicestate,jdbcType=INTEGER},
+      ShipName = #{record.shipname,jdbcType=VARCHAR},
+      ShipNO = #{record.shipno,jdbcType=VARCHAR},
+      Consignee = #{record.consignee,jdbcType=VARCHAR},
+      ConsigneeMobilePhone = #{record.consigneemobilephone,jdbcType=VARCHAR},
+      ConsigneTelephone = #{record.consignetelephone,jdbcType=VARCHAR},
+      ConsignePostcode = #{record.consignepostcode,jdbcType=VARCHAR},
+      ProvinceID = #{record.provinceid,jdbcType=INTEGER},
+      CityID = #{record.cityid,jdbcType=INTEGER},
+      District = #{record.district,jdbcType=INTEGER},
+      ConsigneeAdress = #{record.consigneeadress,jdbcType=VARCHAR},
+      ShipCertificate = #{record.shipcertificate,jdbcType=VARCHAR},
+      ShipCertificate2 = #{record.shipcertificate2,jdbcType=VARCHAR},
+      ServiceType = #{record.servicetype,jdbcType=INTEGER},
+      ProductName = #{record.productname,jdbcType=LONGVARCHAR},
+      BuyerBackReson = #{record.buyerbackreson,jdbcType=LONGVARCHAR},
+      SellerRefuseReson = #{record.sellerrefusereson,jdbcType=LONGVARCHAR},
+      YLWRefuseReson = #{record.ylwrefusereson,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_service
+    set ServiceID = #{record.serviceid,jdbcType=INTEGER},
+      ServiceNO = #{record.serviceno,jdbcType=VARCHAR},
+      OrderID = #{record.orderid,jdbcType=INTEGER},
+      OrderNO = #{record.orderno,jdbcType=VARCHAR},
+      SellerUserID = #{record.selleruserid,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=VARCHAR},
+      RealPayPrices = #{record.realpayprices,jdbcType=DOUBLE},
+      BackPrice = #{record.backprice,jdbcType=DOUBLE},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      ServiceState = #{record.servicestate,jdbcType=INTEGER},
+      ShipName = #{record.shipname,jdbcType=VARCHAR},
+      ShipNO = #{record.shipno,jdbcType=VARCHAR},
+      Consignee = #{record.consignee,jdbcType=VARCHAR},
+      ConsigneeMobilePhone = #{record.consigneemobilephone,jdbcType=VARCHAR},
+      ConsigneTelephone = #{record.consignetelephone,jdbcType=VARCHAR},
+      ConsignePostcode = #{record.consignepostcode,jdbcType=VARCHAR},
+      ProvinceID = #{record.provinceid,jdbcType=INTEGER},
+      CityID = #{record.cityid,jdbcType=INTEGER},
+      District = #{record.district,jdbcType=INTEGER},
+      ConsigneeAdress = #{record.consigneeadress,jdbcType=VARCHAR},
+      ShipCertificate = #{record.shipcertificate,jdbcType=VARCHAR},
+      ShipCertificate2 = #{record.shipcertificate2,jdbcType=VARCHAR},
+      ServiceType = #{record.servicetype,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

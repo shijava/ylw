@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.SupplierCertificationMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.SupplierCertification" >
+    <constructor >
+      <arg column="CertificationID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="SupplierID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CompanyName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BusinessLicenseUrl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrganizationCodeUrl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TaxRegistrationCertificateUrl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CorporateName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Province" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="City" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="District" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EditTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ApprovalState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CertificationType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CertificationID, UserID, SupplierID, CompanyName, BusinessLicenseUrl, OrganizationCodeUrl, 
+    TaxRegistrationCertificateUrl, CorporateName, Province, City, District, AddTime, 
+    EditTime, AdminID, ApprovalState, CertificationType
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.SupplierCertificationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_suppliercertification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.SupplierCertificationExample" >
+    delete from t_suppliercertification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.SupplierCertification" >
+    insert into t_suppliercertification (CertificationID, UserID, SupplierID, 
+      CompanyName, BusinessLicenseUrl, OrganizationCodeUrl, 
+      TaxRegistrationCertificateUrl, CorporateName, 
+      Province, City, District, 
+      AddTime, EditTime, AdminID, 
+      ApprovalState, CertificationType)
+    values (#{certificationid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{supplierid,jdbcType=INTEGER}, 
+      #{companyname,jdbcType=VARCHAR}, #{businesslicenseurl,jdbcType=VARCHAR}, #{organizationcodeurl,jdbcType=VARCHAR}, 
+      #{taxregistrationcertificateurl,jdbcType=VARCHAR}, #{corporatename,jdbcType=VARCHAR}, 
+      #{province,jdbcType=INTEGER}, #{city,jdbcType=INTEGER}, #{district,jdbcType=INTEGER}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{edittime,jdbcType=TIMESTAMP}, #{adminid,jdbcType=INTEGER}, 
+      #{approvalstate,jdbcType=INTEGER}, #{certificationtype,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.SupplierCertification" >
+    insert into t_suppliercertification
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="certificationid != null" >
+        CertificationID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="supplierid != null" >
+        SupplierID,
+      </if>
+      <if test="companyname != null" >
+        CompanyName,
+      </if>
+      <if test="businesslicenseurl != null" >
+        BusinessLicenseUrl,
+      </if>
+      <if test="organizationcodeurl != null" >
+        OrganizationCodeUrl,
+      </if>
+      <if test="taxregistrationcertificateurl != null" >
+        TaxRegistrationCertificateUrl,
+      </if>
+      <if test="corporatename != null" >
+        CorporateName,
+      </if>
+      <if test="province != null" >
+        Province,
+      </if>
+      <if test="city != null" >
+        City,
+      </if>
+      <if test="district != null" >
+        District,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="edittime != null" >
+        EditTime,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="approvalstate != null" >
+        ApprovalState,
+      </if>
+      <if test="certificationtype != null" >
+        CertificationType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="certificationid != null" >
+        #{certificationid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="supplierid != null" >
+        #{supplierid,jdbcType=INTEGER},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="businesslicenseurl != null" >
+        #{businesslicenseurl,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcodeurl != null" >
+        #{organizationcodeurl,jdbcType=VARCHAR},
+      </if>
+      <if test="taxregistrationcertificateurl != null" >
+        #{taxregistrationcertificateurl,jdbcType=VARCHAR},
+      </if>
+      <if test="corporatename != null" >
+        #{corporatename,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=INTEGER},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        #{edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="approvalstate != null" >
+        #{approvalstate,jdbcType=INTEGER},
+      </if>
+      <if test="certificationtype != null" >
+        #{certificationtype,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.SupplierCertificationExample" resultType="java.lang.Integer" >
+    select count(*) from t_suppliercertification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_suppliercertification
+    <set >
+      <if test="record.certificationid != null" >
+        CertificationID = #{record.certificationid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.supplierid != null" >
+        SupplierID = #{record.supplierid,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyname != null" >
+        CompanyName = #{record.companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businesslicenseurl != null" >
+        BusinessLicenseUrl = #{record.businesslicenseurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationcodeurl != null" >
+        OrganizationCodeUrl = #{record.organizationcodeurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxregistrationcertificateurl != null" >
+        TaxRegistrationCertificateUrl = #{record.taxregistrationcertificateurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corporatename != null" >
+        CorporateName = #{record.corporatename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        Province = #{record.province,jdbcType=INTEGER},
+      </if>
+      <if test="record.city != null" >
+        City = #{record.city,jdbcType=INTEGER},
+      </if>
+      <if test="record.district != null" >
+        District = #{record.district,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.edittime != null" >
+        EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adminid != null" >
+        AdminID = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.approvalstate != null" >
+        ApprovalState = #{record.approvalstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.certificationtype != null" >
+        CertificationType = #{record.certificationtype,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_suppliercertification
+    set CertificationID = #{record.certificationid,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      SupplierID = #{record.supplierid,jdbcType=INTEGER},
+      CompanyName = #{record.companyname,jdbcType=VARCHAR},
+      BusinessLicenseUrl = #{record.businesslicenseurl,jdbcType=VARCHAR},
+      OrganizationCodeUrl = #{record.organizationcodeurl,jdbcType=VARCHAR},
+      TaxRegistrationCertificateUrl = #{record.taxregistrationcertificateurl,jdbcType=VARCHAR},
+      CorporateName = #{record.corporatename,jdbcType=VARCHAR},
+      Province = #{record.province,jdbcType=INTEGER},
+      City = #{record.city,jdbcType=INTEGER},
+      District = #{record.district,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      ApprovalState = #{record.approvalstate,jdbcType=INTEGER},
+      CertificationType = #{record.certificationtype,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

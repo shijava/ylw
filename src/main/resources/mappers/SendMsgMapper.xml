@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.SendMsgMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.SendMsg" >
+    <constructor >
+      <arg column="SendMsgID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="UseType" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.SendMsg" >
+    <constructor >
+      <arg column="SendMsgID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="UseType" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PhoneMsgContent" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SendMsgID, Phone, Code, AddTime, UseType
+  </sql>
+  <sql id="Blob_Column_List" >
+    PhoneMsgContent
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.SendMsgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_sendmsg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.SendMsgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_sendmsg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.SendMsgExample" >
+    delete from t_sendmsg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.SendMsg" >
+    insert into t_sendmsg (SendMsgID, Phone, Code, 
+      AddTime, UseType, PhoneMsgContent
+      )
+    values (#{sendmsgid,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{usetype,jdbcType=VARCHAR}, #{phonemsgcontent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.SendMsg" >
+    insert into t_sendmsg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sendmsgid != null" >
+        SendMsgID,
+      </if>
+      <if test="phone != null" >
+        Phone,
+      </if>
+      <if test="code != null" >
+        Code,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="usetype != null" >
+        UseType,
+      </if>
+      <if test="phonemsgcontent != null" >
+        PhoneMsgContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sendmsgid != null" >
+        #{sendmsgid,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usetype != null" >
+        #{usetype,jdbcType=VARCHAR},
+      </if>
+      <if test="phonemsgcontent != null" >
+        #{phonemsgcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.SendMsgExample" resultType="java.lang.Integer" >
+    select count(*) from t_sendmsg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_sendmsg
+    <set >
+      <if test="record.sendmsgid != null" >
+        SendMsgID = #{record.sendmsgid,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null" >
+        Phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        Code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.usetype != null" >
+        UseType = #{record.usetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phonemsgcontent != null" >
+        PhoneMsgContent = #{record.phonemsgcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_sendmsg
+    set SendMsgID = #{record.sendmsgid,jdbcType=INTEGER},
+      Phone = #{record.phone,jdbcType=VARCHAR},
+      Code = #{record.code,jdbcType=VARCHAR},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      UseType = #{record.usetype,jdbcType=VARCHAR},
+      PhoneMsgContent = #{record.phonemsgcontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_sendmsg
+    set SendMsgID = #{record.sendmsgid,jdbcType=INTEGER},
+      Phone = #{record.phone,jdbcType=VARCHAR},
+      Code = #{record.code,jdbcType=VARCHAR},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      UseType = #{record.usetype,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.OrderAddressMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.OrderAddress" >
+    <constructor >
+      <arg column="OrderAddressID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Consignee" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Postcode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Telphone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MobilePhone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ProvinceID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CityID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Districe" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IsDefault" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    OrderAddressID, UserID, Consignee, Postcode, Telphone, MobilePhone, ProvinceID, CityID, 
+    Districe, Address, IsDefault
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.OrderAddressExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_orderaddress
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.OrderAddressExample" >
+    delete from t_orderaddress
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.OrderAddress" >
+    insert into t_orderaddress (OrderAddressID, UserID, Consignee, 
+      Postcode, Telphone, MobilePhone, 
+      ProvinceID, CityID, Districe, 
+      Address, IsDefault)
+    values (#{orderaddressid,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{consignee,jdbcType=VARCHAR}, 
+      #{postcode,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR}, #{mobilephone,jdbcType=VARCHAR}, 
+      #{provinceid,jdbcType=INTEGER}, #{cityid,jdbcType=INTEGER}, #{districe,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{isdefault,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.OrderAddress" >
+    insert into t_orderaddress
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderaddressid != null" >
+        OrderAddressID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="consignee != null" >
+        Consignee,
+      </if>
+      <if test="postcode != null" >
+        Postcode,
+      </if>
+      <if test="telphone != null" >
+        Telphone,
+      </if>
+      <if test="mobilephone != null" >
+        MobilePhone,
+      </if>
+      <if test="provinceid != null" >
+        ProvinceID,
+      </if>
+      <if test="cityid != null" >
+        CityID,
+      </if>
+      <if test="districe != null" >
+        Districe,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="isdefault != null" >
+        IsDefault,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderaddressid != null" >
+        #{orderaddressid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null" >
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null" >
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilephone != null" >
+        #{mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null" >
+        #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="cityid != null" >
+        #{cityid,jdbcType=INTEGER},
+      </if>
+      <if test="districe != null" >
+        #{districe,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isdefault != null" >
+        #{isdefault,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.OrderAddressExample" resultType="java.lang.Integer" >
+    select count(*) from t_orderaddress
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_orderaddress
+    <set >
+      <if test="record.orderaddressid != null" >
+        OrderAddressID = #{record.orderaddressid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consignee != null" >
+        Consignee = #{record.consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postcode != null" >
+        Postcode = #{record.postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telphone != null" >
+        Telphone = #{record.telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilephone != null" >
+        MobilePhone = #{record.mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceid != null" >
+        ProvinceID = #{record.provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityid != null" >
+        CityID = #{record.cityid,jdbcType=INTEGER},
+      </if>
+      <if test="record.districe != null" >
+        Districe = #{record.districe,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null" >
+        Address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdefault != null" >
+        IsDefault = #{record.isdefault,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_orderaddress
+    set OrderAddressID = #{record.orderaddressid,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=VARCHAR},
+      Consignee = #{record.consignee,jdbcType=VARCHAR},
+      Postcode = #{record.postcode,jdbcType=VARCHAR},
+      Telphone = #{record.telphone,jdbcType=VARCHAR},
+      MobilePhone = #{record.mobilephone,jdbcType=VARCHAR},
+      ProvinceID = #{record.provinceid,jdbcType=INTEGER},
+      CityID = #{record.cityid,jdbcType=INTEGER},
+      Districe = #{record.districe,jdbcType=INTEGER},
+      Address = #{record.address,jdbcType=VARCHAR},
+      IsDefault = #{record.isdefault,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.StoreCategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.StoreCategory" >
+    <constructor >
+      <arg column="StoreCategoryID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="StoreID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ParentID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ChildNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.StoreCategory" >
+    <constructor >
+      <arg column="StoreCategoryID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="StoreID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ParentID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ChildNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="CategoryName" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    StoreCategoryID, StoreID, ParentID, ChildNum, ListID, AddTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    CategoryName
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.StoreCategoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_storecategory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.StoreCategoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_storecategory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.StoreCategoryExample" >
+    delete from t_storecategory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.StoreCategory" >
+    insert into t_storecategory (StoreCategoryID, StoreID, ParentID, 
+      ChildNum, ListID, AddTime, 
+      CategoryName)
+    values (#{storecategoryid,jdbcType=INTEGER}, #{storeid,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}, 
+      #{childnum,jdbcType=INTEGER}, #{listid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{categoryname,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.StoreCategory" >
+    insert into t_storecategory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="storecategoryid != null" >
+        StoreCategoryID,
+      </if>
+      <if test="storeid != null" >
+        StoreID,
+      </if>
+      <if test="parentid != null" >
+        ParentID,
+      </if>
+      <if test="childnum != null" >
+        ChildNum,
+      </if>
+      <if test="listid != null" >
+        ListID,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="categoryname != null" >
+        CategoryName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="storecategoryid != null" >
+        #{storecategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="storeid != null" >
+        #{storeid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="childnum != null" >
+        #{childnum,jdbcType=INTEGER},
+      </if>
+      <if test="listid != null" >
+        #{listid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryname != null" >
+        #{categoryname,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.StoreCategoryExample" resultType="java.lang.Integer" >
+    select count(*) from t_storecategory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_storecategory
+    <set >
+      <if test="record.storecategoryid != null" >
+        StoreCategoryID = #{record.storecategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.storeid != null" >
+        StoreID = #{record.storeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentid != null" >
+        ParentID = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.childnum != null" >
+        ChildNum = #{record.childnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.listid != null" >
+        ListID = #{record.listid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.categoryname != null" >
+        CategoryName = #{record.categoryname,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_storecategory
+    set StoreCategoryID = #{record.storecategoryid,jdbcType=INTEGER},
+      StoreID = #{record.storeid,jdbcType=INTEGER},
+      ParentID = #{record.parentid,jdbcType=INTEGER},
+      ChildNum = #{record.childnum,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      CategoryName = #{record.categoryname,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_storecategory
+    set StoreCategoryID = #{record.storecategoryid,jdbcType=INTEGER},
+      StoreID = #{record.storeid,jdbcType=INTEGER},
+      ParentID = #{record.parentid,jdbcType=INTEGER},
+      ChildNum = #{record.childnum,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

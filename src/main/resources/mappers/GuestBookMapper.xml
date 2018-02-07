@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.GuestBookMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.GuestBook" >
+    <constructor >
+      <arg column="GuestbookID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="NickName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BookContent" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IpAddress" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsReply" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ReplyContent" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ReplyTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    GuestbookID, NickName, BookContent, IpAddress, AddTime, IsReply, ReplyContent, ReplyTime, 
+    AdminID, IsClose
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.GuestBookExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_guestbook
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.GuestBookExample" >
+    delete from t_guestbook
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.GuestBook" >
+    insert into t_guestbook (GuestbookID, NickName, BookContent, 
+      IpAddress, AddTime, IsReply, 
+      ReplyContent, ReplyTime, AdminID, 
+      IsClose)
+    values (#{guestbookid,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, #{bookcontent,jdbcType=VARCHAR}, 
+      #{ipaddress,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}, #{isreply,jdbcType=INTEGER}, 
+      #{replycontent,jdbcType=VARCHAR}, #{replytime,jdbcType=TIMESTAMP}, #{adminid,jdbcType=INTEGER}, 
+      #{isclose,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.GuestBook" >
+    insert into t_guestbook
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="guestbookid != null" >
+        GuestbookID,
+      </if>
+      <if test="nickname != null" >
+        NickName,
+      </if>
+      <if test="bookcontent != null" >
+        BookContent,
+      </if>
+      <if test="ipaddress != null" >
+        IpAddress,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="isreply != null" >
+        IsReply,
+      </if>
+      <if test="replycontent != null" >
+        ReplyContent,
+      </if>
+      <if test="replytime != null" >
+        ReplyTime,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="isclose != null" >
+        IsClose,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="guestbookid != null" >
+        #{guestbookid,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="bookcontent != null" >
+        #{bookcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddress != null" >
+        #{ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isreply != null" >
+        #{isreply,jdbcType=INTEGER},
+      </if>
+      <if test="replycontent != null" >
+        #{replycontent,jdbcType=VARCHAR},
+      </if>
+      <if test="replytime != null" >
+        #{replytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="isclose != null" >
+        #{isclose,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.GuestBookExample" resultType="java.lang.Integer" >
+    select count(*) from t_guestbook
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_guestbook
+    <set >
+      <if test="record.guestbookid != null" >
+        GuestbookID = #{record.guestbookid,jdbcType=INTEGER},
+      </if>
+      <if test="record.nickname != null" >
+        NickName = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookcontent != null" >
+        BookContent = #{record.bookcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ipaddress != null" >
+        IpAddress = #{record.ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isreply != null" >
+        IsReply = #{record.isreply,jdbcType=INTEGER},
+      </if>
+      <if test="record.replycontent != null" >
+        ReplyContent = #{record.replycontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replytime != null" >
+        ReplyTime = #{record.replytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adminid != null" >
+        AdminID = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isclose != null" >
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_guestbook
+    set GuestbookID = #{record.guestbookid,jdbcType=INTEGER},
+      NickName = #{record.nickname,jdbcType=VARCHAR},
+      BookContent = #{record.bookcontent,jdbcType=VARCHAR},
+      IpAddress = #{record.ipaddress,jdbcType=VARCHAR},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsReply = #{record.isreply,jdbcType=INTEGER},
+      ReplyContent = #{record.replycontent,jdbcType=VARCHAR},
+      ReplyTime = #{record.replytime,jdbcType=TIMESTAMP},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      IsClose = #{record.isclose,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

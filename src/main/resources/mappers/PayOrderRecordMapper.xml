@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.PayOrderRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.PayOrderRecord" >
+    <constructor >
+      <arg column="PayOrderRecordID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PayOrderRecordNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="PointPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="RealPayPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PayState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="RealPayTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="UsablePointPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.PayOrderRecordWithBLOBs" >
+    <constructor >
+      <arg column="PayOrderRecordID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PayOrderRecordNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="PointPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="RealPayPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PayState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="RealPayTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="UsablePointPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="Note" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="CWNote" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PayOrderRecordID, PayOrderRecordNo, OrderPriceTotal, PointPriceTotal, RealPayPriceTotal, 
+    UserID, OrderType, AddTime, AdminID, PayState, RealPayTime, UsablePointPriceTotal
+  </sql>
+  <sql id="Blob_Column_List" >
+    Note, CWNote
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.PayOrderRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_payorderrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.PayOrderRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_payorderrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.PayOrderRecordExample" >
+    delete from t_payorderrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.PayOrderRecordWithBLOBs" >
+    insert into t_payorderrecord (PayOrderRecordID, PayOrderRecordNo, 
+      OrderPriceTotal, PointPriceTotal, RealPayPriceTotal, 
+      UserID, OrderType, AddTime, 
+      AdminID, PayState, RealPayTime, 
+      UsablePointPriceTotal, Note, CWNote
+      )
+    values (#{payorderrecordid,jdbcType=INTEGER}, #{payorderrecordno,jdbcType=VARCHAR}, 
+      #{orderpricetotal,jdbcType=DOUBLE}, #{pointpricetotal,jdbcType=DOUBLE}, #{realpaypricetotal,jdbcType=DOUBLE}, 
+      #{userid,jdbcType=INTEGER}, #{ordertype,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{adminid,jdbcType=INTEGER}, #{paystate,jdbcType=INTEGER}, #{realpaytime,jdbcType=TIMESTAMP}, 
+      #{usablepointpricetotal,jdbcType=DOUBLE}, #{note,jdbcType=LONGVARCHAR}, #{cwnote,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.PayOrderRecordWithBLOBs" >
+    insert into t_payorderrecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payorderrecordid != null" >
+        PayOrderRecordID,
+      </if>
+      <if test="payorderrecordno != null" >
+        PayOrderRecordNo,
+      </if>
+      <if test="orderpricetotal != null" >
+        OrderPriceTotal,
+      </if>
+      <if test="pointpricetotal != null" >
+        PointPriceTotal,
+      </if>
+      <if test="realpaypricetotal != null" >
+        RealPayPriceTotal,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="ordertype != null" >
+        OrderType,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="paystate != null" >
+        PayState,
+      </if>
+      <if test="realpaytime != null" >
+        RealPayTime,
+      </if>
+      <if test="usablepointpricetotal != null" >
+        UsablePointPriceTotal,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="cwnote != null" >
+        CWNote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payorderrecordid != null" >
+        #{payorderrecordid,jdbcType=INTEGER},
+      </if>
+      <if test="payorderrecordno != null" >
+        #{payorderrecordno,jdbcType=VARCHAR},
+      </if>
+      <if test="orderpricetotal != null" >
+        #{orderpricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="pointpricetotal != null" >
+        #{pointpricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="realpaypricetotal != null" >
+        #{realpaypricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ordertype != null" >
+        #{ordertype,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="paystate != null" >
+        #{paystate,jdbcType=INTEGER},
+      </if>
+      <if test="realpaytime != null" >
+        #{realpaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usablepointpricetotal != null" >
+        #{usablepointpricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cwnote != null" >
+        #{cwnote,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.PayOrderRecordExample" resultType="java.lang.Integer" >
+    select count(*) from t_payorderrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_payorderrecord
+    <set >
+      <if test="record.payorderrecordid != null" >
+        PayOrderRecordID = #{record.payorderrecordid,jdbcType=INTEGER},
+      </if>
+      <if test="record.payorderrecordno != null" >
+        PayOrderRecordNo = #{record.payorderrecordno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderpricetotal != null" >
+        OrderPriceTotal = #{record.orderpricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pointpricetotal != null" >
+        PointPriceTotal = #{record.pointpricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.realpaypricetotal != null" >
+        RealPayPriceTotal = #{record.realpaypricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ordertype != null" >
+        OrderType = #{record.ordertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adminid != null" >
+        AdminID = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.paystate != null" >
+        PayState = #{record.paystate,jdbcType=INTEGER},
+      </if>
+      <if test="record.realpaytime != null" >
+        RealPayTime = #{record.realpaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.usablepointpricetotal != null" >
+        UsablePointPriceTotal = #{record.usablepointpricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.note != null" >
+        Note = #{record.note,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.cwnote != null" >
+        CWNote = #{record.cwnote,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_payorderrecord
+    set PayOrderRecordID = #{record.payorderrecordid,jdbcType=INTEGER},
+      PayOrderRecordNo = #{record.payorderrecordno,jdbcType=VARCHAR},
+      OrderPriceTotal = #{record.orderpricetotal,jdbcType=DOUBLE},
+      PointPriceTotal = #{record.pointpricetotal,jdbcType=DOUBLE},
+      RealPayPriceTotal = #{record.realpaypricetotal,jdbcType=DOUBLE},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      OrderType = #{record.ordertype,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      PayState = #{record.paystate,jdbcType=INTEGER},
+      RealPayTime = #{record.realpaytime,jdbcType=TIMESTAMP},
+      UsablePointPriceTotal = #{record.usablepointpricetotal,jdbcType=DOUBLE},
+      Note = #{record.note,jdbcType=LONGVARCHAR},
+      CWNote = #{record.cwnote,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_payorderrecord
+    set PayOrderRecordID = #{record.payorderrecordid,jdbcType=INTEGER},
+      PayOrderRecordNo = #{record.payorderrecordno,jdbcType=VARCHAR},
+      OrderPriceTotal = #{record.orderpricetotal,jdbcType=DOUBLE},
+      PointPriceTotal = #{record.pointpricetotal,jdbcType=DOUBLE},
+      RealPayPriceTotal = #{record.realpaypricetotal,jdbcType=DOUBLE},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      OrderType = #{record.ordertype,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      PayState = #{record.paystate,jdbcType=INTEGER},
+      RealPayTime = #{record.realpaytime,jdbcType=TIMESTAMP},
+      UsablePointPriceTotal = #{record.usablepointpricetotal,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

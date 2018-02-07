@@ -1,0 +1,873 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myit.ylw.dao.ConfigMapper">
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.Config">
+    <constructor>
+      <arg column="PointsUseID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="UserID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="Source" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="UsePoints" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="IsInCome" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="Addtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="Note" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PointsUseID, UserID, Source, UsePoints, IsInCome, Addtime, Note
+  </sql>
+  <select id="selectByExample" parameterType="com.myit.ylw.pojo.ConfigExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_pointsuserecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.ConfigExample">
+    delete from t_pointsuserecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.Config">
+    insert into t_pointsuserecord (PointsUseID, UserID, Source, 
+      UsePoints, IsInCome, Addtime, 
+      Note)
+    values (#{pointsuseid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, 
+      #{usepoints,jdbcType=INTEGER}, #{isincome,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.Config">
+    insert into t_pointsuserecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pointsuseid != null">
+        PointsUseID,
+      </if>
+      <if test="userid != null">
+        UserID,
+      </if>
+      <if test="source != null">
+        Source,
+      </if>
+      <if test="usepoints != null">
+        UsePoints,
+      </if>
+      <if test="isincome != null">
+        IsInCome,
+      </if>
+      <if test="addtime != null">
+        Addtime,
+      </if>
+      <if test="note != null">
+        Note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pointsuseid != null">
+        #{pointsuseid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="usepoints != null">
+        #{usepoints,jdbcType=INTEGER},
+      </if>
+      <if test="isincome != null">
+        #{isincome,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.ConfigExample" resultType="java.lang.Integer">
+    select count(*) from t_pointsuserecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_pointsuserecord
+    <set>
+      <if test="record.pointsuseid != null">
+        PointsUseID = #{record.pointsuseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null">
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.source != null">
+        Source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usepoints != null">
+        UsePoints = #{record.usepoints,jdbcType=INTEGER},
+      </if>
+      <if test="record.isincome != null">
+        IsInCome = #{record.isincome,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null">
+        Addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.note != null">
+        Note = #{record.note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_pointsuserecord
+    set PointsUseID = #{record.pointsuseid,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      Source = #{record.source,jdbcType=VARCHAR},
+      UsePoints = #{record.usepoints,jdbcType=INTEGER},
+      IsInCome = #{record.isincome,jdbcType=INTEGER},
+      Addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      Note = #{record.note,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.Config">
+    <constructor>
+      <arg column="ConfigID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="LanguageVer" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="WebsiteName" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="WebsiteDir" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="WebsiteKeywords" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="WebsiteDescription" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MailReceiveAddressForFeedback" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MailReceiveAddressForProduct" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MailReceiveAddressForJob" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MailSmtpServer" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MailUserName" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MailPassword" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="FooterInfo" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ListID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="AdminID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="AddTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="IsClose" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SetCommentDay" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SetCommentScore" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SetBackProductDay" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="AddProductFreeDays" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="ProductBond" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="ProductVIPServer" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="SetCloseOrderDay" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SetSignOrderDay" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SetSellerSolveDay" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="MinPointPercent" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="MaxPointPercent" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="SetCloseDesOrderDay" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="ExhibitionLong" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SetCloseSeeWLDay" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="ServiceHotline" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="Logo" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="WeChatPic" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PPTMoney" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="SeoTitle" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.ConfigWithBLOBs">
+    <constructor>
+      <arg column="ConfigID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="LanguageVer" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="WebsiteName" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="WebsiteDir" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="WebsiteKeywords" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="WebsiteDescription" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MailReceiveAddressForFeedback" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MailReceiveAddressForProduct" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MailReceiveAddressForJob" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MailSmtpServer" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MailUserName" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MailPassword" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="FooterInfo" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ListID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="AdminID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="AddTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="IsClose" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SetCommentDay" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SetCommentScore" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SetBackProductDay" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="AddProductFreeDays" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="ProductBond" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="ProductVIPServer" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="SetCloseOrderDay" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SetSignOrderDay" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SetSellerSolveDay" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="MinPointPercent" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="MaxPointPercent" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="SetCloseDesOrderDay" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="ExhibitionLong" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SetCloseSeeWLDay" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="ServiceHotline" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="Logo" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="WeChatPic" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PPTMoney" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="SeoTitle" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SetCommentContent" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+      <arg column="ExhibitionPic" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ConfigID, LanguageVer, WebsiteName, WebsiteDir, WebsiteKeywords, WebsiteDescription, 
+    MailReceiveAddressForFeedback, MailReceiveAddressForProduct, MailReceiveAddressForJob, 
+    MailSmtpServer, MailUserName, MailPassword, FooterInfo, ListID, AdminID, AddTime, 
+    IsClose, SetCommentDay, SetCommentScore, SetBackProductDay, AddProductFreeDays, ProductBond, 
+    ProductVIPServer, SetCloseOrderDay, SetSignOrderDay, SetSellerSolveDay, MinPointPercent, 
+    MaxPointPercent, SetCloseDesOrderDay, ExhibitionLong, SetCloseSeeWLDay, ServiceHotline, 
+    Logo, WeChatPic, PPTMoney, SeoTitle
+  </sql>
+  <sql id="Blob_Column_List">
+    SetCommentContent, ExhibitionPic
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.myit.ylw.pojo.ConfigExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.myit.ylw.pojo.ConfigExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.ConfigExample">
+    delete from t_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.ConfigWithBLOBs">
+    insert into t_config (ConfigID, LanguageVer, WebsiteName, 
+      WebsiteDir, WebsiteKeywords, WebsiteDescription, 
+      MailReceiveAddressForFeedback, MailReceiveAddressForProduct, 
+      MailReceiveAddressForJob, MailSmtpServer, 
+      MailUserName, MailPassword, FooterInfo, 
+      ListID, AdminID, AddTime, 
+      IsClose, SetCommentDay, SetCommentScore, 
+      SetBackProductDay, AddProductFreeDays, 
+      ProductBond, ProductVIPServer, SetCloseOrderDay, 
+      SetSignOrderDay, SetSellerSolveDay, MinPointPercent, 
+      MaxPointPercent, SetCloseDesOrderDay, ExhibitionLong, 
+      SetCloseSeeWLDay, ServiceHotline, Logo, 
+      WeChatPic, PPTMoney, SeoTitle, 
+      SetCommentContent, ExhibitionPic
+      )
+    values (#{configid,jdbcType=INTEGER}, #{languagever,jdbcType=VARCHAR}, #{websitename,jdbcType=VARCHAR}, 
+      #{websitedir,jdbcType=VARCHAR}, #{websitekeywords,jdbcType=VARCHAR}, #{websitedescription,jdbcType=VARCHAR}, 
+      #{mailreceiveaddressforfeedback,jdbcType=VARCHAR}, #{mailreceiveaddressforproduct,jdbcType=VARCHAR}, 
+      #{mailreceiveaddressforjob,jdbcType=VARCHAR}, #{mailsmtpserver,jdbcType=VARCHAR}, 
+      #{mailusername,jdbcType=VARCHAR}, #{mailpassword,jdbcType=VARCHAR}, #{footerinfo,jdbcType=VARCHAR}, 
+      #{listid,jdbcType=INTEGER}, #{adminid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{isclose,jdbcType=INTEGER}, #{setcommentday,jdbcType=INTEGER}, #{setcommentscore,jdbcType=INTEGER}, 
+      #{setbackproductday,jdbcType=INTEGER}, #{addproductfreedays,jdbcType=INTEGER}, 
+      #{productbond,jdbcType=DOUBLE}, #{productvipserver,jdbcType=DOUBLE}, #{setcloseorderday,jdbcType=INTEGER}, 
+      #{setsignorderday,jdbcType=INTEGER}, #{setsellersolveday,jdbcType=INTEGER}, #{minpointpercent,jdbcType=DOUBLE}, 
+      #{maxpointpercent,jdbcType=DOUBLE}, #{setclosedesorderday,jdbcType=INTEGER}, #{exhibitionlong,jdbcType=INTEGER}, 
+      #{setcloseseewlday,jdbcType=INTEGER}, #{servicehotline,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, 
+      #{wechatpic,jdbcType=VARCHAR}, #{pptmoney,jdbcType=DOUBLE}, #{seotitle,jdbcType=VARCHAR}, 
+      #{setcommentcontent,jdbcType=LONGVARCHAR}, #{exhibitionpic,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.ConfigWithBLOBs">
+    insert into t_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="configid != null">
+        ConfigID,
+      </if>
+      <if test="languagever != null">
+        LanguageVer,
+      </if>
+      <if test="websitename != null">
+        WebsiteName,
+      </if>
+      <if test="websitedir != null">
+        WebsiteDir,
+      </if>
+      <if test="websitekeywords != null">
+        WebsiteKeywords,
+      </if>
+      <if test="websitedescription != null">
+        WebsiteDescription,
+      </if>
+      <if test="mailreceiveaddressforfeedback != null">
+        MailReceiveAddressForFeedback,
+      </if>
+      <if test="mailreceiveaddressforproduct != null">
+        MailReceiveAddressForProduct,
+      </if>
+      <if test="mailreceiveaddressforjob != null">
+        MailReceiveAddressForJob,
+      </if>
+      <if test="mailsmtpserver != null">
+        MailSmtpServer,
+      </if>
+      <if test="mailusername != null">
+        MailUserName,
+      </if>
+      <if test="mailpassword != null">
+        MailPassword,
+      </if>
+      <if test="footerinfo != null">
+        FooterInfo,
+      </if>
+      <if test="listid != null">
+        ListID,
+      </if>
+      <if test="adminid != null">
+        AdminID,
+      </if>
+      <if test="addtime != null">
+        AddTime,
+      </if>
+      <if test="isclose != null">
+        IsClose,
+      </if>
+      <if test="setcommentday != null">
+        SetCommentDay,
+      </if>
+      <if test="setcommentscore != null">
+        SetCommentScore,
+      </if>
+      <if test="setbackproductday != null">
+        SetBackProductDay,
+      </if>
+      <if test="addproductfreedays != null">
+        AddProductFreeDays,
+      </if>
+      <if test="productbond != null">
+        ProductBond,
+      </if>
+      <if test="productvipserver != null">
+        ProductVIPServer,
+      </if>
+      <if test="setcloseorderday != null">
+        SetCloseOrderDay,
+      </if>
+      <if test="setsignorderday != null">
+        SetSignOrderDay,
+      </if>
+      <if test="setsellersolveday != null">
+        SetSellerSolveDay,
+      </if>
+      <if test="minpointpercent != null">
+        MinPointPercent,
+      </if>
+      <if test="maxpointpercent != null">
+        MaxPointPercent,
+      </if>
+      <if test="setclosedesorderday != null">
+        SetCloseDesOrderDay,
+      </if>
+      <if test="exhibitionlong != null">
+        ExhibitionLong,
+      </if>
+      <if test="setcloseseewlday != null">
+        SetCloseSeeWLDay,
+      </if>
+      <if test="servicehotline != null">
+        ServiceHotline,
+      </if>
+      <if test="logo != null">
+        Logo,
+      </if>
+      <if test="wechatpic != null">
+        WeChatPic,
+      </if>
+      <if test="pptmoney != null">
+        PPTMoney,
+      </if>
+      <if test="seotitle != null">
+        SeoTitle,
+      </if>
+      <if test="setcommentcontent != null">
+        SetCommentContent,
+      </if>
+      <if test="exhibitionpic != null">
+        ExhibitionPic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="configid != null">
+        #{configid,jdbcType=INTEGER},
+      </if>
+      <if test="languagever != null">
+        #{languagever,jdbcType=VARCHAR},
+      </if>
+      <if test="websitename != null">
+        #{websitename,jdbcType=VARCHAR},
+      </if>
+      <if test="websitedir != null">
+        #{websitedir,jdbcType=VARCHAR},
+      </if>
+      <if test="websitekeywords != null">
+        #{websitekeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="websitedescription != null">
+        #{websitedescription,jdbcType=VARCHAR},
+      </if>
+      <if test="mailreceiveaddressforfeedback != null">
+        #{mailreceiveaddressforfeedback,jdbcType=VARCHAR},
+      </if>
+      <if test="mailreceiveaddressforproduct != null">
+        #{mailreceiveaddressforproduct,jdbcType=VARCHAR},
+      </if>
+      <if test="mailreceiveaddressforjob != null">
+        #{mailreceiveaddressforjob,jdbcType=VARCHAR},
+      </if>
+      <if test="mailsmtpserver != null">
+        #{mailsmtpserver,jdbcType=VARCHAR},
+      </if>
+      <if test="mailusername != null">
+        #{mailusername,jdbcType=VARCHAR},
+      </if>
+      <if test="mailpassword != null">
+        #{mailpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="footerinfo != null">
+        #{footerinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="listid != null">
+        #{listid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null">
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isclose != null">
+        #{isclose,jdbcType=INTEGER},
+      </if>
+      <if test="setcommentday != null">
+        #{setcommentday,jdbcType=INTEGER},
+      </if>
+      <if test="setcommentscore != null">
+        #{setcommentscore,jdbcType=INTEGER},
+      </if>
+      <if test="setbackproductday != null">
+        #{setbackproductday,jdbcType=INTEGER},
+      </if>
+      <if test="addproductfreedays != null">
+        #{addproductfreedays,jdbcType=INTEGER},
+      </if>
+      <if test="productbond != null">
+        #{productbond,jdbcType=DOUBLE},
+      </if>
+      <if test="productvipserver != null">
+        #{productvipserver,jdbcType=DOUBLE},
+      </if>
+      <if test="setcloseorderday != null">
+        #{setcloseorderday,jdbcType=INTEGER},
+      </if>
+      <if test="setsignorderday != null">
+        #{setsignorderday,jdbcType=INTEGER},
+      </if>
+      <if test="setsellersolveday != null">
+        #{setsellersolveday,jdbcType=INTEGER},
+      </if>
+      <if test="minpointpercent != null">
+        #{minpointpercent,jdbcType=DOUBLE},
+      </if>
+      <if test="maxpointpercent != null">
+        #{maxpointpercent,jdbcType=DOUBLE},
+      </if>
+      <if test="setclosedesorderday != null">
+        #{setclosedesorderday,jdbcType=INTEGER},
+      </if>
+      <if test="exhibitionlong != null">
+        #{exhibitionlong,jdbcType=INTEGER},
+      </if>
+      <if test="setcloseseewlday != null">
+        #{setcloseseewlday,jdbcType=INTEGER},
+      </if>
+      <if test="servicehotline != null">
+        #{servicehotline,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatpic != null">
+        #{wechatpic,jdbcType=VARCHAR},
+      </if>
+      <if test="pptmoney != null">
+        #{pptmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="seotitle != null">
+        #{seotitle,jdbcType=VARCHAR},
+      </if>
+      <if test="setcommentcontent != null">
+        #{setcommentcontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="exhibitionpic != null">
+        #{exhibitionpic,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.ConfigExample" resultType="java.lang.Integer">
+    select count(*) from t_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_config
+    <set>
+      <if test="record.configid != null">
+        ConfigID = #{record.configid,jdbcType=INTEGER},
+      </if>
+      <if test="record.languagever != null">
+        LanguageVer = #{record.languagever,jdbcType=VARCHAR},
+      </if>
+      <if test="record.websitename != null">
+        WebsiteName = #{record.websitename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.websitedir != null">
+        WebsiteDir = #{record.websitedir,jdbcType=VARCHAR},
+      </if>
+      <if test="record.websitekeywords != null">
+        WebsiteKeywords = #{record.websitekeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.websitedescription != null">
+        WebsiteDescription = #{record.websitedescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mailreceiveaddressforfeedback != null">
+        MailReceiveAddressForFeedback = #{record.mailreceiveaddressforfeedback,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mailreceiveaddressforproduct != null">
+        MailReceiveAddressForProduct = #{record.mailreceiveaddressforproduct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mailreceiveaddressforjob != null">
+        MailReceiveAddressForJob = #{record.mailreceiveaddressforjob,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mailsmtpserver != null">
+        MailSmtpServer = #{record.mailsmtpserver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mailusername != null">
+        MailUserName = #{record.mailusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mailpassword != null">
+        MailPassword = #{record.mailpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.footerinfo != null">
+        FooterInfo = #{record.footerinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.listid != null">
+        ListID = #{record.listid,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminid != null">
+        AdminID = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null">
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isclose != null">
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+      <if test="record.setcommentday != null">
+        SetCommentDay = #{record.setcommentday,jdbcType=INTEGER},
+      </if>
+      <if test="record.setcommentscore != null">
+        SetCommentScore = #{record.setcommentscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.setbackproductday != null">
+        SetBackProductDay = #{record.setbackproductday,jdbcType=INTEGER},
+      </if>
+      <if test="record.addproductfreedays != null">
+        AddProductFreeDays = #{record.addproductfreedays,jdbcType=INTEGER},
+      </if>
+      <if test="record.productbond != null">
+        ProductBond = #{record.productbond,jdbcType=DOUBLE},
+      </if>
+      <if test="record.productvipserver != null">
+        ProductVIPServer = #{record.productvipserver,jdbcType=DOUBLE},
+      </if>
+      <if test="record.setcloseorderday != null">
+        SetCloseOrderDay = #{record.setcloseorderday,jdbcType=INTEGER},
+      </if>
+      <if test="record.setsignorderday != null">
+        SetSignOrderDay = #{record.setsignorderday,jdbcType=INTEGER},
+      </if>
+      <if test="record.setsellersolveday != null">
+        SetSellerSolveDay = #{record.setsellersolveday,jdbcType=INTEGER},
+      </if>
+      <if test="record.minpointpercent != null">
+        MinPointPercent = #{record.minpointpercent,jdbcType=DOUBLE},
+      </if>
+      <if test="record.maxpointpercent != null">
+        MaxPointPercent = #{record.maxpointpercent,jdbcType=DOUBLE},
+      </if>
+      <if test="record.setclosedesorderday != null">
+        SetCloseDesOrderDay = #{record.setclosedesorderday,jdbcType=INTEGER},
+      </if>
+      <if test="record.exhibitionlong != null">
+        ExhibitionLong = #{record.exhibitionlong,jdbcType=INTEGER},
+      </if>
+      <if test="record.setcloseseewlday != null">
+        SetCloseSeeWLDay = #{record.setcloseseewlday,jdbcType=INTEGER},
+      </if>
+      <if test="record.servicehotline != null">
+        ServiceHotline = #{record.servicehotline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logo != null">
+        Logo = #{record.logo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wechatpic != null">
+        WeChatPic = #{record.wechatpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pptmoney != null">
+        PPTMoney = #{record.pptmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.seotitle != null">
+        SeoTitle = #{record.seotitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.setcommentcontent != null">
+        SetCommentContent = #{record.setcommentcontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.exhibitionpic != null">
+        ExhibitionPic = #{record.exhibitionpic,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update t_config
+    set ConfigID = #{record.configid,jdbcType=INTEGER},
+      LanguageVer = #{record.languagever,jdbcType=VARCHAR},
+      WebsiteName = #{record.websitename,jdbcType=VARCHAR},
+      WebsiteDir = #{record.websitedir,jdbcType=VARCHAR},
+      WebsiteKeywords = #{record.websitekeywords,jdbcType=VARCHAR},
+      WebsiteDescription = #{record.websitedescription,jdbcType=VARCHAR},
+      MailReceiveAddressForFeedback = #{record.mailreceiveaddressforfeedback,jdbcType=VARCHAR},
+      MailReceiveAddressForProduct = #{record.mailreceiveaddressforproduct,jdbcType=VARCHAR},
+      MailReceiveAddressForJob = #{record.mailreceiveaddressforjob,jdbcType=VARCHAR},
+      MailSmtpServer = #{record.mailsmtpserver,jdbcType=VARCHAR},
+      MailUserName = #{record.mailusername,jdbcType=VARCHAR},
+      MailPassword = #{record.mailpassword,jdbcType=VARCHAR},
+      FooterInfo = #{record.footerinfo,jdbcType=VARCHAR},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      SetCommentDay = #{record.setcommentday,jdbcType=INTEGER},
+      SetCommentScore = #{record.setcommentscore,jdbcType=INTEGER},
+      SetBackProductDay = #{record.setbackproductday,jdbcType=INTEGER},
+      AddProductFreeDays = #{record.addproductfreedays,jdbcType=INTEGER},
+      ProductBond = #{record.productbond,jdbcType=DOUBLE},
+      ProductVIPServer = #{record.productvipserver,jdbcType=DOUBLE},
+      SetCloseOrderDay = #{record.setcloseorderday,jdbcType=INTEGER},
+      SetSignOrderDay = #{record.setsignorderday,jdbcType=INTEGER},
+      SetSellerSolveDay = #{record.setsellersolveday,jdbcType=INTEGER},
+      MinPointPercent = #{record.minpointpercent,jdbcType=DOUBLE},
+      MaxPointPercent = #{record.maxpointpercent,jdbcType=DOUBLE},
+      SetCloseDesOrderDay = #{record.setclosedesorderday,jdbcType=INTEGER},
+      ExhibitionLong = #{record.exhibitionlong,jdbcType=INTEGER},
+      SetCloseSeeWLDay = #{record.setcloseseewlday,jdbcType=INTEGER},
+      ServiceHotline = #{record.servicehotline,jdbcType=VARCHAR},
+      Logo = #{record.logo,jdbcType=VARCHAR},
+      WeChatPic = #{record.wechatpic,jdbcType=VARCHAR},
+      PPTMoney = #{record.pptmoney,jdbcType=DOUBLE},
+      SeoTitle = #{record.seotitle,jdbcType=VARCHAR},
+      SetCommentContent = #{record.setcommentcontent,jdbcType=LONGVARCHAR},
+      ExhibitionPic = #{record.exhibitionpic,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_config
+    set ConfigID = #{record.configid,jdbcType=INTEGER},
+      LanguageVer = #{record.languagever,jdbcType=VARCHAR},
+      WebsiteName = #{record.websitename,jdbcType=VARCHAR},
+      WebsiteDir = #{record.websitedir,jdbcType=VARCHAR},
+      WebsiteKeywords = #{record.websitekeywords,jdbcType=VARCHAR},
+      WebsiteDescription = #{record.websitedescription,jdbcType=VARCHAR},
+      MailReceiveAddressForFeedback = #{record.mailreceiveaddressforfeedback,jdbcType=VARCHAR},
+      MailReceiveAddressForProduct = #{record.mailreceiveaddressforproduct,jdbcType=VARCHAR},
+      MailReceiveAddressForJob = #{record.mailreceiveaddressforjob,jdbcType=VARCHAR},
+      MailSmtpServer = #{record.mailsmtpserver,jdbcType=VARCHAR},
+      MailUserName = #{record.mailusername,jdbcType=VARCHAR},
+      MailPassword = #{record.mailpassword,jdbcType=VARCHAR},
+      FooterInfo = #{record.footerinfo,jdbcType=VARCHAR},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      SetCommentDay = #{record.setcommentday,jdbcType=INTEGER},
+      SetCommentScore = #{record.setcommentscore,jdbcType=INTEGER},
+      SetBackProductDay = #{record.setbackproductday,jdbcType=INTEGER},
+      AddProductFreeDays = #{record.addproductfreedays,jdbcType=INTEGER},
+      ProductBond = #{record.productbond,jdbcType=DOUBLE},
+      ProductVIPServer = #{record.productvipserver,jdbcType=DOUBLE},
+      SetCloseOrderDay = #{record.setcloseorderday,jdbcType=INTEGER},
+      SetSignOrderDay = #{record.setsignorderday,jdbcType=INTEGER},
+      SetSellerSolveDay = #{record.setsellersolveday,jdbcType=INTEGER},
+      MinPointPercent = #{record.minpointpercent,jdbcType=DOUBLE},
+      MaxPointPercent = #{record.maxpointpercent,jdbcType=DOUBLE},
+      SetCloseDesOrderDay = #{record.setclosedesorderday,jdbcType=INTEGER},
+      ExhibitionLong = #{record.exhibitionlong,jdbcType=INTEGER},
+      SetCloseSeeWLDay = #{record.setcloseseewlday,jdbcType=INTEGER},
+      ServiceHotline = #{record.servicehotline,jdbcType=VARCHAR},
+      Logo = #{record.logo,jdbcType=VARCHAR},
+      WeChatPic = #{record.wechatpic,jdbcType=VARCHAR},
+      PPTMoney = #{record.pptmoney,jdbcType=DOUBLE},
+      SeoTitle = #{record.seotitle,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

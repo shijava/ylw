@@ -1,0 +1,1038 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.Product" >
+    <constructor >
+      <arg column="ProductID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ClassID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ProductName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SmallPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BigPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Keywords" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Description" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Details" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IsRecommend" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ClickNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="InitIsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="MaterialType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Technics" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ProductNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SurfaceTechnics" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UtensilsDesign" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Construction" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Modeling" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Packaging" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsPrintLogin" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="GiftGivingOccasion" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GiftCategory" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GiftPurposes" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GiftStyle" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GiftObject" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IsCustomMade" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Price" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="Point" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="StoreCategoryID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsNoReasonReturn" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Province" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="City" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="District" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsUserRecommend" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserRecommendListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CommentScore" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CommentNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ConsultNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CollectNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShopID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Storage" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="SalesVolume" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsPutaway" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PutawayTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsLocalFeaturesGifts" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="GAddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="GIsAudit" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="GProvince" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="GCity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="GDistrict" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PriceRange" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PointPercent" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="GiftPriceRange" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TrendyGiftRecommend" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AdPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="fromtype" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="sellernick" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.ProductWithBLOBs" >
+    <constructor >
+      <arg column="ProductID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ClassID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ProductName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SmallPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BigPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Keywords" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Description" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Details" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IsRecommend" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ClickNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="InitIsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="MaterialType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Technics" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ProductNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SurfaceTechnics" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UtensilsDesign" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Construction" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Modeling" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Packaging" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsPrintLogin" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="GiftGivingOccasion" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GiftCategory" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GiftPurposes" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GiftStyle" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GiftObject" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IsCustomMade" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Price" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="Point" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="StoreCategoryID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsNoReasonReturn" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Province" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="City" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="District" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsUserRecommend" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserRecommendListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CommentScore" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CommentNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ConsultNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CollectNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShopID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Storage" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="SalesVolume" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsPutaway" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PutawayTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsLocalFeaturesGifts" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="GAddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="GIsAudit" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="GProvince" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="GCity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="GDistrict" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PriceRange" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PointPercent" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="GiftPriceRange" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TrendyGiftRecommend" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AdPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="fromtype" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="sellernick" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BrandName" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="shop_url" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="click_url" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="details_url" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ProductID, ClassID, ProductName, SmallPic, BigPic, Keywords, Description, Details, 
+    IsRecommend, ClickNum, ListID, AdminID, AddTime, IsClose, InitIsClose, MaterialType, 
+    Technics, ProductNO, SurfaceTechnics, UtensilsDesign, Construction, Modeling, Packaging, 
+    IsPrintLogin, GiftGivingOccasion, GiftCategory, GiftPurposes, GiftStyle, GiftObject, 
+    IsCustomMade, Price, Point, StoreCategoryID, IsNoReasonReturn, Province, City, District, 
+    IsUserRecommend, UserRecommendListID, CommentScore, CommentNum, ConsultNum, CollectNum, 
+    ShopID, Storage, SalesVolume, IsPutaway, PutawayTime, IsLocalFeaturesGifts, GAddTime, 
+    GIsAudit, GProvince, GCity, GDistrict, PriceRange, PointPercent, GiftPriceRange, 
+    TrendyGiftRecommend, AdPic, fromtype, sellernick
+  </sql>
+  <sql id="Blob_Column_List" >
+    BrandName, shop_url, click_url, details_url
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.ProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.ProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.ProductExample" >
+    delete from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.ProductWithBLOBs" >
+    insert into t_product (ProductID, ClassID, ProductName, 
+      SmallPic, BigPic, Keywords, 
+      Description, Details, IsRecommend, 
+      ClickNum, ListID, AdminID, 
+      AddTime, IsClose, InitIsClose, 
+      MaterialType, Technics, ProductNO, 
+      SurfaceTechnics, UtensilsDesign, Construction, 
+      Modeling, Packaging, IsPrintLogin, 
+      GiftGivingOccasion, GiftCategory, GiftPurposes, 
+      GiftStyle, GiftObject, IsCustomMade, 
+      Price, Point, StoreCategoryID, 
+      IsNoReasonReturn, Province, City, 
+      District, IsUserRecommend, UserRecommendListID, 
+      CommentScore, CommentNum, ConsultNum, 
+      CollectNum, ShopID, Storage, 
+      SalesVolume, IsPutaway, PutawayTime, 
+      IsLocalFeaturesGifts, GAddTime, GIsAudit, 
+      GProvince, GCity, GDistrict, 
+      PriceRange, PointPercent, GiftPriceRange, 
+      TrendyGiftRecommend, AdPic, fromtype, 
+      sellernick, BrandName, shop_url, 
+      click_url, details_url)
+    values (#{productid,jdbcType=INTEGER}, #{classid,jdbcType=INTEGER}, #{productname,jdbcType=VARCHAR}, 
+      #{smallpic,jdbcType=VARCHAR}, #{bigpic,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR}, #{isrecommend,jdbcType=INTEGER}, 
+      #{clicknum,jdbcType=INTEGER}, #{listid,jdbcType=INTEGER}, #{adminid,jdbcType=INTEGER}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{isclose,jdbcType=INTEGER}, #{initisclose,jdbcType=INTEGER}, 
+      #{materialtype,jdbcType=INTEGER}, #{technics,jdbcType=VARCHAR}, #{productno,jdbcType=VARCHAR}, 
+      #{surfacetechnics,jdbcType=INTEGER}, #{utensilsdesign,jdbcType=INTEGER}, #{construction,jdbcType=INTEGER}, 
+      #{modeling,jdbcType=INTEGER}, #{packaging,jdbcType=INTEGER}, #{isprintlogin,jdbcType=INTEGER}, 
+      #{giftgivingoccasion,jdbcType=VARCHAR}, #{giftcategory,jdbcType=VARCHAR}, #{giftpurposes,jdbcType=VARCHAR}, 
+      #{giftstyle,jdbcType=VARCHAR}, #{giftobject,jdbcType=VARCHAR}, #{iscustommade,jdbcType=INTEGER}, 
+      #{price,jdbcType=DOUBLE}, #{point,jdbcType=INTEGER}, #{storecategoryid,jdbcType=INTEGER}, 
+      #{isnoreasonreturn,jdbcType=INTEGER}, #{province,jdbcType=INTEGER}, #{city,jdbcType=INTEGER}, 
+      #{district,jdbcType=INTEGER}, #{isuserrecommend,jdbcType=INTEGER}, #{userrecommendlistid,jdbcType=INTEGER}, 
+      #{commentscore,jdbcType=INTEGER}, #{commentnum,jdbcType=INTEGER}, #{consultnum,jdbcType=INTEGER}, 
+      #{collectnum,jdbcType=INTEGER}, #{shopid,jdbcType=INTEGER}, #{storage,jdbcType=INTEGER}, 
+      #{salesvolume,jdbcType=INTEGER}, #{isputaway,jdbcType=INTEGER}, #{putawaytime,jdbcType=TIMESTAMP}, 
+      #{islocalfeaturesgifts,jdbcType=INTEGER}, #{gaddtime,jdbcType=TIMESTAMP}, #{gisaudit,jdbcType=INTEGER}, 
+      #{gprovince,jdbcType=INTEGER}, #{gcity,jdbcType=INTEGER}, #{gdistrict,jdbcType=INTEGER}, 
+      #{pricerange,jdbcType=INTEGER}, #{pointpercent,jdbcType=DOUBLE}, #{giftpricerange,jdbcType=INTEGER}, 
+      #{trendygiftrecommend,jdbcType=INTEGER}, #{adpic,jdbcType=VARCHAR}, #{fromtype,jdbcType=INTEGER}, 
+      #{sellernick,jdbcType=VARCHAR}, #{brandname,jdbcType=LONGVARCHAR}, #{shopUrl,jdbcType=LONGVARCHAR}, 
+      #{clickUrl,jdbcType=LONGVARCHAR}, #{detailsUrl,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.ProductWithBLOBs" >
+    insert into t_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productid != null" >
+        ProductID,
+      </if>
+      <if test="classid != null" >
+        ClassID,
+      </if>
+      <if test="productname != null" >
+        ProductName,
+      </if>
+      <if test="smallpic != null" >
+        SmallPic,
+      </if>
+      <if test="bigpic != null" >
+        BigPic,
+      </if>
+      <if test="keywords != null" >
+        Keywords,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="details != null" >
+        Details,
+      </if>
+      <if test="isrecommend != null" >
+        IsRecommend,
+      </if>
+      <if test="clicknum != null" >
+        ClickNum,
+      </if>
+      <if test="listid != null" >
+        ListID,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="isclose != null" >
+        IsClose,
+      </if>
+      <if test="initisclose != null" >
+        InitIsClose,
+      </if>
+      <if test="materialtype != null" >
+        MaterialType,
+      </if>
+      <if test="technics != null" >
+        Technics,
+      </if>
+      <if test="productno != null" >
+        ProductNO,
+      </if>
+      <if test="surfacetechnics != null" >
+        SurfaceTechnics,
+      </if>
+      <if test="utensilsdesign != null" >
+        UtensilsDesign,
+      </if>
+      <if test="construction != null" >
+        Construction,
+      </if>
+      <if test="modeling != null" >
+        Modeling,
+      </if>
+      <if test="packaging != null" >
+        Packaging,
+      </if>
+      <if test="isprintlogin != null" >
+        IsPrintLogin,
+      </if>
+      <if test="giftgivingoccasion != null" >
+        GiftGivingOccasion,
+      </if>
+      <if test="giftcategory != null" >
+        GiftCategory,
+      </if>
+      <if test="giftpurposes != null" >
+        GiftPurposes,
+      </if>
+      <if test="giftstyle != null" >
+        GiftStyle,
+      </if>
+      <if test="giftobject != null" >
+        GiftObject,
+      </if>
+      <if test="iscustommade != null" >
+        IsCustomMade,
+      </if>
+      <if test="price != null" >
+        Price,
+      </if>
+      <if test="point != null" >
+        Point,
+      </if>
+      <if test="storecategoryid != null" >
+        StoreCategoryID,
+      </if>
+      <if test="isnoreasonreturn != null" >
+        IsNoReasonReturn,
+      </if>
+      <if test="province != null" >
+        Province,
+      </if>
+      <if test="city != null" >
+        City,
+      </if>
+      <if test="district != null" >
+        District,
+      </if>
+      <if test="isuserrecommend != null" >
+        IsUserRecommend,
+      </if>
+      <if test="userrecommendlistid != null" >
+        UserRecommendListID,
+      </if>
+      <if test="commentscore != null" >
+        CommentScore,
+      </if>
+      <if test="commentnum != null" >
+        CommentNum,
+      </if>
+      <if test="consultnum != null" >
+        ConsultNum,
+      </if>
+      <if test="collectnum != null" >
+        CollectNum,
+      </if>
+      <if test="shopid != null" >
+        ShopID,
+      </if>
+      <if test="storage != null" >
+        Storage,
+      </if>
+      <if test="salesvolume != null" >
+        SalesVolume,
+      </if>
+      <if test="isputaway != null" >
+        IsPutaway,
+      </if>
+      <if test="putawaytime != null" >
+        PutawayTime,
+      </if>
+      <if test="islocalfeaturesgifts != null" >
+        IsLocalFeaturesGifts,
+      </if>
+      <if test="gaddtime != null" >
+        GAddTime,
+      </if>
+      <if test="gisaudit != null" >
+        GIsAudit,
+      </if>
+      <if test="gprovince != null" >
+        GProvince,
+      </if>
+      <if test="gcity != null" >
+        GCity,
+      </if>
+      <if test="gdistrict != null" >
+        GDistrict,
+      </if>
+      <if test="pricerange != null" >
+        PriceRange,
+      </if>
+      <if test="pointpercent != null" >
+        PointPercent,
+      </if>
+      <if test="giftpricerange != null" >
+        GiftPriceRange,
+      </if>
+      <if test="trendygiftrecommend != null" >
+        TrendyGiftRecommend,
+      </if>
+      <if test="adpic != null" >
+        AdPic,
+      </if>
+      <if test="fromtype != null" >
+        fromtype,
+      </if>
+      <if test="sellernick != null" >
+        sellernick,
+      </if>
+      <if test="brandname != null" >
+        BrandName,
+      </if>
+      <if test="shopUrl != null" >
+        shop_url,
+      </if>
+      <if test="clickUrl != null" >
+        click_url,
+      </if>
+      <if test="detailsUrl != null" >
+        details_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="smallpic != null" >
+        #{smallpic,jdbcType=VARCHAR},
+      </if>
+      <if test="bigpic != null" >
+        #{bigpic,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="isrecommend != null" >
+        #{isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="clicknum != null" >
+        #{clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="listid != null" >
+        #{listid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isclose != null" >
+        #{isclose,jdbcType=INTEGER},
+      </if>
+      <if test="initisclose != null" >
+        #{initisclose,jdbcType=INTEGER},
+      </if>
+      <if test="materialtype != null" >
+        #{materialtype,jdbcType=INTEGER},
+      </if>
+      <if test="technics != null" >
+        #{technics,jdbcType=VARCHAR},
+      </if>
+      <if test="productno != null" >
+        #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="surfacetechnics != null" >
+        #{surfacetechnics,jdbcType=INTEGER},
+      </if>
+      <if test="utensilsdesign != null" >
+        #{utensilsdesign,jdbcType=INTEGER},
+      </if>
+      <if test="construction != null" >
+        #{construction,jdbcType=INTEGER},
+      </if>
+      <if test="modeling != null" >
+        #{modeling,jdbcType=INTEGER},
+      </if>
+      <if test="packaging != null" >
+        #{packaging,jdbcType=INTEGER},
+      </if>
+      <if test="isprintlogin != null" >
+        #{isprintlogin,jdbcType=INTEGER},
+      </if>
+      <if test="giftgivingoccasion != null" >
+        #{giftgivingoccasion,jdbcType=VARCHAR},
+      </if>
+      <if test="giftcategory != null" >
+        #{giftcategory,jdbcType=VARCHAR},
+      </if>
+      <if test="giftpurposes != null" >
+        #{giftpurposes,jdbcType=VARCHAR},
+      </if>
+      <if test="giftstyle != null" >
+        #{giftstyle,jdbcType=VARCHAR},
+      </if>
+      <if test="giftobject != null" >
+        #{giftobject,jdbcType=VARCHAR},
+      </if>
+      <if test="iscustommade != null" >
+        #{iscustommade,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="point != null" >
+        #{point,jdbcType=INTEGER},
+      </if>
+      <if test="storecategoryid != null" >
+        #{storecategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="isnoreasonreturn != null" >
+        #{isnoreasonreturn,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=INTEGER},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=INTEGER},
+      </if>
+      <if test="isuserrecommend != null" >
+        #{isuserrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="userrecommendlistid != null" >
+        #{userrecommendlistid,jdbcType=INTEGER},
+      </if>
+      <if test="commentscore != null" >
+        #{commentscore,jdbcType=INTEGER},
+      </if>
+      <if test="commentnum != null" >
+        #{commentnum,jdbcType=INTEGER},
+      </if>
+      <if test="consultnum != null" >
+        #{consultnum,jdbcType=INTEGER},
+      </if>
+      <if test="collectnum != null" >
+        #{collectnum,jdbcType=INTEGER},
+      </if>
+      <if test="shopid != null" >
+        #{shopid,jdbcType=INTEGER},
+      </if>
+      <if test="storage != null" >
+        #{storage,jdbcType=INTEGER},
+      </if>
+      <if test="salesvolume != null" >
+        #{salesvolume,jdbcType=INTEGER},
+      </if>
+      <if test="isputaway != null" >
+        #{isputaway,jdbcType=INTEGER},
+      </if>
+      <if test="putawaytime != null" >
+        #{putawaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="islocalfeaturesgifts != null" >
+        #{islocalfeaturesgifts,jdbcType=INTEGER},
+      </if>
+      <if test="gaddtime != null" >
+        #{gaddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gisaudit != null" >
+        #{gisaudit,jdbcType=INTEGER},
+      </if>
+      <if test="gprovince != null" >
+        #{gprovince,jdbcType=INTEGER},
+      </if>
+      <if test="gcity != null" >
+        #{gcity,jdbcType=INTEGER},
+      </if>
+      <if test="gdistrict != null" >
+        #{gdistrict,jdbcType=INTEGER},
+      </if>
+      <if test="pricerange != null" >
+        #{pricerange,jdbcType=INTEGER},
+      </if>
+      <if test="pointpercent != null" >
+        #{pointpercent,jdbcType=DOUBLE},
+      </if>
+      <if test="giftpricerange != null" >
+        #{giftpricerange,jdbcType=INTEGER},
+      </if>
+      <if test="trendygiftrecommend != null" >
+        #{trendygiftrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="adpic != null" >
+        #{adpic,jdbcType=VARCHAR},
+      </if>
+      <if test="fromtype != null" >
+        #{fromtype,jdbcType=INTEGER},
+      </if>
+      <if test="sellernick != null" >
+        #{sellernick,jdbcType=VARCHAR},
+      </if>
+      <if test="brandname != null" >
+        #{brandname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="shopUrl != null" >
+        #{shopUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="clickUrl != null" >
+        #{clickUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="detailsUrl != null" >
+        #{detailsUrl,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.ProductExample" resultType="java.lang.Integer" >
+    select count(*) from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_product
+    <set >
+      <if test="record.productid != null" >
+        ProductID = #{record.productid,jdbcType=INTEGER},
+      </if>
+      <if test="record.classid != null" >
+        ClassID = #{record.classid,jdbcType=INTEGER},
+      </if>
+      <if test="record.productname != null" >
+        ProductName = #{record.productname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smallpic != null" >
+        SmallPic = #{record.smallpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigpic != null" >
+        BigPic = #{record.bigpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keywords != null" >
+        Keywords = #{record.keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        Description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.details != null" >
+        Details = #{record.details,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isrecommend != null" >
+        IsRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="record.clicknum != null" >
+        ClickNum = #{record.clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="record.listid != null" >
+        ListID = #{record.listid,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminid != null" >
+        AdminID = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isclose != null" >
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+      <if test="record.initisclose != null" >
+        InitIsClose = #{record.initisclose,jdbcType=INTEGER},
+      </if>
+      <if test="record.materialtype != null" >
+        MaterialType = #{record.materialtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.technics != null" >
+        Technics = #{record.technics,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productno != null" >
+        ProductNO = #{record.productno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.surfacetechnics != null" >
+        SurfaceTechnics = #{record.surfacetechnics,jdbcType=INTEGER},
+      </if>
+      <if test="record.utensilsdesign != null" >
+        UtensilsDesign = #{record.utensilsdesign,jdbcType=INTEGER},
+      </if>
+      <if test="record.construction != null" >
+        Construction = #{record.construction,jdbcType=INTEGER},
+      </if>
+      <if test="record.modeling != null" >
+        Modeling = #{record.modeling,jdbcType=INTEGER},
+      </if>
+      <if test="record.packaging != null" >
+        Packaging = #{record.packaging,jdbcType=INTEGER},
+      </if>
+      <if test="record.isprintlogin != null" >
+        IsPrintLogin = #{record.isprintlogin,jdbcType=INTEGER},
+      </if>
+      <if test="record.giftgivingoccasion != null" >
+        GiftGivingOccasion = #{record.giftgivingoccasion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.giftcategory != null" >
+        GiftCategory = #{record.giftcategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.giftpurposes != null" >
+        GiftPurposes = #{record.giftpurposes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.giftstyle != null" >
+        GiftStyle = #{record.giftstyle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.giftobject != null" >
+        GiftObject = #{record.giftobject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iscustommade != null" >
+        IsCustomMade = #{record.iscustommade,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        Price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.point != null" >
+        Point = #{record.point,jdbcType=INTEGER},
+      </if>
+      <if test="record.storecategoryid != null" >
+        StoreCategoryID = #{record.storecategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isnoreasonreturn != null" >
+        IsNoReasonReturn = #{record.isnoreasonreturn,jdbcType=INTEGER},
+      </if>
+      <if test="record.province != null" >
+        Province = #{record.province,jdbcType=INTEGER},
+      </if>
+      <if test="record.city != null" >
+        City = #{record.city,jdbcType=INTEGER},
+      </if>
+      <if test="record.district != null" >
+        District = #{record.district,jdbcType=INTEGER},
+      </if>
+      <if test="record.isuserrecommend != null" >
+        IsUserRecommend = #{record.isuserrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="record.userrecommendlistid != null" >
+        UserRecommendListID = #{record.userrecommendlistid,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentscore != null" >
+        CommentScore = #{record.commentscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentnum != null" >
+        CommentNum = #{record.commentnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.consultnum != null" >
+        ConsultNum = #{record.consultnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectnum != null" >
+        CollectNum = #{record.collectnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopid != null" >
+        ShopID = #{record.shopid,jdbcType=INTEGER},
+      </if>
+      <if test="record.storage != null" >
+        Storage = #{record.storage,jdbcType=INTEGER},
+      </if>
+      <if test="record.salesvolume != null" >
+        SalesVolume = #{record.salesvolume,jdbcType=INTEGER},
+      </if>
+      <if test="record.isputaway != null" >
+        IsPutaway = #{record.isputaway,jdbcType=INTEGER},
+      </if>
+      <if test="record.putawaytime != null" >
+        PutawayTime = #{record.putawaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.islocalfeaturesgifts != null" >
+        IsLocalFeaturesGifts = #{record.islocalfeaturesgifts,jdbcType=INTEGER},
+      </if>
+      <if test="record.gaddtime != null" >
+        GAddTime = #{record.gaddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gisaudit != null" >
+        GIsAudit = #{record.gisaudit,jdbcType=INTEGER},
+      </if>
+      <if test="record.gprovince != null" >
+        GProvince = #{record.gprovince,jdbcType=INTEGER},
+      </if>
+      <if test="record.gcity != null" >
+        GCity = #{record.gcity,jdbcType=INTEGER},
+      </if>
+      <if test="record.gdistrict != null" >
+        GDistrict = #{record.gdistrict,jdbcType=INTEGER},
+      </if>
+      <if test="record.pricerange != null" >
+        PriceRange = #{record.pricerange,jdbcType=INTEGER},
+      </if>
+      <if test="record.pointpercent != null" >
+        PointPercent = #{record.pointpercent,jdbcType=DOUBLE},
+      </if>
+      <if test="record.giftpricerange != null" >
+        GiftPriceRange = #{record.giftpricerange,jdbcType=INTEGER},
+      </if>
+      <if test="record.trendygiftrecommend != null" >
+        TrendyGiftRecommend = #{record.trendygiftrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="record.adpic != null" >
+        AdPic = #{record.adpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromtype != null" >
+        fromtype = #{record.fromtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.sellernick != null" >
+        sellernick = #{record.sellernick,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandname != null" >
+        BrandName = #{record.brandname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.shopUrl != null" >
+        shop_url = #{record.shopUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.clickUrl != null" >
+        click_url = #{record.clickUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.detailsUrl != null" >
+        details_url = #{record.detailsUrl,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_product
+    set ProductID = #{record.productid,jdbcType=INTEGER},
+      ClassID = #{record.classid,jdbcType=INTEGER},
+      ProductName = #{record.productname,jdbcType=VARCHAR},
+      SmallPic = #{record.smallpic,jdbcType=VARCHAR},
+      BigPic = #{record.bigpic,jdbcType=VARCHAR},
+      Keywords = #{record.keywords,jdbcType=VARCHAR},
+      Description = #{record.description,jdbcType=VARCHAR},
+      Details = #{record.details,jdbcType=VARCHAR},
+      IsRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      ClickNum = #{record.clicknum,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      InitIsClose = #{record.initisclose,jdbcType=INTEGER},
+      MaterialType = #{record.materialtype,jdbcType=INTEGER},
+      Technics = #{record.technics,jdbcType=VARCHAR},
+      ProductNO = #{record.productno,jdbcType=VARCHAR},
+      SurfaceTechnics = #{record.surfacetechnics,jdbcType=INTEGER},
+      UtensilsDesign = #{record.utensilsdesign,jdbcType=INTEGER},
+      Construction = #{record.construction,jdbcType=INTEGER},
+      Modeling = #{record.modeling,jdbcType=INTEGER},
+      Packaging = #{record.packaging,jdbcType=INTEGER},
+      IsPrintLogin = #{record.isprintlogin,jdbcType=INTEGER},
+      GiftGivingOccasion = #{record.giftgivingoccasion,jdbcType=VARCHAR},
+      GiftCategory = #{record.giftcategory,jdbcType=VARCHAR},
+      GiftPurposes = #{record.giftpurposes,jdbcType=VARCHAR},
+      GiftStyle = #{record.giftstyle,jdbcType=VARCHAR},
+      GiftObject = #{record.giftobject,jdbcType=VARCHAR},
+      IsCustomMade = #{record.iscustommade,jdbcType=INTEGER},
+      Price = #{record.price,jdbcType=DOUBLE},
+      Point = #{record.point,jdbcType=INTEGER},
+      StoreCategoryID = #{record.storecategoryid,jdbcType=INTEGER},
+      IsNoReasonReturn = #{record.isnoreasonreturn,jdbcType=INTEGER},
+      Province = #{record.province,jdbcType=INTEGER},
+      City = #{record.city,jdbcType=INTEGER},
+      District = #{record.district,jdbcType=INTEGER},
+      IsUserRecommend = #{record.isuserrecommend,jdbcType=INTEGER},
+      UserRecommendListID = #{record.userrecommendlistid,jdbcType=INTEGER},
+      CommentScore = #{record.commentscore,jdbcType=INTEGER},
+      CommentNum = #{record.commentnum,jdbcType=INTEGER},
+      ConsultNum = #{record.consultnum,jdbcType=INTEGER},
+      CollectNum = #{record.collectnum,jdbcType=INTEGER},
+      ShopID = #{record.shopid,jdbcType=INTEGER},
+      Storage = #{record.storage,jdbcType=INTEGER},
+      SalesVolume = #{record.salesvolume,jdbcType=INTEGER},
+      IsPutaway = #{record.isputaway,jdbcType=INTEGER},
+      PutawayTime = #{record.putawaytime,jdbcType=TIMESTAMP},
+      IsLocalFeaturesGifts = #{record.islocalfeaturesgifts,jdbcType=INTEGER},
+      GAddTime = #{record.gaddtime,jdbcType=TIMESTAMP},
+      GIsAudit = #{record.gisaudit,jdbcType=INTEGER},
+      GProvince = #{record.gprovince,jdbcType=INTEGER},
+      GCity = #{record.gcity,jdbcType=INTEGER},
+      GDistrict = #{record.gdistrict,jdbcType=INTEGER},
+      PriceRange = #{record.pricerange,jdbcType=INTEGER},
+      PointPercent = #{record.pointpercent,jdbcType=DOUBLE},
+      GiftPriceRange = #{record.giftpricerange,jdbcType=INTEGER},
+      TrendyGiftRecommend = #{record.trendygiftrecommend,jdbcType=INTEGER},
+      AdPic = #{record.adpic,jdbcType=VARCHAR},
+      fromtype = #{record.fromtype,jdbcType=INTEGER},
+      sellernick = #{record.sellernick,jdbcType=VARCHAR},
+      BrandName = #{record.brandname,jdbcType=LONGVARCHAR},
+      shop_url = #{record.shopUrl,jdbcType=LONGVARCHAR},
+      click_url = #{record.clickUrl,jdbcType=LONGVARCHAR},
+      details_url = #{record.detailsUrl,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_product
+    set ProductID = #{record.productid,jdbcType=INTEGER},
+      ClassID = #{record.classid,jdbcType=INTEGER},
+      ProductName = #{record.productname,jdbcType=VARCHAR},
+      SmallPic = #{record.smallpic,jdbcType=VARCHAR},
+      BigPic = #{record.bigpic,jdbcType=VARCHAR},
+      Keywords = #{record.keywords,jdbcType=VARCHAR},
+      Description = #{record.description,jdbcType=VARCHAR},
+      Details = #{record.details,jdbcType=VARCHAR},
+      IsRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      ClickNum = #{record.clicknum,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      InitIsClose = #{record.initisclose,jdbcType=INTEGER},
+      MaterialType = #{record.materialtype,jdbcType=INTEGER},
+      Technics = #{record.technics,jdbcType=VARCHAR},
+      ProductNO = #{record.productno,jdbcType=VARCHAR},
+      SurfaceTechnics = #{record.surfacetechnics,jdbcType=INTEGER},
+      UtensilsDesign = #{record.utensilsdesign,jdbcType=INTEGER},
+      Construction = #{record.construction,jdbcType=INTEGER},
+      Modeling = #{record.modeling,jdbcType=INTEGER},
+      Packaging = #{record.packaging,jdbcType=INTEGER},
+      IsPrintLogin = #{record.isprintlogin,jdbcType=INTEGER},
+      GiftGivingOccasion = #{record.giftgivingoccasion,jdbcType=VARCHAR},
+      GiftCategory = #{record.giftcategory,jdbcType=VARCHAR},
+      GiftPurposes = #{record.giftpurposes,jdbcType=VARCHAR},
+      GiftStyle = #{record.giftstyle,jdbcType=VARCHAR},
+      GiftObject = #{record.giftobject,jdbcType=VARCHAR},
+      IsCustomMade = #{record.iscustommade,jdbcType=INTEGER},
+      Price = #{record.price,jdbcType=DOUBLE},
+      Point = #{record.point,jdbcType=INTEGER},
+      StoreCategoryID = #{record.storecategoryid,jdbcType=INTEGER},
+      IsNoReasonReturn = #{record.isnoreasonreturn,jdbcType=INTEGER},
+      Province = #{record.province,jdbcType=INTEGER},
+      City = #{record.city,jdbcType=INTEGER},
+      District = #{record.district,jdbcType=INTEGER},
+      IsUserRecommend = #{record.isuserrecommend,jdbcType=INTEGER},
+      UserRecommendListID = #{record.userrecommendlistid,jdbcType=INTEGER},
+      CommentScore = #{record.commentscore,jdbcType=INTEGER},
+      CommentNum = #{record.commentnum,jdbcType=INTEGER},
+      ConsultNum = #{record.consultnum,jdbcType=INTEGER},
+      CollectNum = #{record.collectnum,jdbcType=INTEGER},
+      ShopID = #{record.shopid,jdbcType=INTEGER},
+      Storage = #{record.storage,jdbcType=INTEGER},
+      SalesVolume = #{record.salesvolume,jdbcType=INTEGER},
+      IsPutaway = #{record.isputaway,jdbcType=INTEGER},
+      PutawayTime = #{record.putawaytime,jdbcType=TIMESTAMP},
+      IsLocalFeaturesGifts = #{record.islocalfeaturesgifts,jdbcType=INTEGER},
+      GAddTime = #{record.gaddtime,jdbcType=TIMESTAMP},
+      GIsAudit = #{record.gisaudit,jdbcType=INTEGER},
+      GProvince = #{record.gprovince,jdbcType=INTEGER},
+      GCity = #{record.gcity,jdbcType=INTEGER},
+      GDistrict = #{record.gdistrict,jdbcType=INTEGER},
+      PriceRange = #{record.pricerange,jdbcType=INTEGER},
+      PointPercent = #{record.pointpercent,jdbcType=DOUBLE},
+      GiftPriceRange = #{record.giftpricerange,jdbcType=INTEGER},
+      TrendyGiftRecommend = #{record.trendygiftrecommend,jdbcType=INTEGER},
+      AdPic = #{record.adpic,jdbcType=VARCHAR},
+      fromtype = #{record.fromtype,jdbcType=INTEGER},
+      sellernick = #{record.sellernick,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

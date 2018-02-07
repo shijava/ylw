@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.UserLogMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.UserLog" >
+    <constructor >
+      <arg column="UserLogID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="LogContent" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ScriptFile" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IPAddress" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UserLogID, LogContent, ScriptFile, IPAddress, UserID, AddTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.UserLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_userlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.UserLogExample" >
+    delete from t_userlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.UserLog" >
+    insert into t_userlog (UserLogID, LogContent, ScriptFile, 
+      IPAddress, UserID, AddTime
+      )
+    values (#{userlogid,jdbcType=INTEGER}, #{logcontent,jdbcType=VARCHAR}, #{scriptfile,jdbcType=VARCHAR}, 
+      #{ipaddress,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.UserLog" >
+    insert into t_userlog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userlogid != null" >
+        UserLogID,
+      </if>
+      <if test="logcontent != null" >
+        LogContent,
+      </if>
+      <if test="scriptfile != null" >
+        ScriptFile,
+      </if>
+      <if test="ipaddress != null" >
+        IPAddress,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userlogid != null" >
+        #{userlogid,jdbcType=INTEGER},
+      </if>
+      <if test="logcontent != null" >
+        #{logcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="scriptfile != null" >
+        #{scriptfile,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddress != null" >
+        #{ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.UserLogExample" resultType="java.lang.Integer" >
+    select count(*) from t_userlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_userlog
+    <set >
+      <if test="record.userlogid != null" >
+        UserLogID = #{record.userlogid,jdbcType=INTEGER},
+      </if>
+      <if test="record.logcontent != null" >
+        LogContent = #{record.logcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scriptfile != null" >
+        ScriptFile = #{record.scriptfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ipaddress != null" >
+        IPAddress = #{record.ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_userlog
+    set UserLogID = #{record.userlogid,jdbcType=INTEGER},
+      LogContent = #{record.logcontent,jdbcType=VARCHAR},
+      ScriptFile = #{record.scriptfile,jdbcType=VARCHAR},
+      IPAddress = #{record.ipaddress,jdbcType=VARCHAR},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

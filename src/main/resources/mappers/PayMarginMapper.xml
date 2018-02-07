@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.PayMarginMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.PayMargin" >
+    <constructor >
+      <arg column="PayMarginID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PayMarginNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MarginType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Price" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="PayMethodID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsAudit" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EditTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="AdminID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IsDZ" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DZTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="DZAdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DZAdminName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IsBackBZJ" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="BackTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="BackAdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="BackAdminName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BackPrice" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.PayMarginWithBLOBs" >
+    <constructor >
+      <arg column="PayMarginID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PayMarginNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MarginType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Price" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="PayMethodID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsAudit" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EditTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="AdminID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IsDZ" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DZTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="DZAdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DZAdminName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IsBackBZJ" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="BackTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="BackAdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="BackAdminName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BackPrice" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="Note" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="BackNOte" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="BackZFNote" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PayMarginID, PayMarginNo, MarginType, UserID, Price, PayMethodID, IsAudit, IsClose, 
+    AddTime, EditTime, AdminID, IsDZ, DZTime, DZAdminID, DZAdminName, IsBackBZJ, BackTime, 
+    BackAdminID, BackAdminName, BackPrice
+  </sql>
+  <sql id="Blob_Column_List" >
+    Note, BackNOte, BackZFNote
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.PayMarginExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_paymargin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.PayMarginExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_paymargin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.PayMarginExample" >
+    delete from t_paymargin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.PayMarginWithBLOBs" >
+    insert into t_paymargin (PayMarginID, PayMarginNo, MarginType, 
+      UserID, Price, PayMethodID, 
+      IsAudit, IsClose, AddTime, 
+      EditTime, AdminID, IsDZ, 
+      DZTime, DZAdminID, DZAdminName, 
+      IsBackBZJ, BackTime, BackAdminID, 
+      BackAdminName, BackPrice, Note, 
+      BackNOte, BackZFNote)
+    values (#{paymarginid,jdbcType=INTEGER}, #{paymarginno,jdbcType=VARCHAR}, #{margintype,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{paymethodid,jdbcType=INTEGER}, 
+      #{isaudit,jdbcType=INTEGER}, #{isclose,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{edittime,jdbcType=TIMESTAMP}, #{adminid,jdbcType=VARCHAR}, #{isdz,jdbcType=INTEGER}, 
+      #{dztime,jdbcType=TIMESTAMP}, #{dzadminid,jdbcType=INTEGER}, #{dzadminname,jdbcType=VARCHAR}, 
+      #{isbackbzj,jdbcType=INTEGER}, #{backtime,jdbcType=TIMESTAMP}, #{backadminid,jdbcType=INTEGER}, 
+      #{backadminname,jdbcType=VARCHAR}, #{backprice,jdbcType=DOUBLE}, #{note,jdbcType=LONGVARCHAR}, 
+      #{backnote,jdbcType=LONGVARCHAR}, #{backzfnote,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.PayMarginWithBLOBs" >
+    insert into t_paymargin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paymarginid != null" >
+        PayMarginID,
+      </if>
+      <if test="paymarginno != null" >
+        PayMarginNo,
+      </if>
+      <if test="margintype != null" >
+        MarginType,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="price != null" >
+        Price,
+      </if>
+      <if test="paymethodid != null" >
+        PayMethodID,
+      </if>
+      <if test="isaudit != null" >
+        IsAudit,
+      </if>
+      <if test="isclose != null" >
+        IsClose,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="edittime != null" >
+        EditTime,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="isdz != null" >
+        IsDZ,
+      </if>
+      <if test="dztime != null" >
+        DZTime,
+      </if>
+      <if test="dzadminid != null" >
+        DZAdminID,
+      </if>
+      <if test="dzadminname != null" >
+        DZAdminName,
+      </if>
+      <if test="isbackbzj != null" >
+        IsBackBZJ,
+      </if>
+      <if test="backtime != null" >
+        BackTime,
+      </if>
+      <if test="backadminid != null" >
+        BackAdminID,
+      </if>
+      <if test="backadminname != null" >
+        BackAdminName,
+      </if>
+      <if test="backprice != null" >
+        BackPrice,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="backnote != null" >
+        BackNOte,
+      </if>
+      <if test="backzfnote != null" >
+        BackZFNote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paymarginid != null" >
+        #{paymarginid,jdbcType=INTEGER},
+      </if>
+      <if test="paymarginno != null" >
+        #{paymarginno,jdbcType=VARCHAR},
+      </if>
+      <if test="margintype != null" >
+        #{margintype,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="paymethodid != null" >
+        #{paymethodid,jdbcType=INTEGER},
+      </if>
+      <if test="isaudit != null" >
+        #{isaudit,jdbcType=INTEGER},
+      </if>
+      <if test="isclose != null" >
+        #{isclose,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        #{edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=VARCHAR},
+      </if>
+      <if test="isdz != null" >
+        #{isdz,jdbcType=INTEGER},
+      </if>
+      <if test="dztime != null" >
+        #{dztime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dzadminid != null" >
+        #{dzadminid,jdbcType=INTEGER},
+      </if>
+      <if test="dzadminname != null" >
+        #{dzadminname,jdbcType=VARCHAR},
+      </if>
+      <if test="isbackbzj != null" >
+        #{isbackbzj,jdbcType=INTEGER},
+      </if>
+      <if test="backtime != null" >
+        #{backtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="backadminid != null" >
+        #{backadminid,jdbcType=INTEGER},
+      </if>
+      <if test="backadminname != null" >
+        #{backadminname,jdbcType=VARCHAR},
+      </if>
+      <if test="backprice != null" >
+        #{backprice,jdbcType=DOUBLE},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="backnote != null" >
+        #{backnote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="backzfnote != null" >
+        #{backzfnote,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.PayMarginExample" resultType="java.lang.Integer" >
+    select count(*) from t_paymargin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_paymargin
+    <set >
+      <if test="record.paymarginid != null" >
+        PayMarginID = #{record.paymarginid,jdbcType=INTEGER},
+      </if>
+      <if test="record.paymarginno != null" >
+        PayMarginNo = #{record.paymarginno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.margintype != null" >
+        MarginType = #{record.margintype,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        Price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.paymethodid != null" >
+        PayMethodID = #{record.paymethodid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isaudit != null" >
+        IsAudit = #{record.isaudit,jdbcType=INTEGER},
+      </if>
+      <if test="record.isclose != null" >
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.edittime != null" >
+        EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adminid != null" >
+        AdminID = #{record.adminid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdz != null" >
+        IsDZ = #{record.isdz,jdbcType=INTEGER},
+      </if>
+      <if test="record.dztime != null" >
+        DZTime = #{record.dztime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dzadminid != null" >
+        DZAdminID = #{record.dzadminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dzadminname != null" >
+        DZAdminName = #{record.dzadminname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isbackbzj != null" >
+        IsBackBZJ = #{record.isbackbzj,jdbcType=INTEGER},
+      </if>
+      <if test="record.backtime != null" >
+        BackTime = #{record.backtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.backadminid != null" >
+        BackAdminID = #{record.backadminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.backadminname != null" >
+        BackAdminName = #{record.backadminname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backprice != null" >
+        BackPrice = #{record.backprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.note != null" >
+        Note = #{record.note,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.backnote != null" >
+        BackNOte = #{record.backnote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.backzfnote != null" >
+        BackZFNote = #{record.backzfnote,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_paymargin
+    set PayMarginID = #{record.paymarginid,jdbcType=INTEGER},
+      PayMarginNo = #{record.paymarginno,jdbcType=VARCHAR},
+      MarginType = #{record.margintype,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      Price = #{record.price,jdbcType=DOUBLE},
+      PayMethodID = #{record.paymethodid,jdbcType=INTEGER},
+      IsAudit = #{record.isaudit,jdbcType=INTEGER},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      AdminID = #{record.adminid,jdbcType=VARCHAR},
+      IsDZ = #{record.isdz,jdbcType=INTEGER},
+      DZTime = #{record.dztime,jdbcType=TIMESTAMP},
+      DZAdminID = #{record.dzadminid,jdbcType=INTEGER},
+      DZAdminName = #{record.dzadminname,jdbcType=VARCHAR},
+      IsBackBZJ = #{record.isbackbzj,jdbcType=INTEGER},
+      BackTime = #{record.backtime,jdbcType=TIMESTAMP},
+      BackAdminID = #{record.backadminid,jdbcType=INTEGER},
+      BackAdminName = #{record.backadminname,jdbcType=VARCHAR},
+      BackPrice = #{record.backprice,jdbcType=DOUBLE},
+      Note = #{record.note,jdbcType=LONGVARCHAR},
+      BackNOte = #{record.backnote,jdbcType=LONGVARCHAR},
+      BackZFNote = #{record.backzfnote,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_paymargin
+    set PayMarginID = #{record.paymarginid,jdbcType=INTEGER},
+      PayMarginNo = #{record.paymarginno,jdbcType=VARCHAR},
+      MarginType = #{record.margintype,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      Price = #{record.price,jdbcType=DOUBLE},
+      PayMethodID = #{record.paymethodid,jdbcType=INTEGER},
+      IsAudit = #{record.isaudit,jdbcType=INTEGER},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      AdminID = #{record.adminid,jdbcType=VARCHAR},
+      IsDZ = #{record.isdz,jdbcType=INTEGER},
+      DZTime = #{record.dztime,jdbcType=TIMESTAMP},
+      DZAdminID = #{record.dzadminid,jdbcType=INTEGER},
+      DZAdminName = #{record.dzadminname,jdbcType=VARCHAR},
+      IsBackBZJ = #{record.isbackbzj,jdbcType=INTEGER},
+      BackTime = #{record.backtime,jdbcType=TIMESTAMP},
+      BackAdminID = #{record.backadminid,jdbcType=INTEGER},
+      BackAdminName = #{record.backadminname,jdbcType=VARCHAR},
+      BackPrice = #{record.backprice,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

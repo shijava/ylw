@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.ExhibitionHallMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.ExhibitionHall" >
+    <constructor >
+      <arg column="ExhibitionHallID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ExName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LTop" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="LLeft" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ATop" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ALeft" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PositionNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.ExhibitionHallWithBLOBs" >
+    <constructor >
+      <arg column="ExhibitionHallID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ExName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LTop" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="LLeft" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ATop" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ALeft" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PositionNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OuterImg" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="InnerImg" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ExhibitionHallID, ExName, LTop, LLeft, ATop, ALeft, PositionNum, IsClose, AdminID, 
+    AddTime, ListID
+  </sql>
+  <sql id="Blob_Column_List" >
+    OuterImg, InnerImg
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.ExhibitionHallExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_exhibitionhall
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.ExhibitionHallExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_exhibitionhall
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.ExhibitionHallExample" >
+    delete from t_exhibitionhall
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.ExhibitionHallWithBLOBs" >
+    insert into t_exhibitionhall (ExhibitionHallID, ExName, LTop, 
+      LLeft, ATop, ALeft, 
+      PositionNum, IsClose, AdminID, 
+      AddTime, ListID, OuterImg, 
+      InnerImg)
+    values (#{exhibitionhallid,jdbcType=INTEGER}, #{exname,jdbcType=VARCHAR}, #{ltop,jdbcType=INTEGER}, 
+      #{lleft,jdbcType=INTEGER}, #{atop,jdbcType=INTEGER}, #{aleft,jdbcType=INTEGER}, 
+      #{positionnum,jdbcType=INTEGER}, #{isclose,jdbcType=INTEGER}, #{adminid,jdbcType=INTEGER}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{listid,jdbcType=INTEGER}, #{outerimg,jdbcType=LONGVARCHAR}, 
+      #{innerimg,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.ExhibitionHallWithBLOBs" >
+    insert into t_exhibitionhall
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="exhibitionhallid != null" >
+        ExhibitionHallID,
+      </if>
+      <if test="exname != null" >
+        ExName,
+      </if>
+      <if test="ltop != null" >
+        LTop,
+      </if>
+      <if test="lleft != null" >
+        LLeft,
+      </if>
+      <if test="atop != null" >
+        ATop,
+      </if>
+      <if test="aleft != null" >
+        ALeft,
+      </if>
+      <if test="positionnum != null" >
+        PositionNum,
+      </if>
+      <if test="isclose != null" >
+        IsClose,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="listid != null" >
+        ListID,
+      </if>
+      <if test="outerimg != null" >
+        OuterImg,
+      </if>
+      <if test="innerimg != null" >
+        InnerImg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="exhibitionhallid != null" >
+        #{exhibitionhallid,jdbcType=INTEGER},
+      </if>
+      <if test="exname != null" >
+        #{exname,jdbcType=VARCHAR},
+      </if>
+      <if test="ltop != null" >
+        #{ltop,jdbcType=INTEGER},
+      </if>
+      <if test="lleft != null" >
+        #{lleft,jdbcType=INTEGER},
+      </if>
+      <if test="atop != null" >
+        #{atop,jdbcType=INTEGER},
+      </if>
+      <if test="aleft != null" >
+        #{aleft,jdbcType=INTEGER},
+      </if>
+      <if test="positionnum != null" >
+        #{positionnum,jdbcType=INTEGER},
+      </if>
+      <if test="isclose != null" >
+        #{isclose,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="listid != null" >
+        #{listid,jdbcType=INTEGER},
+      </if>
+      <if test="outerimg != null" >
+        #{outerimg,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="innerimg != null" >
+        #{innerimg,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.ExhibitionHallExample" resultType="java.lang.Integer" >
+    select count(*) from t_exhibitionhall
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_exhibitionhall
+    <set >
+      <if test="record.exhibitionhallid != null" >
+        ExhibitionHallID = #{record.exhibitionhallid,jdbcType=INTEGER},
+      </if>
+      <if test="record.exname != null" >
+        ExName = #{record.exname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltop != null" >
+        LTop = #{record.ltop,jdbcType=INTEGER},
+      </if>
+      <if test="record.lleft != null" >
+        LLeft = #{record.lleft,jdbcType=INTEGER},
+      </if>
+      <if test="record.atop != null" >
+        ATop = #{record.atop,jdbcType=INTEGER},
+      </if>
+      <if test="record.aleft != null" >
+        ALeft = #{record.aleft,jdbcType=INTEGER},
+      </if>
+      <if test="record.positionnum != null" >
+        PositionNum = #{record.positionnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.isclose != null" >
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminid != null" >
+        AdminID = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.listid != null" >
+        ListID = #{record.listid,jdbcType=INTEGER},
+      </if>
+      <if test="record.outerimg != null" >
+        OuterImg = #{record.outerimg,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.innerimg != null" >
+        InnerImg = #{record.innerimg,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_exhibitionhall
+    set ExhibitionHallID = #{record.exhibitionhallid,jdbcType=INTEGER},
+      ExName = #{record.exname,jdbcType=VARCHAR},
+      LTop = #{record.ltop,jdbcType=INTEGER},
+      LLeft = #{record.lleft,jdbcType=INTEGER},
+      ATop = #{record.atop,jdbcType=INTEGER},
+      ALeft = #{record.aleft,jdbcType=INTEGER},
+      PositionNum = #{record.positionnum,jdbcType=INTEGER},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      OuterImg = #{record.outerimg,jdbcType=LONGVARCHAR},
+      InnerImg = #{record.innerimg,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_exhibitionhall
+    set ExhibitionHallID = #{record.exhibitionhallid,jdbcType=INTEGER},
+      ExName = #{record.exname,jdbcType=VARCHAR},
+      LTop = #{record.ltop,jdbcType=INTEGER},
+      LLeft = #{record.lleft,jdbcType=INTEGER},
+      ATop = #{record.atop,jdbcType=INTEGER},
+      ALeft = #{record.aleft,jdbcType=INTEGER},
+      PositionNum = #{record.positionnum,jdbcType=INTEGER},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      ListID = #{record.listid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.SupplierMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.Supplier" >
+    <constructor >
+      <arg column="SupplierID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CompanyName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BusinessLicenseUrl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrganizationCodeUrl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TaxRegistrationCertificateUrl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CorporateName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CompanyLogo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CompanyPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CompanyPicLink" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShopLever" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GoodCommentRate" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="OpenShopDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsPayQualityMoney" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsPayVIPServerMoney" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ProductCount" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShopScore" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="QQ" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShopStyle" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SecondDomain" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ApprovalState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.SupplierWithBLOBs" >
+    <constructor >
+      <arg column="SupplierID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CompanyName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BusinessLicenseUrl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrganizationCodeUrl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TaxRegistrationCertificateUrl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CorporateName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CompanyLogo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CompanyPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CompanyPicLink" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShopLever" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GoodCommentRate" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="OpenShopDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsPayQualityMoney" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsPayVIPServerMoney" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ProductCount" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShopScore" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="QQ" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShopStyle" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SecondDomain" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ApprovalState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShopIntroduce" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="QQLink" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="Contact" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SupplierID, UserID, CompanyName, BusinessLicenseUrl, OrganizationCodeUrl, TaxRegistrationCertificateUrl, 
+    CorporateName, CompanyLogo, CompanyPic, CompanyPicLink, ShopLever, GoodCommentRate, 
+    OpenShopDate, IsPayQualityMoney, IsPayVIPServerMoney, ProductCount, ShopScore, QQ, 
+    ShopStyle, SecondDomain, AdminID, AddTime, IsClose, ListID, ApprovalState
+  </sql>
+  <sql id="Blob_Column_List" >
+    ShopIntroduce, QQLink, Contact
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.SupplierExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_supplier
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.SupplierExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_supplier
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.SupplierExample" >
+    delete from t_supplier
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.SupplierWithBLOBs" >
+    insert into t_supplier (SupplierID, UserID, CompanyName, 
+      BusinessLicenseUrl, OrganizationCodeUrl, 
+      TaxRegistrationCertificateUrl, CorporateName, 
+      CompanyLogo, CompanyPic, CompanyPicLink, 
+      ShopLever, GoodCommentRate, OpenShopDate, 
+      IsPayQualityMoney, IsPayVIPServerMoney, 
+      ProductCount, ShopScore, QQ, 
+      ShopStyle, SecondDomain, AdminID, 
+      AddTime, IsClose, ListID, 
+      ApprovalState, ShopIntroduce, QQLink, 
+      Contact)
+    values (#{supplierid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{companyname,jdbcType=VARCHAR}, 
+      #{businesslicenseurl,jdbcType=VARCHAR}, #{organizationcodeurl,jdbcType=VARCHAR}, 
+      #{taxregistrationcertificateurl,jdbcType=VARCHAR}, #{corporatename,jdbcType=VARCHAR}, 
+      #{companylogo,jdbcType=VARCHAR}, #{companypic,jdbcType=VARCHAR}, #{companypiclink,jdbcType=VARCHAR}, 
+      #{shoplever,jdbcType=VARCHAR}, #{goodcommentrate,jdbcType=DOUBLE}, #{openshopdate,jdbcType=TIMESTAMP}, 
+      #{ispayqualitymoney,jdbcType=INTEGER}, #{ispayvipservermoney,jdbcType=INTEGER}, 
+      #{productcount,jdbcType=INTEGER}, #{shopscore,jdbcType=INTEGER}, #{qq,jdbcType=VARCHAR}, 
+      #{shopstyle,jdbcType=VARCHAR}, #{seconddomain,jdbcType=VARCHAR}, #{adminid,jdbcType=INTEGER}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{isclose,jdbcType=INTEGER}, #{listid,jdbcType=INTEGER}, 
+      #{approvalstate,jdbcType=INTEGER}, #{shopintroduce,jdbcType=LONGVARCHAR}, #{qqlink,jdbcType=LONGVARCHAR}, 
+      #{contact,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.SupplierWithBLOBs" >
+    insert into t_supplier
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="supplierid != null" >
+        SupplierID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="companyname != null" >
+        CompanyName,
+      </if>
+      <if test="businesslicenseurl != null" >
+        BusinessLicenseUrl,
+      </if>
+      <if test="organizationcodeurl != null" >
+        OrganizationCodeUrl,
+      </if>
+      <if test="taxregistrationcertificateurl != null" >
+        TaxRegistrationCertificateUrl,
+      </if>
+      <if test="corporatename != null" >
+        CorporateName,
+      </if>
+      <if test="companylogo != null" >
+        CompanyLogo,
+      </if>
+      <if test="companypic != null" >
+        CompanyPic,
+      </if>
+      <if test="companypiclink != null" >
+        CompanyPicLink,
+      </if>
+      <if test="shoplever != null" >
+        ShopLever,
+      </if>
+      <if test="goodcommentrate != null" >
+        GoodCommentRate,
+      </if>
+      <if test="openshopdate != null" >
+        OpenShopDate,
+      </if>
+      <if test="ispayqualitymoney != null" >
+        IsPayQualityMoney,
+      </if>
+      <if test="ispayvipservermoney != null" >
+        IsPayVIPServerMoney,
+      </if>
+      <if test="productcount != null" >
+        ProductCount,
+      </if>
+      <if test="shopscore != null" >
+        ShopScore,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="shopstyle != null" >
+        ShopStyle,
+      </if>
+      <if test="seconddomain != null" >
+        SecondDomain,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="isclose != null" >
+        IsClose,
+      </if>
+      <if test="listid != null" >
+        ListID,
+      </if>
+      <if test="approvalstate != null" >
+        ApprovalState,
+      </if>
+      <if test="shopintroduce != null" >
+        ShopIntroduce,
+      </if>
+      <if test="qqlink != null" >
+        QQLink,
+      </if>
+      <if test="contact != null" >
+        Contact,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="supplierid != null" >
+        #{supplierid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="businesslicenseurl != null" >
+        #{businesslicenseurl,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcodeurl != null" >
+        #{organizationcodeurl,jdbcType=VARCHAR},
+      </if>
+      <if test="taxregistrationcertificateurl != null" >
+        #{taxregistrationcertificateurl,jdbcType=VARCHAR},
+      </if>
+      <if test="corporatename != null" >
+        #{corporatename,jdbcType=VARCHAR},
+      </if>
+      <if test="companylogo != null" >
+        #{companylogo,jdbcType=VARCHAR},
+      </if>
+      <if test="companypic != null" >
+        #{companypic,jdbcType=VARCHAR},
+      </if>
+      <if test="companypiclink != null" >
+        #{companypiclink,jdbcType=VARCHAR},
+      </if>
+      <if test="shoplever != null" >
+        #{shoplever,jdbcType=VARCHAR},
+      </if>
+      <if test="goodcommentrate != null" >
+        #{goodcommentrate,jdbcType=DOUBLE},
+      </if>
+      <if test="openshopdate != null" >
+        #{openshopdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ispayqualitymoney != null" >
+        #{ispayqualitymoney,jdbcType=INTEGER},
+      </if>
+      <if test="ispayvipservermoney != null" >
+        #{ispayvipservermoney,jdbcType=INTEGER},
+      </if>
+      <if test="productcount != null" >
+        #{productcount,jdbcType=INTEGER},
+      </if>
+      <if test="shopscore != null" >
+        #{shopscore,jdbcType=INTEGER},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="shopstyle != null" >
+        #{shopstyle,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddomain != null" >
+        #{seconddomain,jdbcType=VARCHAR},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isclose != null" >
+        #{isclose,jdbcType=INTEGER},
+      </if>
+      <if test="listid != null" >
+        #{listid,jdbcType=INTEGER},
+      </if>
+      <if test="approvalstate != null" >
+        #{approvalstate,jdbcType=INTEGER},
+      </if>
+      <if test="shopintroduce != null" >
+        #{shopintroduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="qqlink != null" >
+        #{qqlink,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.SupplierExample" resultType="java.lang.Integer" >
+    select count(*) from t_supplier
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_supplier
+    <set >
+      <if test="record.supplierid != null" >
+        SupplierID = #{record.supplierid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyname != null" >
+        CompanyName = #{record.companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businesslicenseurl != null" >
+        BusinessLicenseUrl = #{record.businesslicenseurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationcodeurl != null" >
+        OrganizationCodeUrl = #{record.organizationcodeurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxregistrationcertificateurl != null" >
+        TaxRegistrationCertificateUrl = #{record.taxregistrationcertificateurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corporatename != null" >
+        CorporateName = #{record.corporatename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companylogo != null" >
+        CompanyLogo = #{record.companylogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companypic != null" >
+        CompanyPic = #{record.companypic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companypiclink != null" >
+        CompanyPicLink = #{record.companypiclink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoplever != null" >
+        ShopLever = #{record.shoplever,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodcommentrate != null" >
+        GoodCommentRate = #{record.goodcommentrate,jdbcType=DOUBLE},
+      </if>
+      <if test="record.openshopdate != null" >
+        OpenShopDate = #{record.openshopdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ispayqualitymoney != null" >
+        IsPayQualityMoney = #{record.ispayqualitymoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.ispayvipservermoney != null" >
+        IsPayVIPServerMoney = #{record.ispayvipservermoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.productcount != null" >
+        ProductCount = #{record.productcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopscore != null" >
+        ShopScore = #{record.shopscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.qq != null" >
+        QQ = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopstyle != null" >
+        ShopStyle = #{record.shopstyle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seconddomain != null" >
+        SecondDomain = #{record.seconddomain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminid != null" >
+        AdminID = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isclose != null" >
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+      <if test="record.listid != null" >
+        ListID = #{record.listid,jdbcType=INTEGER},
+      </if>
+      <if test="record.approvalstate != null" >
+        ApprovalState = #{record.approvalstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopintroduce != null" >
+        ShopIntroduce = #{record.shopintroduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.qqlink != null" >
+        QQLink = #{record.qqlink,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.contact != null" >
+        Contact = #{record.contact,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_supplier
+    set SupplierID = #{record.supplierid,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      CompanyName = #{record.companyname,jdbcType=VARCHAR},
+      BusinessLicenseUrl = #{record.businesslicenseurl,jdbcType=VARCHAR},
+      OrganizationCodeUrl = #{record.organizationcodeurl,jdbcType=VARCHAR},
+      TaxRegistrationCertificateUrl = #{record.taxregistrationcertificateurl,jdbcType=VARCHAR},
+      CorporateName = #{record.corporatename,jdbcType=VARCHAR},
+      CompanyLogo = #{record.companylogo,jdbcType=VARCHAR},
+      CompanyPic = #{record.companypic,jdbcType=VARCHAR},
+      CompanyPicLink = #{record.companypiclink,jdbcType=VARCHAR},
+      ShopLever = #{record.shoplever,jdbcType=VARCHAR},
+      GoodCommentRate = #{record.goodcommentrate,jdbcType=DOUBLE},
+      OpenShopDate = #{record.openshopdate,jdbcType=TIMESTAMP},
+      IsPayQualityMoney = #{record.ispayqualitymoney,jdbcType=INTEGER},
+      IsPayVIPServerMoney = #{record.ispayvipservermoney,jdbcType=INTEGER},
+      ProductCount = #{record.productcount,jdbcType=INTEGER},
+      ShopScore = #{record.shopscore,jdbcType=INTEGER},
+      QQ = #{record.qq,jdbcType=VARCHAR},
+      ShopStyle = #{record.shopstyle,jdbcType=VARCHAR},
+      SecondDomain = #{record.seconddomain,jdbcType=VARCHAR},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      ApprovalState = #{record.approvalstate,jdbcType=INTEGER},
+      ShopIntroduce = #{record.shopintroduce,jdbcType=LONGVARCHAR},
+      QQLink = #{record.qqlink,jdbcType=LONGVARCHAR},
+      Contact = #{record.contact,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_supplier
+    set SupplierID = #{record.supplierid,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      CompanyName = #{record.companyname,jdbcType=VARCHAR},
+      BusinessLicenseUrl = #{record.businesslicenseurl,jdbcType=VARCHAR},
+      OrganizationCodeUrl = #{record.organizationcodeurl,jdbcType=VARCHAR},
+      TaxRegistrationCertificateUrl = #{record.taxregistrationcertificateurl,jdbcType=VARCHAR},
+      CorporateName = #{record.corporatename,jdbcType=VARCHAR},
+      CompanyLogo = #{record.companylogo,jdbcType=VARCHAR},
+      CompanyPic = #{record.companypic,jdbcType=VARCHAR},
+      CompanyPicLink = #{record.companypiclink,jdbcType=VARCHAR},
+      ShopLever = #{record.shoplever,jdbcType=VARCHAR},
+      GoodCommentRate = #{record.goodcommentrate,jdbcType=DOUBLE},
+      OpenShopDate = #{record.openshopdate,jdbcType=TIMESTAMP},
+      IsPayQualityMoney = #{record.ispayqualitymoney,jdbcType=INTEGER},
+      IsPayVIPServerMoney = #{record.ispayvipservermoney,jdbcType=INTEGER},
+      ProductCount = #{record.productcount,jdbcType=INTEGER},
+      ShopScore = #{record.shopscore,jdbcType=INTEGER},
+      QQ = #{record.qq,jdbcType=VARCHAR},
+      ShopStyle = #{record.shopstyle,jdbcType=VARCHAR},
+      SecondDomain = #{record.seconddomain,jdbcType=VARCHAR},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      ApprovalState = #{record.approvalstate,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

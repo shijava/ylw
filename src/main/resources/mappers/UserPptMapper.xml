@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.UserPptMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.UserPpt" >
+    <constructor >
+      <arg column="UserPPTID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ProductID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShopID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UserPPTID, ProductID, ShopID, UserID, AddTime, IsClose, ListID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.UserPptExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_userppt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.UserPptExample" >
+    delete from t_userppt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.UserPpt" >
+    insert into t_userppt (UserPPTID, ProductID, ShopID, 
+      UserID, AddTime, IsClose, 
+      ListID)
+    values (#{userpptid,jdbcType=INTEGER}, #{productid,jdbcType=INTEGER}, #{shopid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, #{isclose,jdbcType=INTEGER}, 
+      #{listid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.UserPpt" >
+    insert into t_userppt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userpptid != null" >
+        UserPPTID,
+      </if>
+      <if test="productid != null" >
+        ProductID,
+      </if>
+      <if test="shopid != null" >
+        ShopID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="isclose != null" >
+        IsClose,
+      </if>
+      <if test="listid != null" >
+        ListID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userpptid != null" >
+        #{userpptid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="shopid != null" >
+        #{shopid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isclose != null" >
+        #{isclose,jdbcType=INTEGER},
+      </if>
+      <if test="listid != null" >
+        #{listid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.UserPptExample" resultType="java.lang.Integer" >
+    select count(*) from t_userppt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_userppt
+    <set >
+      <if test="record.userpptid != null" >
+        UserPPTID = #{record.userpptid,jdbcType=INTEGER},
+      </if>
+      <if test="record.productid != null" >
+        ProductID = #{record.productid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopid != null" >
+        ShopID = #{record.shopid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isclose != null" >
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+      <if test="record.listid != null" >
+        ListID = #{record.listid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_userppt
+    set UserPPTID = #{record.userpptid,jdbcType=INTEGER},
+      ProductID = #{record.productid,jdbcType=INTEGER},
+      ShopID = #{record.shopid,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

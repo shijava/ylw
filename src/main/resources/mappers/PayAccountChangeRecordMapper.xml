@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.PayAccountChangeRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.PayAccountChangeRecord" >
+    <constructor >
+      <arg column="payaccountchangeid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="oldzfb" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="oldzfbname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="oldbank" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="oldbankaccount" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="newzfb" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="newzfbname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="newbank" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="newbankaccount" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    payaccountchangeid, oldzfb, oldzfbname, oldbank, oldbankaccount, newzfb, newzfbname, 
+    newbank, newbankaccount, status, UserID, AddTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.PayAccountChangeRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_payaccountchangerecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.PayAccountChangeRecordExample" >
+    delete from t_payaccountchangerecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.PayAccountChangeRecord" >
+    insert into t_payaccountchangerecord (payaccountchangeid, oldzfb, oldzfbname, 
+      oldbank, oldbankaccount, newzfb, 
+      newzfbname, newbank, newbankaccount, 
+      status, UserID, AddTime
+      )
+    values (#{payaccountchangeid,jdbcType=INTEGER}, #{oldzfb,jdbcType=VARCHAR}, #{oldzfbname,jdbcType=VARCHAR}, 
+      #{oldbank,jdbcType=VARCHAR}, #{oldbankaccount,jdbcType=VARCHAR}, #{newzfb,jdbcType=VARCHAR}, 
+      #{newzfbname,jdbcType=VARCHAR}, #{newbank,jdbcType=VARCHAR}, #{newbankaccount,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.PayAccountChangeRecord" >
+    insert into t_payaccountchangerecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payaccountchangeid != null" >
+        payaccountchangeid,
+      </if>
+      <if test="oldzfb != null" >
+        oldzfb,
+      </if>
+      <if test="oldzfbname != null" >
+        oldzfbname,
+      </if>
+      <if test="oldbank != null" >
+        oldbank,
+      </if>
+      <if test="oldbankaccount != null" >
+        oldbankaccount,
+      </if>
+      <if test="newzfb != null" >
+        newzfb,
+      </if>
+      <if test="newzfbname != null" >
+        newzfbname,
+      </if>
+      <if test="newbank != null" >
+        newbank,
+      </if>
+      <if test="newbankaccount != null" >
+        newbankaccount,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payaccountchangeid != null" >
+        #{payaccountchangeid,jdbcType=INTEGER},
+      </if>
+      <if test="oldzfb != null" >
+        #{oldzfb,jdbcType=VARCHAR},
+      </if>
+      <if test="oldzfbname != null" >
+        #{oldzfbname,jdbcType=VARCHAR},
+      </if>
+      <if test="oldbank != null" >
+        #{oldbank,jdbcType=VARCHAR},
+      </if>
+      <if test="oldbankaccount != null" >
+        #{oldbankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="newzfb != null" >
+        #{newzfb,jdbcType=VARCHAR},
+      </if>
+      <if test="newzfbname != null" >
+        #{newzfbname,jdbcType=VARCHAR},
+      </if>
+      <if test="newbank != null" >
+        #{newbank,jdbcType=VARCHAR},
+      </if>
+      <if test="newbankaccount != null" >
+        #{newbankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.PayAccountChangeRecordExample" resultType="java.lang.Integer" >
+    select count(*) from t_payaccountchangerecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_payaccountchangerecord
+    <set >
+      <if test="record.payaccountchangeid != null" >
+        payaccountchangeid = #{record.payaccountchangeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.oldzfb != null" >
+        oldzfb = #{record.oldzfb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oldzfbname != null" >
+        oldzfbname = #{record.oldzfbname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oldbank != null" >
+        oldbank = #{record.oldbank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oldbankaccount != null" >
+        oldbankaccount = #{record.oldbankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newzfb != null" >
+        newzfb = #{record.newzfb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newzfbname != null" >
+        newzfbname = #{record.newzfbname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newbank != null" >
+        newbank = #{record.newbank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newbankaccount != null" >
+        newbankaccount = #{record.newbankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_payaccountchangerecord
+    set payaccountchangeid = #{record.payaccountchangeid,jdbcType=INTEGER},
+      oldzfb = #{record.oldzfb,jdbcType=VARCHAR},
+      oldzfbname = #{record.oldzfbname,jdbcType=VARCHAR},
+      oldbank = #{record.oldbank,jdbcType=VARCHAR},
+      oldbankaccount = #{record.oldbankaccount,jdbcType=VARCHAR},
+      newzfb = #{record.newzfb,jdbcType=VARCHAR},
+      newzfbname = #{record.newzfbname,jdbcType=VARCHAR},
+      newbank = #{record.newbank,jdbcType=VARCHAR},
+      newbankaccount = #{record.newbankaccount,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

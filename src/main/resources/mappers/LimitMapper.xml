@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.LimitMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.Limit" >
+    <constructor >
+      <arg column="LimitID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="LimitField" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LimitValue" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ParentID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ChildNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsDist" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    LimitID, LimitField, LimitValue, ParentID, ChildNum, ListID, IsDist, AdminID, AddTime, 
+    IsClose
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.LimitExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_limit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.LimitExample" >
+    delete from t_limit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.Limit" >
+    insert into t_limit (LimitID, LimitField, LimitValue, 
+      ParentID, ChildNum, ListID, 
+      IsDist, AdminID, AddTime, 
+      IsClose)
+    values (#{limitid,jdbcType=INTEGER}, #{limitfield,jdbcType=VARCHAR}, #{limitvalue,jdbcType=VARCHAR}, 
+      #{parentid,jdbcType=INTEGER}, #{childnum,jdbcType=INTEGER}, #{listid,jdbcType=INTEGER}, 
+      #{isdist,jdbcType=INTEGER}, #{adminid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{isclose,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.Limit" >
+    insert into t_limit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="limitid != null" >
+        LimitID,
+      </if>
+      <if test="limitfield != null" >
+        LimitField,
+      </if>
+      <if test="limitvalue != null" >
+        LimitValue,
+      </if>
+      <if test="parentid != null" >
+        ParentID,
+      </if>
+      <if test="childnum != null" >
+        ChildNum,
+      </if>
+      <if test="listid != null" >
+        ListID,
+      </if>
+      <if test="isdist != null" >
+        IsDist,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="isclose != null" >
+        IsClose,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="limitid != null" >
+        #{limitid,jdbcType=INTEGER},
+      </if>
+      <if test="limitfield != null" >
+        #{limitfield,jdbcType=VARCHAR},
+      </if>
+      <if test="limitvalue != null" >
+        #{limitvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="childnum != null" >
+        #{childnum,jdbcType=INTEGER},
+      </if>
+      <if test="listid != null" >
+        #{listid,jdbcType=INTEGER},
+      </if>
+      <if test="isdist != null" >
+        #{isdist,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isclose != null" >
+        #{isclose,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.LimitExample" resultType="java.lang.Integer" >
+    select count(*) from t_limit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_limit
+    <set >
+      <if test="record.limitid != null" >
+        LimitID = #{record.limitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.limitfield != null" >
+        LimitField = #{record.limitfield,jdbcType=VARCHAR},
+      </if>
+      <if test="record.limitvalue != null" >
+        LimitValue = #{record.limitvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentid != null" >
+        ParentID = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.childnum != null" >
+        ChildNum = #{record.childnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.listid != null" >
+        ListID = #{record.listid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isdist != null" >
+        IsDist = #{record.isdist,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminid != null" >
+        AdminID = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isclose != null" >
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_limit
+    set LimitID = #{record.limitid,jdbcType=INTEGER},
+      LimitField = #{record.limitfield,jdbcType=VARCHAR},
+      LimitValue = #{record.limitvalue,jdbcType=VARCHAR},
+      ParentID = #{record.parentid,jdbcType=INTEGER},
+      ChildNum = #{record.childnum,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      IsDist = #{record.isdist,jdbcType=INTEGER},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsClose = #{record.isclose,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.User" >
+    <constructor >
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UserPass" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RealName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Tel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Mobile" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Comment" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UserRankID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsAudit" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Point" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="WillOverPoint" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="LoginNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="LastLoginTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ThisLoginTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Province" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="City" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="District" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ZhiFuBao" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Bank" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="BankNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="HeadPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="NiName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="QQ" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IsDesigner" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ZhiFuBaoRName" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.User" >
+    <constructor >
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UserPass" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RealName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Tel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Mobile" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Comment" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UserRankID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsAudit" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Point" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="WillOverPoint" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="LoginNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="LastLoginTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ThisLoginTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Province" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="City" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="District" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ZhiFuBao" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Bank" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="BankNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="HeadPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="NiName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="QQ" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IsDesigner" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ZhiFuBaoRName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="QQLink" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UserID, UserName, UserPass, RealName, Sex, Email, Tel, Mobile, Address, Comment, 
+    UserRankID, IsAudit, Point, WillOverPoint, LoginNum, LastLoginTime, ThisLoginTime, 
+    AddTime, IsClose, Province, City, District, UserType, ZhiFuBao, Bank, BankNo, HeadPic, 
+    NiName, QQ, IsDesigner, ZhiFuBaoRName
+  </sql>
+  <sql id="Blob_Column_List" >
+    QQLink
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.UserExample" >
+    delete from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.User" >
+    insert into t_user (UserID, UserName, UserPass, 
+      RealName, Sex, Email, 
+      Tel, Mobile, Address, 
+      Comment, UserRankID, IsAudit, 
+      Point, WillOverPoint, LoginNum, 
+      LastLoginTime, ThisLoginTime, AddTime, 
+      IsClose, Province, City, 
+      District, UserType, ZhiFuBao, 
+      Bank, BankNo, HeadPic, 
+      NiName, QQ, IsDesigner, 
+      ZhiFuBaoRName, QQLink)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userpass,jdbcType=VARCHAR}, 
+      #{realname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{comment,jdbcType=VARCHAR}, #{userrankid,jdbcType=INTEGER}, #{isaudit,jdbcType=INTEGER}, 
+      #{point,jdbcType=INTEGER}, #{willoverpoint,jdbcType=INTEGER}, #{loginnum,jdbcType=INTEGER}, 
+      #{lastlogintime,jdbcType=TIMESTAMP}, #{thislogintime,jdbcType=TIMESTAMP}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{isclose,jdbcType=INTEGER}, #{province,jdbcType=INTEGER}, #{city,jdbcType=INTEGER}, 
+      #{district,jdbcType=INTEGER}, #{usertype,jdbcType=INTEGER}, #{zhifubao,jdbcType=VARCHAR}, 
+      #{bank,jdbcType=INTEGER}, #{bankno,jdbcType=VARCHAR}, #{headpic,jdbcType=VARCHAR}, 
+      #{niname,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{isdesigner,jdbcType=INTEGER}, 
+      #{zhifubaorname,jdbcType=VARCHAR}, #{qqlink,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.User" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="username != null" >
+        UserName,
+      </if>
+      <if test="userpass != null" >
+        UserPass,
+      </if>
+      <if test="realname != null" >
+        RealName,
+      </if>
+      <if test="sex != null" >
+        Sex,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="tel != null" >
+        Tel,
+      </if>
+      <if test="mobile != null" >
+        Mobile,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="comment != null" >
+        Comment,
+      </if>
+      <if test="userrankid != null" >
+        UserRankID,
+      </if>
+      <if test="isaudit != null" >
+        IsAudit,
+      </if>
+      <if test="point != null" >
+        Point,
+      </if>
+      <if test="willoverpoint != null" >
+        WillOverPoint,
+      </if>
+      <if test="loginnum != null" >
+        LoginNum,
+      </if>
+      <if test="lastlogintime != null" >
+        LastLoginTime,
+      </if>
+      <if test="thislogintime != null" >
+        ThisLoginTime,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="isclose != null" >
+        IsClose,
+      </if>
+      <if test="province != null" >
+        Province,
+      </if>
+      <if test="city != null" >
+        City,
+      </if>
+      <if test="district != null" >
+        District,
+      </if>
+      <if test="usertype != null" >
+        UserType,
+      </if>
+      <if test="zhifubao != null" >
+        ZhiFuBao,
+      </if>
+      <if test="bank != null" >
+        Bank,
+      </if>
+      <if test="bankno != null" >
+        BankNo,
+      </if>
+      <if test="headpic != null" >
+        HeadPic,
+      </if>
+      <if test="niname != null" >
+        NiName,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="isdesigner != null" >
+        IsDesigner,
+      </if>
+      <if test="zhifubaorname != null" >
+        ZhiFuBaoRName,
+      </if>
+      <if test="qqlink != null" >
+        QQLink,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpass != null" >
+        #{userpass,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="userrankid != null" >
+        #{userrankid,jdbcType=INTEGER},
+      </if>
+      <if test="isaudit != null" >
+        #{isaudit,jdbcType=INTEGER},
+      </if>
+      <if test="point != null" >
+        #{point,jdbcType=INTEGER},
+      </if>
+      <if test="willoverpoint != null" >
+        #{willoverpoint,jdbcType=INTEGER},
+      </if>
+      <if test="loginnum != null" >
+        #{loginnum,jdbcType=INTEGER},
+      </if>
+      <if test="lastlogintime != null" >
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thislogintime != null" >
+        #{thislogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isclose != null" >
+        #{isclose,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=INTEGER},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="zhifubao != null" >
+        #{zhifubao,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        #{bank,jdbcType=INTEGER},
+      </if>
+      <if test="bankno != null" >
+        #{bankno,jdbcType=VARCHAR},
+      </if>
+      <if test="headpic != null" >
+        #{headpic,jdbcType=VARCHAR},
+      </if>
+      <if test="niname != null" >
+        #{niname,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="isdesigner != null" >
+        #{isdesigner,jdbcType=INTEGER},
+      </if>
+      <if test="zhifubaorname != null" >
+        #{zhifubaorname,jdbcType=VARCHAR},
+      </if>
+      <if test="qqlink != null" >
+        #{qqlink,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.UserExample" resultType="java.lang.Integer" >
+    select count(*) from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_user
+    <set >
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        UserName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userpass != null" >
+        UserPass = #{record.userpass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realname != null" >
+        RealName = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        Sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        Email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        Tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        Mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        Address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comment != null" >
+        Comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userrankid != null" >
+        UserRankID = #{record.userrankid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isaudit != null" >
+        IsAudit = #{record.isaudit,jdbcType=INTEGER},
+      </if>
+      <if test="record.point != null" >
+        Point = #{record.point,jdbcType=INTEGER},
+      </if>
+      <if test="record.willoverpoint != null" >
+        WillOverPoint = #{record.willoverpoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginnum != null" >
+        LoginNum = #{record.loginnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastlogintime != null" >
+        LastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.thislogintime != null" >
+        ThisLoginTime = #{record.thislogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isclose != null" >
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+      <if test="record.province != null" >
+        Province = #{record.province,jdbcType=INTEGER},
+      </if>
+      <if test="record.city != null" >
+        City = #{record.city,jdbcType=INTEGER},
+      </if>
+      <if test="record.district != null" >
+        District = #{record.district,jdbcType=INTEGER},
+      </if>
+      <if test="record.usertype != null" >
+        UserType = #{record.usertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.zhifubao != null" >
+        ZhiFuBao = #{record.zhifubao,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bank != null" >
+        Bank = #{record.bank,jdbcType=INTEGER},
+      </if>
+      <if test="record.bankno != null" >
+        BankNo = #{record.bankno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headpic != null" >
+        HeadPic = #{record.headpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.niname != null" >
+        NiName = #{record.niname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null" >
+        QQ = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdesigner != null" >
+        IsDesigner = #{record.isdesigner,jdbcType=INTEGER},
+      </if>
+      <if test="record.zhifubaorname != null" >
+        ZhiFuBaoRName = #{record.zhifubaorname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qqlink != null" >
+        QQLink = #{record.qqlink,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_user
+    set UserID = #{record.userid,jdbcType=INTEGER},
+      UserName = #{record.username,jdbcType=VARCHAR},
+      UserPass = #{record.userpass,jdbcType=VARCHAR},
+      RealName = #{record.realname,jdbcType=VARCHAR},
+      Sex = #{record.sex,jdbcType=VARCHAR},
+      Email = #{record.email,jdbcType=VARCHAR},
+      Tel = #{record.tel,jdbcType=VARCHAR},
+      Mobile = #{record.mobile,jdbcType=VARCHAR},
+      Address = #{record.address,jdbcType=VARCHAR},
+      Comment = #{record.comment,jdbcType=VARCHAR},
+      UserRankID = #{record.userrankid,jdbcType=INTEGER},
+      IsAudit = #{record.isaudit,jdbcType=INTEGER},
+      Point = #{record.point,jdbcType=INTEGER},
+      WillOverPoint = #{record.willoverpoint,jdbcType=INTEGER},
+      LoginNum = #{record.loginnum,jdbcType=INTEGER},
+      LastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      ThisLoginTime = #{record.thislogintime,jdbcType=TIMESTAMP},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      Province = #{record.province,jdbcType=INTEGER},
+      City = #{record.city,jdbcType=INTEGER},
+      District = #{record.district,jdbcType=INTEGER},
+      UserType = #{record.usertype,jdbcType=INTEGER},
+      ZhiFuBao = #{record.zhifubao,jdbcType=VARCHAR},
+      Bank = #{record.bank,jdbcType=INTEGER},
+      BankNo = #{record.bankno,jdbcType=VARCHAR},
+      HeadPic = #{record.headpic,jdbcType=VARCHAR},
+      NiName = #{record.niname,jdbcType=VARCHAR},
+      QQ = #{record.qq,jdbcType=VARCHAR},
+      IsDesigner = #{record.isdesigner,jdbcType=INTEGER},
+      ZhiFuBaoRName = #{record.zhifubaorname,jdbcType=VARCHAR},
+      QQLink = #{record.qqlink,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_user
+    set UserID = #{record.userid,jdbcType=INTEGER},
+      UserName = #{record.username,jdbcType=VARCHAR},
+      UserPass = #{record.userpass,jdbcType=VARCHAR},
+      RealName = #{record.realname,jdbcType=VARCHAR},
+      Sex = #{record.sex,jdbcType=VARCHAR},
+      Email = #{record.email,jdbcType=VARCHAR},
+      Tel = #{record.tel,jdbcType=VARCHAR},
+      Mobile = #{record.mobile,jdbcType=VARCHAR},
+      Address = #{record.address,jdbcType=VARCHAR},
+      Comment = #{record.comment,jdbcType=VARCHAR},
+      UserRankID = #{record.userrankid,jdbcType=INTEGER},
+      IsAudit = #{record.isaudit,jdbcType=INTEGER},
+      Point = #{record.point,jdbcType=INTEGER},
+      WillOverPoint = #{record.willoverpoint,jdbcType=INTEGER},
+      LoginNum = #{record.loginnum,jdbcType=INTEGER},
+      LastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      ThisLoginTime = #{record.thislogintime,jdbcType=TIMESTAMP},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      Province = #{record.province,jdbcType=INTEGER},
+      City = #{record.city,jdbcType=INTEGER},
+      District = #{record.district,jdbcType=INTEGER},
+      UserType = #{record.usertype,jdbcType=INTEGER},
+      ZhiFuBao = #{record.zhifubao,jdbcType=VARCHAR},
+      Bank = #{record.bank,jdbcType=INTEGER},
+      BankNo = #{record.bankno,jdbcType=VARCHAR},
+      HeadPic = #{record.headpic,jdbcType=VARCHAR},
+      NiName = #{record.niname,jdbcType=VARCHAR},
+      QQ = #{record.qq,jdbcType=VARCHAR},
+      IsDesigner = #{record.isdesigner,jdbcType=INTEGER},
+      ZhiFuBaoRName = #{record.zhifubaorname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.DesignerOrderLogsMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.DesignerOrderLogs" >
+    <constructor >
+      <arg column="DLogID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DOrderID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DOrderNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Description" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CreateDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DLogID, DOrderID, DOrderNO, OrderState, Description, CreateDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.DesignerOrderLogsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_designerorderlogs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.DesignerOrderLogsExample" >
+    delete from t_designerorderlogs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.DesignerOrderLogs" >
+    insert into t_designerorderlogs (DLogID, DOrderID, DOrderNO, 
+      OrderState, Description, CreateDate
+      )
+    values (#{dlogid,jdbcType=INTEGER}, #{dorderid,jdbcType=INTEGER}, #{dorderno,jdbcType=VARCHAR}, 
+      #{orderstate,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.DesignerOrderLogs" >
+    insert into t_designerorderlogs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dlogid != null" >
+        DLogID,
+      </if>
+      <if test="dorderid != null" >
+        DOrderID,
+      </if>
+      <if test="dorderno != null" >
+        DOrderNO,
+      </if>
+      <if test="orderstate != null" >
+        OrderState,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dlogid != null" >
+        #{dlogid,jdbcType=INTEGER},
+      </if>
+      <if test="dorderid != null" >
+        #{dorderid,jdbcType=INTEGER},
+      </if>
+      <if test="dorderno != null" >
+        #{dorderno,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstate != null" >
+        #{orderstate,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.DesignerOrderLogsExample" resultType="java.lang.Integer" >
+    select count(*) from t_designerorderlogs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_designerorderlogs
+    <set >
+      <if test="record.dlogid != null" >
+        DLogID = #{record.dlogid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dorderid != null" >
+        DOrderID = #{record.dorderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dorderno != null" >
+        DOrderNO = #{record.dorderno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderstate != null" >
+        OrderState = #{record.orderstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.description != null" >
+        Description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_designerorderlogs
+    set DLogID = #{record.dlogid,jdbcType=INTEGER},
+      DOrderID = #{record.dorderid,jdbcType=INTEGER},
+      DOrderNO = #{record.dorderno,jdbcType=VARCHAR},
+      OrderState = #{record.orderstate,jdbcType=INTEGER},
+      Description = #{record.description,jdbcType=VARCHAR},
+      CreateDate = #{record.createdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

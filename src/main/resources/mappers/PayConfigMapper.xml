@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.PayConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.PayConfig" >
+    <constructor >
+      <arg column="PayID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="InterFaceName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Receiving_Partner" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Receiving_Key" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Receiving_Seller_Email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Pay_Partner" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Pay_Key" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Pay_Email_Pay" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Account_name_Pay" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Note" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PayID, InterFaceName, Receiving_Partner, Receiving_Key, Receiving_Seller_Email, Pay_Partner, 
+    Pay_Key, Pay_Email_Pay, Account_name_Pay, Note
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.PayConfigExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_payconfig
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.PayConfigExample" >
+    delete from t_payconfig
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.PayConfig" >
+    insert into t_payconfig (PayID, InterFaceName, Receiving_Partner, 
+      Receiving_Key, Receiving_Seller_Email, Pay_Partner, 
+      Pay_Key, Pay_Email_Pay, Account_name_Pay, 
+      Note)
+    values (#{payid,jdbcType=INTEGER}, #{interfacename,jdbcType=VARCHAR}, #{receivingPartner,jdbcType=VARCHAR}, 
+      #{receivingKey,jdbcType=VARCHAR}, #{receivingSellerEmail,jdbcType=VARCHAR}, #{payPartner,jdbcType=VARCHAR}, 
+      #{payKey,jdbcType=VARCHAR}, #{payEmailPay,jdbcType=VARCHAR}, #{accountNamePay,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.PayConfig" >
+    insert into t_payconfig
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payid != null" >
+        PayID,
+      </if>
+      <if test="interfacename != null" >
+        InterFaceName,
+      </if>
+      <if test="receivingPartner != null" >
+        Receiving_Partner,
+      </if>
+      <if test="receivingKey != null" >
+        Receiving_Key,
+      </if>
+      <if test="receivingSellerEmail != null" >
+        Receiving_Seller_Email,
+      </if>
+      <if test="payPartner != null" >
+        Pay_Partner,
+      </if>
+      <if test="payKey != null" >
+        Pay_Key,
+      </if>
+      <if test="payEmailPay != null" >
+        Pay_Email_Pay,
+      </if>
+      <if test="accountNamePay != null" >
+        Account_name_Pay,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payid != null" >
+        #{payid,jdbcType=INTEGER},
+      </if>
+      <if test="interfacename != null" >
+        #{interfacename,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingPartner != null" >
+        #{receivingPartner,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingKey != null" >
+        #{receivingKey,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingSellerEmail != null" >
+        #{receivingSellerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="payPartner != null" >
+        #{payPartner,jdbcType=VARCHAR},
+      </if>
+      <if test="payKey != null" >
+        #{payKey,jdbcType=VARCHAR},
+      </if>
+      <if test="payEmailPay != null" >
+        #{payEmailPay,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNamePay != null" >
+        #{accountNamePay,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.PayConfigExample" resultType="java.lang.Integer" >
+    select count(*) from t_payconfig
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_payconfig
+    <set >
+      <if test="record.payid != null" >
+        PayID = #{record.payid,jdbcType=INTEGER},
+      </if>
+      <if test="record.interfacename != null" >
+        InterFaceName = #{record.interfacename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receivingPartner != null" >
+        Receiving_Partner = #{record.receivingPartner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receivingKey != null" >
+        Receiving_Key = #{record.receivingKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receivingSellerEmail != null" >
+        Receiving_Seller_Email = #{record.receivingSellerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payPartner != null" >
+        Pay_Partner = #{record.payPartner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payKey != null" >
+        Pay_Key = #{record.payKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payEmailPay != null" >
+        Pay_Email_Pay = #{record.payEmailPay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountNamePay != null" >
+        Account_name_Pay = #{record.accountNamePay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        Note = #{record.note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_payconfig
+    set PayID = #{record.payid,jdbcType=INTEGER},
+      InterFaceName = #{record.interfacename,jdbcType=VARCHAR},
+      Receiving_Partner = #{record.receivingPartner,jdbcType=VARCHAR},
+      Receiving_Key = #{record.receivingKey,jdbcType=VARCHAR},
+      Receiving_Seller_Email = #{record.receivingSellerEmail,jdbcType=VARCHAR},
+      Pay_Partner = #{record.payPartner,jdbcType=VARCHAR},
+      Pay_Key = #{record.payKey,jdbcType=VARCHAR},
+      Pay_Email_Pay = #{record.payEmailPay,jdbcType=VARCHAR},
+      Account_name_Pay = #{record.accountNamePay,jdbcType=VARCHAR},
+      Note = #{record.note,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

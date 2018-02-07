@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.UserPointMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.UserPoint" >
+    <constructor >
+      <arg column="PointID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="InOut" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PointType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Point" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShowPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ObjectNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.UserPointWithBLOBs" >
+    <constructor >
+      <arg column="PointID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="InOut" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PointType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Point" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShowPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ObjectNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SourceOrUse" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="Note" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PointID, InOut, AddTime, UserID, PointType, Point, ShowPic, ObjectNO
+  </sql>
+  <sql id="Blob_Column_List" >
+    SourceOrUse, Note
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.UserPointExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_userpoint
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.UserPointExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_userpoint
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.UserPointExample" >
+    delete from t_userpoint
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.UserPointWithBLOBs" >
+    insert into t_userpoint (PointID, InOut, AddTime, 
+      UserID, PointType, Point, 
+      ShowPic, ObjectNO, SourceOrUse, 
+      Note)
+    values (#{pointid,jdbcType=INTEGER}, #{inout,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{userid,jdbcType=INTEGER}, #{pointtype,jdbcType=INTEGER}, #{point,jdbcType=INTEGER}, 
+      #{showpic,jdbcType=VARCHAR}, #{objectno,jdbcType=VARCHAR}, #{sourceoruse,jdbcType=LONGVARCHAR}, 
+      #{note,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.UserPointWithBLOBs" >
+    insert into t_userpoint
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pointid != null" >
+        PointID,
+      </if>
+      <if test="inout != null" >
+        InOut,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="pointtype != null" >
+        PointType,
+      </if>
+      <if test="point != null" >
+        Point,
+      </if>
+      <if test="showpic != null" >
+        ShowPic,
+      </if>
+      <if test="objectno != null" >
+        ObjectNO,
+      </if>
+      <if test="sourceoruse != null" >
+        SourceOrUse,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pointid != null" >
+        #{pointid,jdbcType=INTEGER},
+      </if>
+      <if test="inout != null" >
+        #{inout,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="pointtype != null" >
+        #{pointtype,jdbcType=INTEGER},
+      </if>
+      <if test="point != null" >
+        #{point,jdbcType=INTEGER},
+      </if>
+      <if test="showpic != null" >
+        #{showpic,jdbcType=VARCHAR},
+      </if>
+      <if test="objectno != null" >
+        #{objectno,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceoruse != null" >
+        #{sourceoruse,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.UserPointExample" resultType="java.lang.Integer" >
+    select count(*) from t_userpoint
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_userpoint
+    <set >
+      <if test="record.pointid != null" >
+        PointID = #{record.pointid,jdbcType=INTEGER},
+      </if>
+      <if test="record.inout != null" >
+        InOut = #{record.inout,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pointtype != null" >
+        PointType = #{record.pointtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.point != null" >
+        Point = #{record.point,jdbcType=INTEGER},
+      </if>
+      <if test="record.showpic != null" >
+        ShowPic = #{record.showpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.objectno != null" >
+        ObjectNO = #{record.objectno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourceoruse != null" >
+        SourceOrUse = #{record.sourceoruse,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.note != null" >
+        Note = #{record.note,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_userpoint
+    set PointID = #{record.pointid,jdbcType=INTEGER},
+      InOut = #{record.inout,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      PointType = #{record.pointtype,jdbcType=INTEGER},
+      Point = #{record.point,jdbcType=INTEGER},
+      ShowPic = #{record.showpic,jdbcType=VARCHAR},
+      ObjectNO = #{record.objectno,jdbcType=VARCHAR},
+      SourceOrUse = #{record.sourceoruse,jdbcType=LONGVARCHAR},
+      Note = #{record.note,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_userpoint
+    set PointID = #{record.pointid,jdbcType=INTEGER},
+      InOut = #{record.inout,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      PointType = #{record.pointtype,jdbcType=INTEGER},
+      Point = #{record.point,jdbcType=INTEGER},
+      ShowPic = #{record.showpic,jdbcType=VARCHAR},
+      ObjectNO = #{record.objectno,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

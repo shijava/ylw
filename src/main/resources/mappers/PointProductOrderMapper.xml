@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.PointProductOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.PointProductOrder" >
+    <constructor >
+      <arg column="PPOrderID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PPOrderNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderDatetime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="Consignee" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ConsigneTelephone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ConsigneeMobilePhone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ProvinceID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CityID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="District" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ConsigneeAdress" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShipName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShipNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShipCertificate" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Points" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TotalPrice" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PPOrderID, PPOrderNO, UserID, OrderDatetime, Consignee, ConsigneTelephone, ConsigneeMobilePhone, 
+    ProvinceID, CityID, District, ConsigneeAdress, ShipName, ShipNo, ShipCertificate, 
+    OrderState, Points, Remark, TotalPrice
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.PointProductOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_pointproductorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.PointProductOrderExample" >
+    delete from t_pointproductorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.PointProductOrder" >
+    insert into t_pointproductorder (PPOrderID, PPOrderNO, UserID, 
+      OrderDatetime, Consignee, ConsigneTelephone, 
+      ConsigneeMobilePhone, ProvinceID, CityID, 
+      District, ConsigneeAdress, ShipName, 
+      ShipNo, ShipCertificate, OrderState, 
+      Points, Remark, TotalPrice
+      )
+    values (#{pporderid,jdbcType=INTEGER}, #{pporderno,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, 
+      #{orderdatetime,jdbcType=TIMESTAMP}, #{consignee,jdbcType=VARCHAR}, #{consignetelephone,jdbcType=VARCHAR}, 
+      #{consigneemobilephone,jdbcType=VARCHAR}, #{provinceid,jdbcType=INTEGER}, #{cityid,jdbcType=INTEGER}, 
+      #{district,jdbcType=INTEGER}, #{consigneeadress,jdbcType=VARCHAR}, #{shipname,jdbcType=VARCHAR}, 
+      #{shipno,jdbcType=VARCHAR}, #{shipcertificate,jdbcType=VARCHAR}, #{orderstate,jdbcType=INTEGER}, 
+      #{points,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{totalprice,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.PointProductOrder" >
+    insert into t_pointproductorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pporderid != null" >
+        PPOrderID,
+      </if>
+      <if test="pporderno != null" >
+        PPOrderNO,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="orderdatetime != null" >
+        OrderDatetime,
+      </if>
+      <if test="consignee != null" >
+        Consignee,
+      </if>
+      <if test="consignetelephone != null" >
+        ConsigneTelephone,
+      </if>
+      <if test="consigneemobilephone != null" >
+        ConsigneeMobilePhone,
+      </if>
+      <if test="provinceid != null" >
+        ProvinceID,
+      </if>
+      <if test="cityid != null" >
+        CityID,
+      </if>
+      <if test="district != null" >
+        District,
+      </if>
+      <if test="consigneeadress != null" >
+        ConsigneeAdress,
+      </if>
+      <if test="shipname != null" >
+        ShipName,
+      </if>
+      <if test="shipno != null" >
+        ShipNo,
+      </if>
+      <if test="shipcertificate != null" >
+        ShipCertificate,
+      </if>
+      <if test="orderstate != null" >
+        OrderState,
+      </if>
+      <if test="points != null" >
+        Points,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="totalprice != null" >
+        TotalPrice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pporderid != null" >
+        #{pporderid,jdbcType=INTEGER},
+      </if>
+      <if test="pporderno != null" >
+        #{pporderno,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="orderdatetime != null" >
+        #{orderdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consignee != null" >
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="consignetelephone != null" >
+        #{consignetelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneemobilephone != null" >
+        #{consigneemobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null" >
+        #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="cityid != null" >
+        #{cityid,jdbcType=INTEGER},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=INTEGER},
+      </if>
+      <if test="consigneeadress != null" >
+        #{consigneeadress,jdbcType=VARCHAR},
+      </if>
+      <if test="shipname != null" >
+        #{shipname,jdbcType=VARCHAR},
+      </if>
+      <if test="shipno != null" >
+        #{shipno,jdbcType=VARCHAR},
+      </if>
+      <if test="shipcertificate != null" >
+        #{shipcertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstate != null" >
+        #{orderstate,jdbcType=INTEGER},
+      </if>
+      <if test="points != null" >
+        #{points,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="totalprice != null" >
+        #{totalprice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.PointProductOrderExample" resultType="java.lang.Integer" >
+    select count(*) from t_pointproductorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_pointproductorder
+    <set >
+      <if test="record.pporderid != null" >
+        PPOrderID = #{record.pporderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pporderno != null" >
+        PPOrderNO = #{record.pporderno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderdatetime != null" >
+        OrderDatetime = #{record.orderdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.consignee != null" >
+        Consignee = #{record.consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consignetelephone != null" >
+        ConsigneTelephone = #{record.consignetelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consigneemobilephone != null" >
+        ConsigneeMobilePhone = #{record.consigneemobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceid != null" >
+        ProvinceID = #{record.provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityid != null" >
+        CityID = #{record.cityid,jdbcType=INTEGER},
+      </if>
+      <if test="record.district != null" >
+        District = #{record.district,jdbcType=INTEGER},
+      </if>
+      <if test="record.consigneeadress != null" >
+        ConsigneeAdress = #{record.consigneeadress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipname != null" >
+        ShipName = #{record.shipname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipno != null" >
+        ShipNo = #{record.shipno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipcertificate != null" >
+        ShipCertificate = #{record.shipcertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderstate != null" >
+        OrderState = #{record.orderstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.points != null" >
+        Points = #{record.points,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalprice != null" >
+        TotalPrice = #{record.totalprice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_pointproductorder
+    set PPOrderID = #{record.pporderid,jdbcType=INTEGER},
+      PPOrderNO = #{record.pporderno,jdbcType=VARCHAR},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      OrderDatetime = #{record.orderdatetime,jdbcType=TIMESTAMP},
+      Consignee = #{record.consignee,jdbcType=VARCHAR},
+      ConsigneTelephone = #{record.consignetelephone,jdbcType=VARCHAR},
+      ConsigneeMobilePhone = #{record.consigneemobilephone,jdbcType=VARCHAR},
+      ProvinceID = #{record.provinceid,jdbcType=INTEGER},
+      CityID = #{record.cityid,jdbcType=INTEGER},
+      District = #{record.district,jdbcType=INTEGER},
+      ConsigneeAdress = #{record.consigneeadress,jdbcType=VARCHAR},
+      ShipName = #{record.shipname,jdbcType=VARCHAR},
+      ShipNo = #{record.shipno,jdbcType=VARCHAR},
+      ShipCertificate = #{record.shipcertificate,jdbcType=VARCHAR},
+      OrderState = #{record.orderstate,jdbcType=INTEGER},
+      Points = #{record.points,jdbcType=INTEGER},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      TotalPrice = #{record.totalprice,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

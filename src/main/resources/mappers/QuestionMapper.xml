@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.QuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.Question" >
+    <constructor >
+      <arg column="QuestionID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IsRecommend" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="BackGroundPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsSolution" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.Question" >
+    <constructor >
+      <arg column="QuestionID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IsRecommend" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="BackGroundPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsSolution" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="QuestionContent" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    QuestionID, Title, IsRecommend, IsClose, UserID, AddTime, BackGroundPic, ListID, 
+    IsSolution
+  </sql>
+  <sql id="Blob_Column_List" >
+    QuestionContent
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.QuestionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.QuestionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.QuestionExample" >
+    delete from t_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.Question" >
+    insert into t_question (QuestionID, Title, IsRecommend, 
+      IsClose, UserID, AddTime, 
+      BackGroundPic, ListID, IsSolution, 
+      QuestionContent)
+    values (#{questionid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{isrecommend,jdbcType=INTEGER}, 
+      #{isclose,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{backgroundpic,jdbcType=VARCHAR}, #{listid,jdbcType=INTEGER}, #{issolution,jdbcType=INTEGER}, 
+      #{questioncontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.Question" >
+    insert into t_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="questionid != null" >
+        QuestionID,
+      </if>
+      <if test="title != null" >
+        Title,
+      </if>
+      <if test="isrecommend != null" >
+        IsRecommend,
+      </if>
+      <if test="isclose != null" >
+        IsClose,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="backgroundpic != null" >
+        BackGroundPic,
+      </if>
+      <if test="listid != null" >
+        ListID,
+      </if>
+      <if test="issolution != null" >
+        IsSolution,
+      </if>
+      <if test="questioncontent != null" >
+        QuestionContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="questionid != null" >
+        #{questionid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="isrecommend != null" >
+        #{isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="isclose != null" >
+        #{isclose,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="backgroundpic != null" >
+        #{backgroundpic,jdbcType=VARCHAR},
+      </if>
+      <if test="listid != null" >
+        #{listid,jdbcType=INTEGER},
+      </if>
+      <if test="issolution != null" >
+        #{issolution,jdbcType=INTEGER},
+      </if>
+      <if test="questioncontent != null" >
+        #{questioncontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.QuestionExample" resultType="java.lang.Integer" >
+    select count(*) from t_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_question
+    <set >
+      <if test="record.questionid != null" >
+        QuestionID = #{record.questionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        Title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isrecommend != null" >
+        IsRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="record.isclose != null" >
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.backgroundpic != null" >
+        BackGroundPic = #{record.backgroundpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.listid != null" >
+        ListID = #{record.listid,jdbcType=INTEGER},
+      </if>
+      <if test="record.issolution != null" >
+        IsSolution = #{record.issolution,jdbcType=INTEGER},
+      </if>
+      <if test="record.questioncontent != null" >
+        QuestionContent = #{record.questioncontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_question
+    set QuestionID = #{record.questionid,jdbcType=INTEGER},
+      Title = #{record.title,jdbcType=VARCHAR},
+      IsRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      BackGroundPic = #{record.backgroundpic,jdbcType=VARCHAR},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      IsSolution = #{record.issolution,jdbcType=INTEGER},
+      QuestionContent = #{record.questioncontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_question
+    set QuestionID = #{record.questionid,jdbcType=INTEGER},
+      Title = #{record.title,jdbcType=VARCHAR},
+      IsRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      BackGroundPic = #{record.backgroundpic,jdbcType=VARCHAR},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      IsSolution = #{record.issolution,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.FeedBackMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.FeedBack" >
+    <constructor >
+      <arg column="FeedbackID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TypeID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FeedbackContent" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IpAddress" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsDeal" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DealMeno" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FeedbackID, TypeID, Title, FeedbackContent, IpAddress, AddTime, IsDeal, DealMeno
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.FeedBackExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_feedback
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.FeedBackExample" >
+    delete from t_feedback
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.FeedBack" >
+    insert into t_feedback (FeedbackID, TypeID, Title, 
+      FeedbackContent, IpAddress, AddTime, 
+      IsDeal, DealMeno)
+    values (#{feedbackid,jdbcType=INTEGER}, #{typeid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{feedbackcontent,jdbcType=VARCHAR}, #{ipaddress,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{isdeal,jdbcType=INTEGER}, #{dealmeno,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.FeedBack" >
+    insert into t_feedback
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="feedbackid != null" >
+        FeedbackID,
+      </if>
+      <if test="typeid != null" >
+        TypeID,
+      </if>
+      <if test="title != null" >
+        Title,
+      </if>
+      <if test="feedbackcontent != null" >
+        FeedbackContent,
+      </if>
+      <if test="ipaddress != null" >
+        IpAddress,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="isdeal != null" >
+        IsDeal,
+      </if>
+      <if test="dealmeno != null" >
+        DealMeno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="feedbackid != null" >
+        #{feedbackid,jdbcType=INTEGER},
+      </if>
+      <if test="typeid != null" >
+        #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackcontent != null" >
+        #{feedbackcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddress != null" >
+        #{ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeal != null" >
+        #{isdeal,jdbcType=INTEGER},
+      </if>
+      <if test="dealmeno != null" >
+        #{dealmeno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.FeedBackExample" resultType="java.lang.Integer" >
+    select count(*) from t_feedback
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_feedback
+    <set >
+      <if test="record.feedbackid != null" >
+        FeedbackID = #{record.feedbackid,jdbcType=INTEGER},
+      </if>
+      <if test="record.typeid != null" >
+        TypeID = #{record.typeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        Title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbackcontent != null" >
+        FeedbackContent = #{record.feedbackcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ipaddress != null" >
+        IpAddress = #{record.ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdeal != null" >
+        IsDeal = #{record.isdeal,jdbcType=INTEGER},
+      </if>
+      <if test="record.dealmeno != null" >
+        DealMeno = #{record.dealmeno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_feedback
+    set FeedbackID = #{record.feedbackid,jdbcType=INTEGER},
+      TypeID = #{record.typeid,jdbcType=INTEGER},
+      Title = #{record.title,jdbcType=VARCHAR},
+      FeedbackContent = #{record.feedbackcontent,jdbcType=VARCHAR},
+      IpAddress = #{record.ipaddress,jdbcType=VARCHAR},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsDeal = #{record.isdeal,jdbcType=INTEGER},
+      DealMeno = #{record.dealmeno,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

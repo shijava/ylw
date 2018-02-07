@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.Order" >
+    <constructor >
+      <arg column="OrderID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShopID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderDatetime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="OrderDateEditTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="Consignee" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ConsignePostcode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ConsigneTelephone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ConsigneeMobilePhone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ProvinceID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CityID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="District" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ConsigneeAdress" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PayMethodsID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShipName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShipNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShipCertificate" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ServiceState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShipPrice" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="ShipDatetime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="OrderPrices" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="RealPayPrices" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="Points" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DonatePoints" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsComment" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ParentID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DZ_PayOrderRecordNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DZ_PointPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="DZ_RealPayPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="DZ_RealPayTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="isDZ" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.OrderWithBLOBs" >
+    <constructor >
+      <arg column="OrderID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShopID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderDatetime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="OrderDateEditTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="Consignee" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ConsignePostcode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ConsigneTelephone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ConsigneeMobilePhone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ProvinceID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CityID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="District" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ConsigneeAdress" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PayMethodsID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShipName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShipNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ShipCertificate" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ServiceState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShipPrice" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="ShipDatetime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="OrderPrices" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="RealPayPrices" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="Points" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DonatePoints" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsComment" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ParentID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DZ_PayOrderRecordNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DZ_PointPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="DZ_RealPayPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="DZ_RealPayTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="isDZ" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Remark" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="SellerRemark" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="BullerCancelNote" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="SellerCancelNote" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    OrderID, OrderNo, UserID, ShopID, OrderDatetime, OrderDateEditTime, Consignee, ConsignePostcode, 
+    ConsigneTelephone, ConsigneeMobilePhone, ProvinceID, CityID, District, ConsigneeAdress, 
+    PayMethodsID, ShipName, ShipNo, ShipCertificate, OrderState, ServiceState, OrderType, 
+    ShipPrice, ShipDatetime, OrderPrices, RealPayPrices, Points, DonatePoints, IsComment, 
+    ParentID, DZ_PayOrderRecordNo, DZ_PointPriceTotal, DZ_RealPayPriceTotal, DZ_RealPayTime, 
+    isDZ
+  </sql>
+  <sql id="Blob_Column_List" >
+    Remark, SellerRemark, BullerCancelNote, SellerCancelNote
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.OrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.OrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.OrderExample" >
+    delete from t_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.OrderWithBLOBs" >
+    insert into t_order (OrderID, OrderNo, UserID, 
+      ShopID, OrderDatetime, OrderDateEditTime, 
+      Consignee, ConsignePostcode, ConsigneTelephone, 
+      ConsigneeMobilePhone, ProvinceID, CityID, 
+      District, ConsigneeAdress, PayMethodsID, 
+      ShipName, ShipNo, ShipCertificate, 
+      OrderState, ServiceState, OrderType, 
+      ShipPrice, ShipDatetime, OrderPrices, 
+      RealPayPrices, Points, DonatePoints, 
+      IsComment, ParentID, DZ_PayOrderRecordNo, 
+      DZ_PointPriceTotal, DZ_RealPayPriceTotal, DZ_RealPayTime, 
+      isDZ, Remark, SellerRemark, 
+      BullerCancelNote, SellerCancelNote
+      )
+    values (#{orderid,jdbcType=INTEGER}, #{orderno,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, 
+      #{shopid,jdbcType=INTEGER}, #{orderdatetime,jdbcType=TIMESTAMP}, #{orderdateedittime,jdbcType=TIMESTAMP}, 
+      #{consignee,jdbcType=VARCHAR}, #{consignepostcode,jdbcType=VARCHAR}, #{consignetelephone,jdbcType=VARCHAR}, 
+      #{consigneemobilephone,jdbcType=VARCHAR}, #{provinceid,jdbcType=INTEGER}, #{cityid,jdbcType=INTEGER}, 
+      #{district,jdbcType=INTEGER}, #{consigneeadress,jdbcType=VARCHAR}, #{paymethodsid,jdbcType=INTEGER}, 
+      #{shipname,jdbcType=VARCHAR}, #{shipno,jdbcType=VARCHAR}, #{shipcertificate,jdbcType=VARCHAR}, 
+      #{orderstate,jdbcType=INTEGER}, #{servicestate,jdbcType=INTEGER}, #{ordertype,jdbcType=INTEGER}, 
+      #{shipprice,jdbcType=DOUBLE}, #{shipdatetime,jdbcType=TIMESTAMP}, #{orderprices,jdbcType=DOUBLE}, 
+      #{realpayprices,jdbcType=DOUBLE}, #{points,jdbcType=INTEGER}, #{donatepoints,jdbcType=INTEGER}, 
+      #{iscomment,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}, #{dzPayorderrecordno,jdbcType=VARCHAR}, 
+      #{dzPointpricetotal,jdbcType=DOUBLE}, #{dzRealpaypricetotal,jdbcType=DOUBLE}, #{dzRealpaytime,jdbcType=TIMESTAMP}, 
+      #{isdz,jdbcType=INTEGER}, #{remark,jdbcType=LONGVARCHAR}, #{sellerremark,jdbcType=LONGVARCHAR}, 
+      #{bullercancelnote,jdbcType=LONGVARCHAR}, #{sellercancelnote,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.OrderWithBLOBs" >
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        OrderID,
+      </if>
+      <if test="orderno != null" >
+        OrderNo,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="shopid != null" >
+        ShopID,
+      </if>
+      <if test="orderdatetime != null" >
+        OrderDatetime,
+      </if>
+      <if test="orderdateedittime != null" >
+        OrderDateEditTime,
+      </if>
+      <if test="consignee != null" >
+        Consignee,
+      </if>
+      <if test="consignepostcode != null" >
+        ConsignePostcode,
+      </if>
+      <if test="consignetelephone != null" >
+        ConsigneTelephone,
+      </if>
+      <if test="consigneemobilephone != null" >
+        ConsigneeMobilePhone,
+      </if>
+      <if test="provinceid != null" >
+        ProvinceID,
+      </if>
+      <if test="cityid != null" >
+        CityID,
+      </if>
+      <if test="district != null" >
+        District,
+      </if>
+      <if test="consigneeadress != null" >
+        ConsigneeAdress,
+      </if>
+      <if test="paymethodsid != null" >
+        PayMethodsID,
+      </if>
+      <if test="shipname != null" >
+        ShipName,
+      </if>
+      <if test="shipno != null" >
+        ShipNo,
+      </if>
+      <if test="shipcertificate != null" >
+        ShipCertificate,
+      </if>
+      <if test="orderstate != null" >
+        OrderState,
+      </if>
+      <if test="servicestate != null" >
+        ServiceState,
+      </if>
+      <if test="ordertype != null" >
+        OrderType,
+      </if>
+      <if test="shipprice != null" >
+        ShipPrice,
+      </if>
+      <if test="shipdatetime != null" >
+        ShipDatetime,
+      </if>
+      <if test="orderprices != null" >
+        OrderPrices,
+      </if>
+      <if test="realpayprices != null" >
+        RealPayPrices,
+      </if>
+      <if test="points != null" >
+        Points,
+      </if>
+      <if test="donatepoints != null" >
+        DonatePoints,
+      </if>
+      <if test="iscomment != null" >
+        IsComment,
+      </if>
+      <if test="parentid != null" >
+        ParentID,
+      </if>
+      <if test="dzPayorderrecordno != null" >
+        DZ_PayOrderRecordNo,
+      </if>
+      <if test="dzPointpricetotal != null" >
+        DZ_PointPriceTotal,
+      </if>
+      <if test="dzRealpaypricetotal != null" >
+        DZ_RealPayPriceTotal,
+      </if>
+      <if test="dzRealpaytime != null" >
+        DZ_RealPayTime,
+      </if>
+      <if test="isdz != null" >
+        isDZ,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="sellerremark != null" >
+        SellerRemark,
+      </if>
+      <if test="bullercancelnote != null" >
+        BullerCancelNote,
+      </if>
+      <if test="sellercancelnote != null" >
+        SellerCancelNote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="shopid != null" >
+        #{shopid,jdbcType=INTEGER},
+      </if>
+      <if test="orderdatetime != null" >
+        #{orderdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderdateedittime != null" >
+        #{orderdateedittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consignee != null" >
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="consignepostcode != null" >
+        #{consignepostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="consignetelephone != null" >
+        #{consignetelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneemobilephone != null" >
+        #{consigneemobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null" >
+        #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="cityid != null" >
+        #{cityid,jdbcType=INTEGER},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=INTEGER},
+      </if>
+      <if test="consigneeadress != null" >
+        #{consigneeadress,jdbcType=VARCHAR},
+      </if>
+      <if test="paymethodsid != null" >
+        #{paymethodsid,jdbcType=INTEGER},
+      </if>
+      <if test="shipname != null" >
+        #{shipname,jdbcType=VARCHAR},
+      </if>
+      <if test="shipno != null" >
+        #{shipno,jdbcType=VARCHAR},
+      </if>
+      <if test="shipcertificate != null" >
+        #{shipcertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstate != null" >
+        #{orderstate,jdbcType=INTEGER},
+      </if>
+      <if test="servicestate != null" >
+        #{servicestate,jdbcType=INTEGER},
+      </if>
+      <if test="ordertype != null" >
+        #{ordertype,jdbcType=INTEGER},
+      </if>
+      <if test="shipprice != null" >
+        #{shipprice,jdbcType=DOUBLE},
+      </if>
+      <if test="shipdatetime != null" >
+        #{shipdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderprices != null" >
+        #{orderprices,jdbcType=DOUBLE},
+      </if>
+      <if test="realpayprices != null" >
+        #{realpayprices,jdbcType=DOUBLE},
+      </if>
+      <if test="points != null" >
+        #{points,jdbcType=INTEGER},
+      </if>
+      <if test="donatepoints != null" >
+        #{donatepoints,jdbcType=INTEGER},
+      </if>
+      <if test="iscomment != null" >
+        #{iscomment,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="dzPayorderrecordno != null" >
+        #{dzPayorderrecordno,jdbcType=VARCHAR},
+      </if>
+      <if test="dzPointpricetotal != null" >
+        #{dzPointpricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="dzRealpaypricetotal != null" >
+        #{dzRealpaypricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="dzRealpaytime != null" >
+        #{dzRealpaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdz != null" >
+        #{isdz,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sellerremark != null" >
+        #{sellerremark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bullercancelnote != null" >
+        #{bullercancelnote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sellercancelnote != null" >
+        #{sellercancelnote,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.OrderExample" resultType="java.lang.Integer" >
+    select count(*) from t_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_order
+    <set >
+      <if test="record.orderid != null" >
+        OrderID = #{record.orderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderno != null" >
+        OrderNo = #{record.orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopid != null" >
+        ShopID = #{record.shopid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderdatetime != null" >
+        OrderDatetime = #{record.orderdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderdateedittime != null" >
+        OrderDateEditTime = #{record.orderdateedittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.consignee != null" >
+        Consignee = #{record.consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consignepostcode != null" >
+        ConsignePostcode = #{record.consignepostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consignetelephone != null" >
+        ConsigneTelephone = #{record.consignetelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consigneemobilephone != null" >
+        ConsigneeMobilePhone = #{record.consigneemobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceid != null" >
+        ProvinceID = #{record.provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityid != null" >
+        CityID = #{record.cityid,jdbcType=INTEGER},
+      </if>
+      <if test="record.district != null" >
+        District = #{record.district,jdbcType=INTEGER},
+      </if>
+      <if test="record.consigneeadress != null" >
+        ConsigneeAdress = #{record.consigneeadress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymethodsid != null" >
+        PayMethodsID = #{record.paymethodsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shipname != null" >
+        ShipName = #{record.shipname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipno != null" >
+        ShipNo = #{record.shipno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipcertificate != null" >
+        ShipCertificate = #{record.shipcertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderstate != null" >
+        OrderState = #{record.orderstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.servicestate != null" >
+        ServiceState = #{record.servicestate,jdbcType=INTEGER},
+      </if>
+      <if test="record.ordertype != null" >
+        OrderType = #{record.ordertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.shipprice != null" >
+        ShipPrice = #{record.shipprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.shipdatetime != null" >
+        ShipDatetime = #{record.shipdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderprices != null" >
+        OrderPrices = #{record.orderprices,jdbcType=DOUBLE},
+      </if>
+      <if test="record.realpayprices != null" >
+        RealPayPrices = #{record.realpayprices,jdbcType=DOUBLE},
+      </if>
+      <if test="record.points != null" >
+        Points = #{record.points,jdbcType=INTEGER},
+      </if>
+      <if test="record.donatepoints != null" >
+        DonatePoints = #{record.donatepoints,jdbcType=INTEGER},
+      </if>
+      <if test="record.iscomment != null" >
+        IsComment = #{record.iscomment,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentid != null" >
+        ParentID = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dzPayorderrecordno != null" >
+        DZ_PayOrderRecordNo = #{record.dzPayorderrecordno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dzPointpricetotal != null" >
+        DZ_PointPriceTotal = #{record.dzPointpricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dzRealpaypricetotal != null" >
+        DZ_RealPayPriceTotal = #{record.dzRealpaypricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dzRealpaytime != null" >
+        DZ_RealPayTime = #{record.dzRealpaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdz != null" >
+        isDZ = #{record.isdz,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.sellerremark != null" >
+        SellerRemark = #{record.sellerremark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.bullercancelnote != null" >
+        BullerCancelNote = #{record.bullercancelnote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.sellercancelnote != null" >
+        SellerCancelNote = #{record.sellercancelnote,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_order
+    set OrderID = #{record.orderid,jdbcType=INTEGER},
+      OrderNo = #{record.orderno,jdbcType=VARCHAR},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      ShopID = #{record.shopid,jdbcType=INTEGER},
+      OrderDatetime = #{record.orderdatetime,jdbcType=TIMESTAMP},
+      OrderDateEditTime = #{record.orderdateedittime,jdbcType=TIMESTAMP},
+      Consignee = #{record.consignee,jdbcType=VARCHAR},
+      ConsignePostcode = #{record.consignepostcode,jdbcType=VARCHAR},
+      ConsigneTelephone = #{record.consignetelephone,jdbcType=VARCHAR},
+      ConsigneeMobilePhone = #{record.consigneemobilephone,jdbcType=VARCHAR},
+      ProvinceID = #{record.provinceid,jdbcType=INTEGER},
+      CityID = #{record.cityid,jdbcType=INTEGER},
+      District = #{record.district,jdbcType=INTEGER},
+      ConsigneeAdress = #{record.consigneeadress,jdbcType=VARCHAR},
+      PayMethodsID = #{record.paymethodsid,jdbcType=INTEGER},
+      ShipName = #{record.shipname,jdbcType=VARCHAR},
+      ShipNo = #{record.shipno,jdbcType=VARCHAR},
+      ShipCertificate = #{record.shipcertificate,jdbcType=VARCHAR},
+      OrderState = #{record.orderstate,jdbcType=INTEGER},
+      ServiceState = #{record.servicestate,jdbcType=INTEGER},
+      OrderType = #{record.ordertype,jdbcType=INTEGER},
+      ShipPrice = #{record.shipprice,jdbcType=DOUBLE},
+      ShipDatetime = #{record.shipdatetime,jdbcType=TIMESTAMP},
+      OrderPrices = #{record.orderprices,jdbcType=DOUBLE},
+      RealPayPrices = #{record.realpayprices,jdbcType=DOUBLE},
+      Points = #{record.points,jdbcType=INTEGER},
+      DonatePoints = #{record.donatepoints,jdbcType=INTEGER},
+      IsComment = #{record.iscomment,jdbcType=INTEGER},
+      ParentID = #{record.parentid,jdbcType=INTEGER},
+      DZ_PayOrderRecordNo = #{record.dzPayorderrecordno,jdbcType=VARCHAR},
+      DZ_PointPriceTotal = #{record.dzPointpricetotal,jdbcType=DOUBLE},
+      DZ_RealPayPriceTotal = #{record.dzRealpaypricetotal,jdbcType=DOUBLE},
+      DZ_RealPayTime = #{record.dzRealpaytime,jdbcType=TIMESTAMP},
+      isDZ = #{record.isdz,jdbcType=INTEGER},
+      Remark = #{record.remark,jdbcType=LONGVARCHAR},
+      SellerRemark = #{record.sellerremark,jdbcType=LONGVARCHAR},
+      BullerCancelNote = #{record.bullercancelnote,jdbcType=LONGVARCHAR},
+      SellerCancelNote = #{record.sellercancelnote,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_order
+    set OrderID = #{record.orderid,jdbcType=INTEGER},
+      OrderNo = #{record.orderno,jdbcType=VARCHAR},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      ShopID = #{record.shopid,jdbcType=INTEGER},
+      OrderDatetime = #{record.orderdatetime,jdbcType=TIMESTAMP},
+      OrderDateEditTime = #{record.orderdateedittime,jdbcType=TIMESTAMP},
+      Consignee = #{record.consignee,jdbcType=VARCHAR},
+      ConsignePostcode = #{record.consignepostcode,jdbcType=VARCHAR},
+      ConsigneTelephone = #{record.consignetelephone,jdbcType=VARCHAR},
+      ConsigneeMobilePhone = #{record.consigneemobilephone,jdbcType=VARCHAR},
+      ProvinceID = #{record.provinceid,jdbcType=INTEGER},
+      CityID = #{record.cityid,jdbcType=INTEGER},
+      District = #{record.district,jdbcType=INTEGER},
+      ConsigneeAdress = #{record.consigneeadress,jdbcType=VARCHAR},
+      PayMethodsID = #{record.paymethodsid,jdbcType=INTEGER},
+      ShipName = #{record.shipname,jdbcType=VARCHAR},
+      ShipNo = #{record.shipno,jdbcType=VARCHAR},
+      ShipCertificate = #{record.shipcertificate,jdbcType=VARCHAR},
+      OrderState = #{record.orderstate,jdbcType=INTEGER},
+      ServiceState = #{record.servicestate,jdbcType=INTEGER},
+      OrderType = #{record.ordertype,jdbcType=INTEGER},
+      ShipPrice = #{record.shipprice,jdbcType=DOUBLE},
+      ShipDatetime = #{record.shipdatetime,jdbcType=TIMESTAMP},
+      OrderPrices = #{record.orderprices,jdbcType=DOUBLE},
+      RealPayPrices = #{record.realpayprices,jdbcType=DOUBLE},
+      Points = #{record.points,jdbcType=INTEGER},
+      DonatePoints = #{record.donatepoints,jdbcType=INTEGER},
+      IsComment = #{record.iscomment,jdbcType=INTEGER},
+      ParentID = #{record.parentid,jdbcType=INTEGER},
+      DZ_PayOrderRecordNo = #{record.dzPayorderrecordno,jdbcType=VARCHAR},
+      DZ_PointPriceTotal = #{record.dzPointpricetotal,jdbcType=DOUBLE},
+      DZ_RealPayPriceTotal = #{record.dzRealpaypricetotal,jdbcType=DOUBLE},
+      DZ_RealPayTime = #{record.dzRealpaytime,jdbcType=TIMESTAMP},
+      isDZ = #{record.isdz,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

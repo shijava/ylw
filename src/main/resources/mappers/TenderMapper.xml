@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.TenderMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.Tender" >
+    <constructor >
+      <arg column="TenderID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ISCustomMade" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DeliveryDays" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="InvoiceType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Province" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="City" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="District" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="BeginTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EndTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="Contact" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MobilePhone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TenderStatus" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsAudit" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.TenderWithBLOBs" >
+    <constructor >
+      <arg column="TenderID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ISCustomMade" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DeliveryDays" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="InvoiceType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Province" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="City" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="District" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="BeginTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EndTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="Contact" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MobilePhone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TenderStatus" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsAudit" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TenderName" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="TenderPic" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="Content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="PayMethod" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="Address" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="CompanyName" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="Pic1" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="Pic2" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="Pic3" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="Pic4" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="Pic5" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TenderID, UserID, Quantity, ISCustomMade, DeliveryDays, InvoiceType, Province, City, 
+    District, BeginTime, EndTime, Contact, MobilePhone, TenderStatus, IsAudit, IsClose, 
+    AddTime, AdminID, ListID
+  </sql>
+  <sql id="Blob_Column_List" >
+    TenderName, TenderPic, Content, PayMethod, Address, CompanyName, Pic1, Pic2, Pic3, 
+    Pic4, Pic5
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.TenderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_tender
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.TenderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_tender
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.TenderExample" >
+    delete from t_tender
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.TenderWithBLOBs" >
+    insert into t_tender (TenderID, UserID, Quantity, 
+      ISCustomMade, DeliveryDays, InvoiceType, 
+      Province, City, District, 
+      BeginTime, EndTime, Contact, 
+      MobilePhone, TenderStatus, IsAudit, 
+      IsClose, AddTime, AdminID, 
+      ListID, TenderName, TenderPic, 
+      Content, PayMethod, Address, 
+      CompanyName, Pic1, Pic2, 
+      Pic3, Pic4, Pic5
+      )
+    values (#{tenderid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, 
+      #{iscustommade,jdbcType=INTEGER}, #{deliverydays,jdbcType=INTEGER}, #{invoicetype,jdbcType=INTEGER}, 
+      #{province,jdbcType=INTEGER}, #{city,jdbcType=INTEGER}, #{district,jdbcType=INTEGER}, 
+      #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{contact,jdbcType=VARCHAR}, 
+      #{mobilephone,jdbcType=VARCHAR}, #{tenderstatus,jdbcType=INTEGER}, #{isaudit,jdbcType=INTEGER}, 
+      #{isclose,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, #{adminid,jdbcType=INTEGER}, 
+      #{listid,jdbcType=INTEGER}, #{tendername,jdbcType=LONGVARCHAR}, #{tenderpic,jdbcType=LONGVARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR}, #{paymethod,jdbcType=LONGVARCHAR}, #{address,jdbcType=LONGVARCHAR}, 
+      #{companyname,jdbcType=LONGVARCHAR}, #{pic1,jdbcType=LONGVARCHAR}, #{pic2,jdbcType=LONGVARCHAR}, 
+      #{pic3,jdbcType=LONGVARCHAR}, #{pic4,jdbcType=LONGVARCHAR}, #{pic5,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.TenderWithBLOBs" >
+    insert into t_tender
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tenderid != null" >
+        TenderID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="quantity != null" >
+        Quantity,
+      </if>
+      <if test="iscustommade != null" >
+        ISCustomMade,
+      </if>
+      <if test="deliverydays != null" >
+        DeliveryDays,
+      </if>
+      <if test="invoicetype != null" >
+        InvoiceType,
+      </if>
+      <if test="province != null" >
+        Province,
+      </if>
+      <if test="city != null" >
+        City,
+      </if>
+      <if test="district != null" >
+        District,
+      </if>
+      <if test="begintime != null" >
+        BeginTime,
+      </if>
+      <if test="endtime != null" >
+        EndTime,
+      </if>
+      <if test="contact != null" >
+        Contact,
+      </if>
+      <if test="mobilephone != null" >
+        MobilePhone,
+      </if>
+      <if test="tenderstatus != null" >
+        TenderStatus,
+      </if>
+      <if test="isaudit != null" >
+        IsAudit,
+      </if>
+      <if test="isclose != null" >
+        IsClose,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="listid != null" >
+        ListID,
+      </if>
+      <if test="tendername != null" >
+        TenderName,
+      </if>
+      <if test="tenderpic != null" >
+        TenderPic,
+      </if>
+      <if test="content != null" >
+        Content,
+      </if>
+      <if test="paymethod != null" >
+        PayMethod,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="companyname != null" >
+        CompanyName,
+      </if>
+      <if test="pic1 != null" >
+        Pic1,
+      </if>
+      <if test="pic2 != null" >
+        Pic2,
+      </if>
+      <if test="pic3 != null" >
+        Pic3,
+      </if>
+      <if test="pic4 != null" >
+        Pic4,
+      </if>
+      <if test="pic5 != null" >
+        Pic5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tenderid != null" >
+        #{tenderid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="iscustommade != null" >
+        #{iscustommade,jdbcType=INTEGER},
+      </if>
+      <if test="deliverydays != null" >
+        #{deliverydays,jdbcType=INTEGER},
+      </if>
+      <if test="invoicetype != null" >
+        #{invoicetype,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=INTEGER},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=INTEGER},
+      </if>
+      <if test="begintime != null" >
+        #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilephone != null" >
+        #{mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="tenderstatus != null" >
+        #{tenderstatus,jdbcType=INTEGER},
+      </if>
+      <if test="isaudit != null" >
+        #{isaudit,jdbcType=INTEGER},
+      </if>
+      <if test="isclose != null" >
+        #{isclose,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="listid != null" >
+        #{listid,jdbcType=INTEGER},
+      </if>
+      <if test="tendername != null" >
+        #{tendername,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tenderpic != null" >
+        #{tenderpic,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="paymethod != null" >
+        #{paymethod,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pic1 != null" >
+        #{pic1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pic2 != null" >
+        #{pic2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pic3 != null" >
+        #{pic3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pic4 != null" >
+        #{pic4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pic5 != null" >
+        #{pic5,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.TenderExample" resultType="java.lang.Integer" >
+    select count(*) from t_tender
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_tender
+    <set >
+      <if test="record.tenderid != null" >
+        TenderID = #{record.tenderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.quantity != null" >
+        Quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.iscustommade != null" >
+        ISCustomMade = #{record.iscustommade,jdbcType=INTEGER},
+      </if>
+      <if test="record.deliverydays != null" >
+        DeliveryDays = #{record.deliverydays,jdbcType=INTEGER},
+      </if>
+      <if test="record.invoicetype != null" >
+        InvoiceType = #{record.invoicetype,jdbcType=INTEGER},
+      </if>
+      <if test="record.province != null" >
+        Province = #{record.province,jdbcType=INTEGER},
+      </if>
+      <if test="record.city != null" >
+        City = #{record.city,jdbcType=INTEGER},
+      </if>
+      <if test="record.district != null" >
+        District = #{record.district,jdbcType=INTEGER},
+      </if>
+      <if test="record.begintime != null" >
+        BeginTime = #{record.begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null" >
+        EndTime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.contact != null" >
+        Contact = #{record.contact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilephone != null" >
+        MobilePhone = #{record.mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenderstatus != null" >
+        TenderStatus = #{record.tenderstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.isaudit != null" >
+        IsAudit = #{record.isaudit,jdbcType=INTEGER},
+      </if>
+      <if test="record.isclose != null" >
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adminid != null" >
+        AdminID = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.listid != null" >
+        ListID = #{record.listid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tendername != null" >
+        TenderName = #{record.tendername,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.tenderpic != null" >
+        TenderPic = #{record.tenderpic,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.content != null" >
+        Content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.paymethod != null" >
+        PayMethod = #{record.paymethod,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.address != null" >
+        Address = #{record.address,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.companyname != null" >
+        CompanyName = #{record.companyname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.pic1 != null" >
+        Pic1 = #{record.pic1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.pic2 != null" >
+        Pic2 = #{record.pic2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.pic3 != null" >
+        Pic3 = #{record.pic3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.pic4 != null" >
+        Pic4 = #{record.pic4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.pic5 != null" >
+        Pic5 = #{record.pic5,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_tender
+    set TenderID = #{record.tenderid,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      Quantity = #{record.quantity,jdbcType=INTEGER},
+      ISCustomMade = #{record.iscustommade,jdbcType=INTEGER},
+      DeliveryDays = #{record.deliverydays,jdbcType=INTEGER},
+      InvoiceType = #{record.invoicetype,jdbcType=INTEGER},
+      Province = #{record.province,jdbcType=INTEGER},
+      City = #{record.city,jdbcType=INTEGER},
+      District = #{record.district,jdbcType=INTEGER},
+      BeginTime = #{record.begintime,jdbcType=TIMESTAMP},
+      EndTime = #{record.endtime,jdbcType=TIMESTAMP},
+      Contact = #{record.contact,jdbcType=VARCHAR},
+      MobilePhone = #{record.mobilephone,jdbcType=VARCHAR},
+      TenderStatus = #{record.tenderstatus,jdbcType=INTEGER},
+      IsAudit = #{record.isaudit,jdbcType=INTEGER},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      TenderName = #{record.tendername,jdbcType=LONGVARCHAR},
+      TenderPic = #{record.tenderpic,jdbcType=LONGVARCHAR},
+      Content = #{record.content,jdbcType=LONGVARCHAR},
+      PayMethod = #{record.paymethod,jdbcType=LONGVARCHAR},
+      Address = #{record.address,jdbcType=LONGVARCHAR},
+      CompanyName = #{record.companyname,jdbcType=LONGVARCHAR},
+      Pic1 = #{record.pic1,jdbcType=LONGVARCHAR},
+      Pic2 = #{record.pic2,jdbcType=LONGVARCHAR},
+      Pic3 = #{record.pic3,jdbcType=LONGVARCHAR},
+      Pic4 = #{record.pic4,jdbcType=LONGVARCHAR},
+      Pic5 = #{record.pic5,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_tender
+    set TenderID = #{record.tenderid,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      Quantity = #{record.quantity,jdbcType=INTEGER},
+      ISCustomMade = #{record.iscustommade,jdbcType=INTEGER},
+      DeliveryDays = #{record.deliverydays,jdbcType=INTEGER},
+      InvoiceType = #{record.invoicetype,jdbcType=INTEGER},
+      Province = #{record.province,jdbcType=INTEGER},
+      City = #{record.city,jdbcType=INTEGER},
+      District = #{record.district,jdbcType=INTEGER},
+      BeginTime = #{record.begintime,jdbcType=TIMESTAMP},
+      EndTime = #{record.endtime,jdbcType=TIMESTAMP},
+      Contact = #{record.contact,jdbcType=VARCHAR},
+      MobilePhone = #{record.mobilephone,jdbcType=VARCHAR},
+      TenderStatus = #{record.tenderstatus,jdbcType=INTEGER},
+      IsAudit = #{record.isaudit,jdbcType=INTEGER},
+      IsClose = #{record.isclose,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

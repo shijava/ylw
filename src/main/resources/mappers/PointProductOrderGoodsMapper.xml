@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.PointProductOrderGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.PointProductOrderGoods" >
+    <constructor >
+      <arg column="PPOrderGoodsID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PPOrderID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PPOrderNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PointProductID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PPStorageID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ModelName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Point" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Price" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PPOrderGoodsID, PPOrderID, PPOrderNO, PointProductID, PPStorageID, PName, ModelName, 
+    Point, Quantity, Price
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.PointProductOrderGoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_pointproductordergoods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.PointProductOrderGoodsExample" >
+    delete from t_pointproductordergoods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.PointProductOrderGoods" >
+    insert into t_pointproductordergoods (PPOrderGoodsID, PPOrderID, PPOrderNO, 
+      PointProductID, PPStorageID, PName, 
+      ModelName, Point, Quantity, 
+      Price)
+    values (#{ppordergoodsid,jdbcType=INTEGER}, #{pporderid,jdbcType=INTEGER}, #{pporderno,jdbcType=VARCHAR}, 
+      #{pointproductid,jdbcType=INTEGER}, #{ppstorageid,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, 
+      #{modelname,jdbcType=VARCHAR}, #{point,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, 
+      #{price,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.PointProductOrderGoods" >
+    insert into t_pointproductordergoods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ppordergoodsid != null" >
+        PPOrderGoodsID,
+      </if>
+      <if test="pporderid != null" >
+        PPOrderID,
+      </if>
+      <if test="pporderno != null" >
+        PPOrderNO,
+      </if>
+      <if test="pointproductid != null" >
+        PointProductID,
+      </if>
+      <if test="ppstorageid != null" >
+        PPStorageID,
+      </if>
+      <if test="pname != null" >
+        PName,
+      </if>
+      <if test="modelname != null" >
+        ModelName,
+      </if>
+      <if test="point != null" >
+        Point,
+      </if>
+      <if test="quantity != null" >
+        Quantity,
+      </if>
+      <if test="price != null" >
+        Price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ppordergoodsid != null" >
+        #{ppordergoodsid,jdbcType=INTEGER},
+      </if>
+      <if test="pporderid != null" >
+        #{pporderid,jdbcType=INTEGER},
+      </if>
+      <if test="pporderno != null" >
+        #{pporderno,jdbcType=VARCHAR},
+      </if>
+      <if test="pointproductid != null" >
+        #{pointproductid,jdbcType=INTEGER},
+      </if>
+      <if test="ppstorageid != null" >
+        #{ppstorageid,jdbcType=INTEGER},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="modelname != null" >
+        #{modelname,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null" >
+        #{point,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.PointProductOrderGoodsExample" resultType="java.lang.Integer" >
+    select count(*) from t_pointproductordergoods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_pointproductordergoods
+    <set >
+      <if test="record.ppordergoodsid != null" >
+        PPOrderGoodsID = #{record.ppordergoodsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pporderid != null" >
+        PPOrderID = #{record.pporderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pporderno != null" >
+        PPOrderNO = #{record.pporderno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pointproductid != null" >
+        PointProductID = #{record.pointproductid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ppstorageid != null" >
+        PPStorageID = #{record.ppstorageid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pname != null" >
+        PName = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelname != null" >
+        ModelName = #{record.modelname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.point != null" >
+        Point = #{record.point,jdbcType=INTEGER},
+      </if>
+      <if test="record.quantity != null" >
+        Quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        Price = #{record.price,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_pointproductordergoods
+    set PPOrderGoodsID = #{record.ppordergoodsid,jdbcType=INTEGER},
+      PPOrderID = #{record.pporderid,jdbcType=INTEGER},
+      PPOrderNO = #{record.pporderno,jdbcType=VARCHAR},
+      PointProductID = #{record.pointproductid,jdbcType=INTEGER},
+      PPStorageID = #{record.ppstorageid,jdbcType=INTEGER},
+      PName = #{record.pname,jdbcType=VARCHAR},
+      ModelName = #{record.modelname,jdbcType=VARCHAR},
+      Point = #{record.point,jdbcType=INTEGER},
+      Quantity = #{record.quantity,jdbcType=INTEGER},
+      Price = #{record.price,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

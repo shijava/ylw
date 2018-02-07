@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.StorageMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.Storage" >
+    <constructor >
+      <arg column="StorageID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ProductID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ModelName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Unit" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Storage" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    StorageID, ProductID, ModelName, Unit, Storage, ListID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.StorageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_storage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.StorageExample" >
+    delete from t_storage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.Storage" >
+    insert into t_storage (StorageID, ProductID, ModelName, 
+      Unit, Storage, ListID
+      )
+    values (#{storageid,jdbcType=INTEGER}, #{productid,jdbcType=INTEGER}, #{modelname,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{storage,jdbcType=INTEGER}, #{listid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.Storage" >
+    insert into t_storage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="storageid != null" >
+        StorageID,
+      </if>
+      <if test="productid != null" >
+        ProductID,
+      </if>
+      <if test="modelname != null" >
+        ModelName,
+      </if>
+      <if test="unit != null" >
+        Unit,
+      </if>
+      <if test="storage != null" >
+        Storage,
+      </if>
+      <if test="listid != null" >
+        ListID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="storageid != null" >
+        #{storageid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="modelname != null" >
+        #{modelname,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="storage != null" >
+        #{storage,jdbcType=INTEGER},
+      </if>
+      <if test="listid != null" >
+        #{listid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.StorageExample" resultType="java.lang.Integer" >
+    select count(*) from t_storage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_storage
+    <set >
+      <if test="record.storageid != null" >
+        StorageID = #{record.storageid,jdbcType=INTEGER},
+      </if>
+      <if test="record.productid != null" >
+        ProductID = #{record.productid,jdbcType=INTEGER},
+      </if>
+      <if test="record.modelname != null" >
+        ModelName = #{record.modelname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        Unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storage != null" >
+        Storage = #{record.storage,jdbcType=INTEGER},
+      </if>
+      <if test="record.listid != null" >
+        ListID = #{record.listid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_storage
+    set StorageID = #{record.storageid,jdbcType=INTEGER},
+      ProductID = #{record.productid,jdbcType=INTEGER},
+      ModelName = #{record.modelname,jdbcType=VARCHAR},
+      Unit = #{record.unit,jdbcType=VARCHAR},
+      Storage = #{record.storage,jdbcType=INTEGER},
+      ListID = #{record.listid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

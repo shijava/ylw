@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.OrderGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.OrderGoods" >
+    <constructor >
+      <arg column="OrderGoodsID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ProductID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ProductName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="StorageID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Price" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="RealPrice" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="Point" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DonatePoint" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ShipPrice" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="CommentState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="EditTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="PointPercent" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    OrderGoodsID, OrderID, OrderNo, ProductID, ProductName, StorageID, Quantity, Price, 
+    RealPrice, Point, DonatePoint, ShipPrice, CommentState, EditTime, PointPercent
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.OrderGoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_ordergoods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.OrderGoodsExample" >
+    delete from t_ordergoods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.OrderGoods" >
+    insert into t_ordergoods (OrderGoodsID, OrderID, OrderNo, 
+      ProductID, ProductName, StorageID, 
+      Quantity, Price, RealPrice, 
+      Point, DonatePoint, ShipPrice, 
+      CommentState, EditTime, PointPercent
+      )
+    values (#{ordergoodsid,jdbcType=INTEGER}, #{orderid,jdbcType=INTEGER}, #{orderno,jdbcType=VARCHAR}, 
+      #{productid,jdbcType=INTEGER}, #{productname,jdbcType=VARCHAR}, #{storageid,jdbcType=INTEGER}, 
+      #{quantity,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{realprice,jdbcType=DOUBLE}, 
+      #{point,jdbcType=INTEGER}, #{donatepoint,jdbcType=INTEGER}, #{shipprice,jdbcType=DOUBLE}, 
+      #{commentstate,jdbcType=INTEGER}, #{edittime,jdbcType=TIMESTAMP}, #{pointpercent,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.OrderGoods" >
+    insert into t_ordergoods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ordergoodsid != null" >
+        OrderGoodsID,
+      </if>
+      <if test="orderid != null" >
+        OrderID,
+      </if>
+      <if test="orderno != null" >
+        OrderNo,
+      </if>
+      <if test="productid != null" >
+        ProductID,
+      </if>
+      <if test="productname != null" >
+        ProductName,
+      </if>
+      <if test="storageid != null" >
+        StorageID,
+      </if>
+      <if test="quantity != null" >
+        Quantity,
+      </if>
+      <if test="price != null" >
+        Price,
+      </if>
+      <if test="realprice != null" >
+        RealPrice,
+      </if>
+      <if test="point != null" >
+        Point,
+      </if>
+      <if test="donatepoint != null" >
+        DonatePoint,
+      </if>
+      <if test="shipprice != null" >
+        ShipPrice,
+      </if>
+      <if test="commentstate != null" >
+        CommentState,
+      </if>
+      <if test="edittime != null" >
+        EditTime,
+      </if>
+      <if test="pointpercent != null" >
+        PointPercent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ordergoodsid != null" >
+        #{ordergoodsid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="storageid != null" >
+        #{storageid,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="realprice != null" >
+        #{realprice,jdbcType=DOUBLE},
+      </if>
+      <if test="point != null" >
+        #{point,jdbcType=INTEGER},
+      </if>
+      <if test="donatepoint != null" >
+        #{donatepoint,jdbcType=INTEGER},
+      </if>
+      <if test="shipprice != null" >
+        #{shipprice,jdbcType=DOUBLE},
+      </if>
+      <if test="commentstate != null" >
+        #{commentstate,jdbcType=INTEGER},
+      </if>
+      <if test="edittime != null" >
+        #{edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pointpercent != null" >
+        #{pointpercent,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.OrderGoodsExample" resultType="java.lang.Integer" >
+    select count(*) from t_ordergoods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_ordergoods
+    <set >
+      <if test="record.ordergoodsid != null" >
+        OrderGoodsID = #{record.ordergoodsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderid != null" >
+        OrderID = #{record.orderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderno != null" >
+        OrderNo = #{record.orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productid != null" >
+        ProductID = #{record.productid,jdbcType=INTEGER},
+      </if>
+      <if test="record.productname != null" >
+        ProductName = #{record.productname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storageid != null" >
+        StorageID = #{record.storageid,jdbcType=INTEGER},
+      </if>
+      <if test="record.quantity != null" >
+        Quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        Price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.realprice != null" >
+        RealPrice = #{record.realprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.point != null" >
+        Point = #{record.point,jdbcType=INTEGER},
+      </if>
+      <if test="record.donatepoint != null" >
+        DonatePoint = #{record.donatepoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.shipprice != null" >
+        ShipPrice = #{record.shipprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.commentstate != null" >
+        CommentState = #{record.commentstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.edittime != null" >
+        EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pointpercent != null" >
+        PointPercent = #{record.pointpercent,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_ordergoods
+    set OrderGoodsID = #{record.ordergoodsid,jdbcType=INTEGER},
+      OrderID = #{record.orderid,jdbcType=INTEGER},
+      OrderNo = #{record.orderno,jdbcType=VARCHAR},
+      ProductID = #{record.productid,jdbcType=INTEGER},
+      ProductName = #{record.productname,jdbcType=VARCHAR},
+      StorageID = #{record.storageid,jdbcType=INTEGER},
+      Quantity = #{record.quantity,jdbcType=INTEGER},
+      Price = #{record.price,jdbcType=DOUBLE},
+      RealPrice = #{record.realprice,jdbcType=DOUBLE},
+      Point = #{record.point,jdbcType=INTEGER},
+      DonatePoint = #{record.donatepoint,jdbcType=INTEGER},
+      ShipPrice = #{record.shipprice,jdbcType=DOUBLE},
+      CommentState = #{record.commentstate,jdbcType=INTEGER},
+      EditTime = #{record.edittime,jdbcType=TIMESTAMP},
+      PointPercent = #{record.pointpercent,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

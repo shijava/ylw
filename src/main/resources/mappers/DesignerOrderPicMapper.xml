@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.DesignerOrderPicMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.DesignerOrderPic" >
+    <constructor >
+      <arg column="DesignerPicID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DOrderID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DOrderNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.DesignerOrderPicWithBLOBs" >
+    <constructor >
+      <arg column="DesignerPicID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DOrderID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DOrderNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="PicUrl" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="PicDescribe" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DesignerPicID, DOrderID, DOrderNO, AddTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    PicUrl, PicDescribe
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.DesignerOrderPicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_designerorderpic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.DesignerOrderPicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_designerorderpic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.DesignerOrderPicExample" >
+    delete from t_designerorderpic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.DesignerOrderPicWithBLOBs" >
+    insert into t_designerorderpic (DesignerPicID, DOrderID, DOrderNO, 
+      AddTime, PicUrl, PicDescribe
+      )
+    values (#{designerpicid,jdbcType=INTEGER}, #{dorderid,jdbcType=INTEGER}, #{dorderno,jdbcType=VARCHAR}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{picurl,jdbcType=LONGVARCHAR}, #{picdescribe,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.DesignerOrderPicWithBLOBs" >
+    insert into t_designerorderpic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="designerpicid != null" >
+        DesignerPicID,
+      </if>
+      <if test="dorderid != null" >
+        DOrderID,
+      </if>
+      <if test="dorderno != null" >
+        DOrderNO,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="picurl != null" >
+        PicUrl,
+      </if>
+      <if test="picdescribe != null" >
+        PicDescribe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="designerpicid != null" >
+        #{designerpicid,jdbcType=INTEGER},
+      </if>
+      <if test="dorderid != null" >
+        #{dorderid,jdbcType=INTEGER},
+      </if>
+      <if test="dorderno != null" >
+        #{dorderno,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="picurl != null" >
+        #{picurl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="picdescribe != null" >
+        #{picdescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.DesignerOrderPicExample" resultType="java.lang.Integer" >
+    select count(*) from t_designerorderpic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_designerorderpic
+    <set >
+      <if test="record.designerpicid != null" >
+        DesignerPicID = #{record.designerpicid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dorderid != null" >
+        DOrderID = #{record.dorderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dorderno != null" >
+        DOrderNO = #{record.dorderno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.picurl != null" >
+        PicUrl = #{record.picurl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.picdescribe != null" >
+        PicDescribe = #{record.picdescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_designerorderpic
+    set DesignerPicID = #{record.designerpicid,jdbcType=INTEGER},
+      DOrderID = #{record.dorderid,jdbcType=INTEGER},
+      DOrderNO = #{record.dorderno,jdbcType=VARCHAR},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      PicUrl = #{record.picurl,jdbcType=LONGVARCHAR},
+      PicDescribe = #{record.picdescribe,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_designerorderpic
+    set DesignerPicID = #{record.designerpicid,jdbcType=INTEGER},
+      DOrderID = #{record.dorderid,jdbcType=INTEGER},
+      DOrderNO = #{record.dorderno,jdbcType=VARCHAR},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

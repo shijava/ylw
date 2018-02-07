@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.OrderLogsMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.OrderLogs" >
+    <constructor >
+      <arg column="LogID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CreateDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.OrderLogs" >
+    <constructor >
+      <arg column="LogID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CreateDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="Description" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    LogID, OrderID, OrderNo, OrderState, CreateDate
+  </sql>
+  <sql id="Blob_Column_List" >
+    Description
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.OrderLogsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_orderlogs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.OrderLogsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_orderlogs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.OrderLogsExample" >
+    delete from t_orderlogs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.OrderLogs" >
+    insert into t_orderlogs (LogID, OrderID, OrderNo, 
+      OrderState, CreateDate, Description
+      )
+    values (#{logid,jdbcType=INTEGER}, #{orderid,jdbcType=VARCHAR}, #{orderno,jdbcType=VARCHAR}, 
+      #{orderstate,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.OrderLogs" >
+    insert into t_orderlogs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logid != null" >
+        LogID,
+      </if>
+      <if test="orderid != null" >
+        OrderID,
+      </if>
+      <if test="orderno != null" >
+        OrderNo,
+      </if>
+      <if test="orderstate != null" >
+        OrderState,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logid != null" >
+        #{logid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstate != null" >
+        #{orderstate,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.OrderLogsExample" resultType="java.lang.Integer" >
+    select count(*) from t_orderlogs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_orderlogs
+    <set >
+      <if test="record.logid != null" >
+        LogID = #{record.logid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderid != null" >
+        OrderID = #{record.orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderno != null" >
+        OrderNo = #{record.orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderstate != null" >
+        OrderState = #{record.orderstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdate != null" >
+        CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.description != null" >
+        Description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_orderlogs
+    set LogID = #{record.logid,jdbcType=INTEGER},
+      OrderID = #{record.orderid,jdbcType=VARCHAR},
+      OrderNo = #{record.orderno,jdbcType=VARCHAR},
+      OrderState = #{record.orderstate,jdbcType=INTEGER},
+      CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      Description = #{record.description,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_orderlogs
+    set LogID = #{record.logid,jdbcType=INTEGER},
+      OrderID = #{record.orderid,jdbcType=VARCHAR},
+      OrderNo = #{record.orderno,jdbcType=VARCHAR},
+      OrderState = #{record.orderstate,jdbcType=INTEGER},
+      CreateDate = #{record.createdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

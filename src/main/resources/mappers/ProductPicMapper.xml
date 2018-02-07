@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.ProductPicMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.ProductPic" >
+    <constructor >
+      <arg column="ProductPicID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ProductID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SmallPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BigPic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Description" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ListID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AdminID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AddTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IsClose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ProductPicID, ProductID, Title, SmallPic, BigPic, Description, ListID, AdminID, AddTime, 
+    IsClose
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.ProductPicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_productpic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.ProductPicExample" >
+    delete from t_productpic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.ProductPic" >
+    insert into t_productpic (ProductPicID, ProductID, Title, 
+      SmallPic, BigPic, Description, 
+      ListID, AdminID, AddTime, 
+      IsClose)
+    values (#{productpicid,jdbcType=INTEGER}, #{productid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{smallpic,jdbcType=VARCHAR}, #{bigpic,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{listid,jdbcType=INTEGER}, #{adminid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{isclose,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.ProductPic" >
+    insert into t_productpic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productpicid != null" >
+        ProductPicID,
+      </if>
+      <if test="productid != null" >
+        ProductID,
+      </if>
+      <if test="title != null" >
+        Title,
+      </if>
+      <if test="smallpic != null" >
+        SmallPic,
+      </if>
+      <if test="bigpic != null" >
+        BigPic,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="listid != null" >
+        ListID,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="isclose != null" >
+        IsClose,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productpicid != null" >
+        #{productpicid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="smallpic != null" >
+        #{smallpic,jdbcType=VARCHAR},
+      </if>
+      <if test="bigpic != null" >
+        #{bigpic,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="listid != null" >
+        #{listid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isclose != null" >
+        #{isclose,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.ProductPicExample" resultType="java.lang.Integer" >
+    select count(*) from t_productpic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_productpic
+    <set >
+      <if test="record.productpicid != null" >
+        ProductPicID = #{record.productpicid,jdbcType=INTEGER},
+      </if>
+      <if test="record.productid != null" >
+        ProductID = #{record.productid,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        Title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smallpic != null" >
+        SmallPic = #{record.smallpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigpic != null" >
+        BigPic = #{record.bigpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        Description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.listid != null" >
+        ListID = #{record.listid,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminid != null" >
+        AdminID = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isclose != null" >
+        IsClose = #{record.isclose,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_productpic
+    set ProductPicID = #{record.productpicid,jdbcType=INTEGER},
+      ProductID = #{record.productid,jdbcType=INTEGER},
+      Title = #{record.title,jdbcType=VARCHAR},
+      SmallPic = #{record.smallpic,jdbcType=VARCHAR},
+      BigPic = #{record.bigpic,jdbcType=VARCHAR},
+      Description = #{record.description,jdbcType=VARCHAR},
+      ListID = #{record.listid,jdbcType=INTEGER},
+      AdminID = #{record.adminid,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsClose = #{record.isclose,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

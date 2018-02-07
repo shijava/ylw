@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.DesignerOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.DesignerOrder" >
+    <constructor >
+      <arg column="DOrderID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DorderNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderDatetime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="DesignWorksID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderPrices" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="RealPayPrices" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="OrderState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AppealState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsAppeal" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="BullerUserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DesignerUserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PayMethodsID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="YlWPayPrice" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="CancelOrderNote" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GiveUpOrderNote" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DZ_PayOrderRecordNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DZ_PointPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="DZ_RealPayPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="DZ_RealPayTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="isDZ" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderCompleteTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myit.ylw.pojo.DesignerOrderWithBLOBs" >
+    <constructor >
+      <arg column="DOrderID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DorderNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderDatetime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="DesignWorksID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderPrices" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="RealPayPrices" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="OrderState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="AppealState" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="IsAppeal" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="BullerUserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="DesignerUserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PayMethodsID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="YlWPayPrice" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="CancelOrderNote" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GiveUpOrderNote" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DZ_PayOrderRecordNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DZ_PointPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="DZ_RealPayPriceTotal" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="DZ_RealPayTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="isDZ" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OrderCompleteTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="Title" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="BullerDescribe" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="BullerUploadPic1" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="BullerUploadPic2" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="BullerUploadPic3" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="BullerUploadPic4" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="BullerUploadPic5" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="BullerRemark" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="SellerRemark" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DOrderID, DorderNO, OrderDatetime, DesignWorksID, OrderPrices, RealPayPrices, OrderState, 
+    AppealState, IsAppeal, BullerUserID, DesignerUserID, PayMethodsID, YlWPayPrice, CancelOrderNote, 
+    GiveUpOrderNote, DZ_PayOrderRecordNo, DZ_PointPriceTotal, DZ_RealPayPriceTotal, DZ_RealPayTime, 
+    isDZ, OrderCompleteTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    Title, BullerDescribe, BullerUploadPic1, BullerUploadPic2, BullerUploadPic3, BullerUploadPic4, 
+    BullerUploadPic5, BullerRemark, SellerRemark
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myit.ylw.pojo.DesignerOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_designerorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.DesignerOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_designerorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.DesignerOrderExample" >
+    delete from t_designerorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.DesignerOrderWithBLOBs" >
+    insert into t_designerorder (DOrderID, DorderNO, OrderDatetime, 
+      DesignWorksID, OrderPrices, RealPayPrices, 
+      OrderState, AppealState, IsAppeal, 
+      BullerUserID, DesignerUserID, PayMethodsID, 
+      YlWPayPrice, CancelOrderNote, GiveUpOrderNote, 
+      DZ_PayOrderRecordNo, DZ_PointPriceTotal, DZ_RealPayPriceTotal, 
+      DZ_RealPayTime, isDZ, OrderCompleteTime, 
+      Title, BullerDescribe, BullerUploadPic1, 
+      BullerUploadPic2, BullerUploadPic3, 
+      BullerUploadPic4, BullerUploadPic5, 
+      BullerRemark, SellerRemark)
+    values (#{dorderid,jdbcType=INTEGER}, #{dorderno,jdbcType=VARCHAR}, #{orderdatetime,jdbcType=TIMESTAMP}, 
+      #{designworksid,jdbcType=INTEGER}, #{orderprices,jdbcType=DOUBLE}, #{realpayprices,jdbcType=DOUBLE}, 
+      #{orderstate,jdbcType=INTEGER}, #{appealstate,jdbcType=INTEGER}, #{isappeal,jdbcType=INTEGER}, 
+      #{bulleruserid,jdbcType=INTEGER}, #{designeruserid,jdbcType=INTEGER}, #{paymethodsid,jdbcType=INTEGER}, 
+      #{ylwpayprice,jdbcType=DOUBLE}, #{cancelordernote,jdbcType=VARCHAR}, #{giveupordernote,jdbcType=VARCHAR}, 
+      #{dzPayorderrecordno,jdbcType=VARCHAR}, #{dzPointpricetotal,jdbcType=DOUBLE}, #{dzRealpaypricetotal,jdbcType=DOUBLE}, 
+      #{dzRealpaytime,jdbcType=TIMESTAMP}, #{isdz,jdbcType=INTEGER}, #{ordercompletetime,jdbcType=TIMESTAMP}, 
+      #{title,jdbcType=LONGVARCHAR}, #{bullerdescribe,jdbcType=LONGVARCHAR}, #{bulleruploadpic1,jdbcType=LONGVARCHAR}, 
+      #{bulleruploadpic2,jdbcType=LONGVARCHAR}, #{bulleruploadpic3,jdbcType=LONGVARCHAR}, 
+      #{bulleruploadpic4,jdbcType=LONGVARCHAR}, #{bulleruploadpic5,jdbcType=LONGVARCHAR}, 
+      #{bullerremark,jdbcType=LONGVARCHAR}, #{sellerremark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.DesignerOrderWithBLOBs" >
+    insert into t_designerorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dorderid != null" >
+        DOrderID,
+      </if>
+      <if test="dorderno != null" >
+        DorderNO,
+      </if>
+      <if test="orderdatetime != null" >
+        OrderDatetime,
+      </if>
+      <if test="designworksid != null" >
+        DesignWorksID,
+      </if>
+      <if test="orderprices != null" >
+        OrderPrices,
+      </if>
+      <if test="realpayprices != null" >
+        RealPayPrices,
+      </if>
+      <if test="orderstate != null" >
+        OrderState,
+      </if>
+      <if test="appealstate != null" >
+        AppealState,
+      </if>
+      <if test="isappeal != null" >
+        IsAppeal,
+      </if>
+      <if test="bulleruserid != null" >
+        BullerUserID,
+      </if>
+      <if test="designeruserid != null" >
+        DesignerUserID,
+      </if>
+      <if test="paymethodsid != null" >
+        PayMethodsID,
+      </if>
+      <if test="ylwpayprice != null" >
+        YlWPayPrice,
+      </if>
+      <if test="cancelordernote != null" >
+        CancelOrderNote,
+      </if>
+      <if test="giveupordernote != null" >
+        GiveUpOrderNote,
+      </if>
+      <if test="dzPayorderrecordno != null" >
+        DZ_PayOrderRecordNo,
+      </if>
+      <if test="dzPointpricetotal != null" >
+        DZ_PointPriceTotal,
+      </if>
+      <if test="dzRealpaypricetotal != null" >
+        DZ_RealPayPriceTotal,
+      </if>
+      <if test="dzRealpaytime != null" >
+        DZ_RealPayTime,
+      </if>
+      <if test="isdz != null" >
+        isDZ,
+      </if>
+      <if test="ordercompletetime != null" >
+        OrderCompleteTime,
+      </if>
+      <if test="title != null" >
+        Title,
+      </if>
+      <if test="bullerdescribe != null" >
+        BullerDescribe,
+      </if>
+      <if test="bulleruploadpic1 != null" >
+        BullerUploadPic1,
+      </if>
+      <if test="bulleruploadpic2 != null" >
+        BullerUploadPic2,
+      </if>
+      <if test="bulleruploadpic3 != null" >
+        BullerUploadPic3,
+      </if>
+      <if test="bulleruploadpic4 != null" >
+        BullerUploadPic4,
+      </if>
+      <if test="bulleruploadpic5 != null" >
+        BullerUploadPic5,
+      </if>
+      <if test="bullerremark != null" >
+        BullerRemark,
+      </if>
+      <if test="sellerremark != null" >
+        SellerRemark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dorderid != null" >
+        #{dorderid,jdbcType=INTEGER},
+      </if>
+      <if test="dorderno != null" >
+        #{dorderno,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdatetime != null" >
+        #{orderdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="designworksid != null" >
+        #{designworksid,jdbcType=INTEGER},
+      </if>
+      <if test="orderprices != null" >
+        #{orderprices,jdbcType=DOUBLE},
+      </if>
+      <if test="realpayprices != null" >
+        #{realpayprices,jdbcType=DOUBLE},
+      </if>
+      <if test="orderstate != null" >
+        #{orderstate,jdbcType=INTEGER},
+      </if>
+      <if test="appealstate != null" >
+        #{appealstate,jdbcType=INTEGER},
+      </if>
+      <if test="isappeal != null" >
+        #{isappeal,jdbcType=INTEGER},
+      </if>
+      <if test="bulleruserid != null" >
+        #{bulleruserid,jdbcType=INTEGER},
+      </if>
+      <if test="designeruserid != null" >
+        #{designeruserid,jdbcType=INTEGER},
+      </if>
+      <if test="paymethodsid != null" >
+        #{paymethodsid,jdbcType=INTEGER},
+      </if>
+      <if test="ylwpayprice != null" >
+        #{ylwpayprice,jdbcType=DOUBLE},
+      </if>
+      <if test="cancelordernote != null" >
+        #{cancelordernote,jdbcType=VARCHAR},
+      </if>
+      <if test="giveupordernote != null" >
+        #{giveupordernote,jdbcType=VARCHAR},
+      </if>
+      <if test="dzPayorderrecordno != null" >
+        #{dzPayorderrecordno,jdbcType=VARCHAR},
+      </if>
+      <if test="dzPointpricetotal != null" >
+        #{dzPointpricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="dzRealpaypricetotal != null" >
+        #{dzRealpaypricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="dzRealpaytime != null" >
+        #{dzRealpaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdz != null" >
+        #{isdz,jdbcType=INTEGER},
+      </if>
+      <if test="ordercompletetime != null" >
+        #{ordercompletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bullerdescribe != null" >
+        #{bullerdescribe,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bulleruploadpic1 != null" >
+        #{bulleruploadpic1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bulleruploadpic2 != null" >
+        #{bulleruploadpic2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bulleruploadpic3 != null" >
+        #{bulleruploadpic3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bulleruploadpic4 != null" >
+        #{bulleruploadpic4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bulleruploadpic5 != null" >
+        #{bulleruploadpic5,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bullerremark != null" >
+        #{bullerremark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sellerremark != null" >
+        #{sellerremark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.DesignerOrderExample" resultType="java.lang.Integer" >
+    select count(*) from t_designerorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_designerorder
+    <set >
+      <if test="record.dorderid != null" >
+        DOrderID = #{record.dorderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dorderno != null" >
+        DorderNO = #{record.dorderno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderdatetime != null" >
+        OrderDatetime = #{record.orderdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.designworksid != null" >
+        DesignWorksID = #{record.designworksid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderprices != null" >
+        OrderPrices = #{record.orderprices,jdbcType=DOUBLE},
+      </if>
+      <if test="record.realpayprices != null" >
+        RealPayPrices = #{record.realpayprices,jdbcType=DOUBLE},
+      </if>
+      <if test="record.orderstate != null" >
+        OrderState = #{record.orderstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.appealstate != null" >
+        AppealState = #{record.appealstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.isappeal != null" >
+        IsAppeal = #{record.isappeal,jdbcType=INTEGER},
+      </if>
+      <if test="record.bulleruserid != null" >
+        BullerUserID = #{record.bulleruserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.designeruserid != null" >
+        DesignerUserID = #{record.designeruserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.paymethodsid != null" >
+        PayMethodsID = #{record.paymethodsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ylwpayprice != null" >
+        YlWPayPrice = #{record.ylwpayprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cancelordernote != null" >
+        CancelOrderNote = #{record.cancelordernote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.giveupordernote != null" >
+        GiveUpOrderNote = #{record.giveupordernote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dzPayorderrecordno != null" >
+        DZ_PayOrderRecordNo = #{record.dzPayorderrecordno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dzPointpricetotal != null" >
+        DZ_PointPriceTotal = #{record.dzPointpricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dzRealpaypricetotal != null" >
+        DZ_RealPayPriceTotal = #{record.dzRealpaypricetotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dzRealpaytime != null" >
+        DZ_RealPayTime = #{record.dzRealpaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdz != null" >
+        isDZ = #{record.isdz,jdbcType=INTEGER},
+      </if>
+      <if test="record.ordercompletetime != null" >
+        OrderCompleteTime = #{record.ordercompletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.title != null" >
+        Title = #{record.title,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.bullerdescribe != null" >
+        BullerDescribe = #{record.bullerdescribe,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.bulleruploadpic1 != null" >
+        BullerUploadPic1 = #{record.bulleruploadpic1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.bulleruploadpic2 != null" >
+        BullerUploadPic2 = #{record.bulleruploadpic2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.bulleruploadpic3 != null" >
+        BullerUploadPic3 = #{record.bulleruploadpic3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.bulleruploadpic4 != null" >
+        BullerUploadPic4 = #{record.bulleruploadpic4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.bulleruploadpic5 != null" >
+        BullerUploadPic5 = #{record.bulleruploadpic5,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.bullerremark != null" >
+        BullerRemark = #{record.bullerremark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.sellerremark != null" >
+        SellerRemark = #{record.sellerremark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_designerorder
+    set DOrderID = #{record.dorderid,jdbcType=INTEGER},
+      DorderNO = #{record.dorderno,jdbcType=VARCHAR},
+      OrderDatetime = #{record.orderdatetime,jdbcType=TIMESTAMP},
+      DesignWorksID = #{record.designworksid,jdbcType=INTEGER},
+      OrderPrices = #{record.orderprices,jdbcType=DOUBLE},
+      RealPayPrices = #{record.realpayprices,jdbcType=DOUBLE},
+      OrderState = #{record.orderstate,jdbcType=INTEGER},
+      AppealState = #{record.appealstate,jdbcType=INTEGER},
+      IsAppeal = #{record.isappeal,jdbcType=INTEGER},
+      BullerUserID = #{record.bulleruserid,jdbcType=INTEGER},
+      DesignerUserID = #{record.designeruserid,jdbcType=INTEGER},
+      PayMethodsID = #{record.paymethodsid,jdbcType=INTEGER},
+      YlWPayPrice = #{record.ylwpayprice,jdbcType=DOUBLE},
+      CancelOrderNote = #{record.cancelordernote,jdbcType=VARCHAR},
+      GiveUpOrderNote = #{record.giveupordernote,jdbcType=VARCHAR},
+      DZ_PayOrderRecordNo = #{record.dzPayorderrecordno,jdbcType=VARCHAR},
+      DZ_PointPriceTotal = #{record.dzPointpricetotal,jdbcType=DOUBLE},
+      DZ_RealPayPriceTotal = #{record.dzRealpaypricetotal,jdbcType=DOUBLE},
+      DZ_RealPayTime = #{record.dzRealpaytime,jdbcType=TIMESTAMP},
+      isDZ = #{record.isdz,jdbcType=INTEGER},
+      OrderCompleteTime = #{record.ordercompletetime,jdbcType=TIMESTAMP},
+      Title = #{record.title,jdbcType=LONGVARCHAR},
+      BullerDescribe = #{record.bullerdescribe,jdbcType=LONGVARCHAR},
+      BullerUploadPic1 = #{record.bulleruploadpic1,jdbcType=LONGVARCHAR},
+      BullerUploadPic2 = #{record.bulleruploadpic2,jdbcType=LONGVARCHAR},
+      BullerUploadPic3 = #{record.bulleruploadpic3,jdbcType=LONGVARCHAR},
+      BullerUploadPic4 = #{record.bulleruploadpic4,jdbcType=LONGVARCHAR},
+      BullerUploadPic5 = #{record.bulleruploadpic5,jdbcType=LONGVARCHAR},
+      BullerRemark = #{record.bullerremark,jdbcType=LONGVARCHAR},
+      SellerRemark = #{record.sellerremark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_designerorder
+    set DOrderID = #{record.dorderid,jdbcType=INTEGER},
+      DorderNO = #{record.dorderno,jdbcType=VARCHAR},
+      OrderDatetime = #{record.orderdatetime,jdbcType=TIMESTAMP},
+      DesignWorksID = #{record.designworksid,jdbcType=INTEGER},
+      OrderPrices = #{record.orderprices,jdbcType=DOUBLE},
+      RealPayPrices = #{record.realpayprices,jdbcType=DOUBLE},
+      OrderState = #{record.orderstate,jdbcType=INTEGER},
+      AppealState = #{record.appealstate,jdbcType=INTEGER},
+      IsAppeal = #{record.isappeal,jdbcType=INTEGER},
+      BullerUserID = #{record.bulleruserid,jdbcType=INTEGER},
+      DesignerUserID = #{record.designeruserid,jdbcType=INTEGER},
+      PayMethodsID = #{record.paymethodsid,jdbcType=INTEGER},
+      YlWPayPrice = #{record.ylwpayprice,jdbcType=DOUBLE},
+      CancelOrderNote = #{record.cancelordernote,jdbcType=VARCHAR},
+      GiveUpOrderNote = #{record.giveupordernote,jdbcType=VARCHAR},
+      DZ_PayOrderRecordNo = #{record.dzPayorderrecordno,jdbcType=VARCHAR},
+      DZ_PointPriceTotal = #{record.dzPointpricetotal,jdbcType=DOUBLE},
+      DZ_RealPayPriceTotal = #{record.dzRealpaypricetotal,jdbcType=DOUBLE},
+      DZ_RealPayTime = #{record.dzRealpaytime,jdbcType=TIMESTAMP},
+      isDZ = #{record.isdz,jdbcType=INTEGER},
+      OrderCompleteTime = #{record.ordercompletetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

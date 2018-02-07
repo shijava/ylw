@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.PointProductCartMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.PointProductCart" >
+    <constructor >
+      <arg column="PPCart" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PointProductID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PPStorageID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CartType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PPCart, UserID, PointProductID, PPStorageID, Quantity, CartType
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.PointProductCartExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_pointproductcart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.PointProductCartExample" >
+    delete from t_pointproductcart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.PointProductCart" >
+    insert into t_pointproductcart (PPCart, UserID, PointProductID, 
+      PPStorageID, Quantity, CartType
+      )
+    values (#{ppcart,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{pointproductid,jdbcType=INTEGER}, 
+      #{ppstorageid,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, #{carttype,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.PointProductCart" >
+    insert into t_pointproductcart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ppcart != null" >
+        PPCart,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="pointproductid != null" >
+        PointProductID,
+      </if>
+      <if test="ppstorageid != null" >
+        PPStorageID,
+      </if>
+      <if test="quantity != null" >
+        Quantity,
+      </if>
+      <if test="carttype != null" >
+        CartType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ppcart != null" >
+        #{ppcart,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="pointproductid != null" >
+        #{pointproductid,jdbcType=INTEGER},
+      </if>
+      <if test="ppstorageid != null" >
+        #{ppstorageid,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="carttype != null" >
+        #{carttype,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.PointProductCartExample" resultType="java.lang.Integer" >
+    select count(*) from t_pointproductcart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_pointproductcart
+    <set >
+      <if test="record.ppcart != null" >
+        PPCart = #{record.ppcart,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pointproductid != null" >
+        PointProductID = #{record.pointproductid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ppstorageid != null" >
+        PPStorageID = #{record.ppstorageid,jdbcType=INTEGER},
+      </if>
+      <if test="record.quantity != null" >
+        Quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.carttype != null" >
+        CartType = #{record.carttype,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_pointproductcart
+    set PPCart = #{record.ppcart,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      PointProductID = #{record.pointproductid,jdbcType=INTEGER},
+      PPStorageID = #{record.ppstorageid,jdbcType=INTEGER},
+      Quantity = #{record.quantity,jdbcType=INTEGER},
+      CartType = #{record.carttype,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

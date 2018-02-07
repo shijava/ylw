@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myit.ylw.dao.FreightMapper" >
+  <resultMap id="BaseResultMap" type="com.myit.ylw.pojo.Freight" >
+    <constructor >
+      <arg column="FreightID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ProductID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="BeginNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="EndNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Price" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FreightID, ProductID, BeginNum, EndNum, Price
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myit.ylw.pojo.FreightExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_freight
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myit.ylw.pojo.FreightExample" >
+    delete from t_freight
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myit.ylw.pojo.Freight" >
+    insert into t_freight (FreightID, ProductID, BeginNum, 
+      EndNum, Price)
+    values (#{freightid,jdbcType=INTEGER}, #{productid,jdbcType=INTEGER}, #{beginnum,jdbcType=INTEGER}, 
+      #{endnum,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myit.ylw.pojo.Freight" >
+    insert into t_freight
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="freightid != null" >
+        FreightID,
+      </if>
+      <if test="productid != null" >
+        ProductID,
+      </if>
+      <if test="beginnum != null" >
+        BeginNum,
+      </if>
+      <if test="endnum != null" >
+        EndNum,
+      </if>
+      <if test="price != null" >
+        Price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="freightid != null" >
+        #{freightid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="beginnum != null" >
+        #{beginnum,jdbcType=INTEGER},
+      </if>
+      <if test="endnum != null" >
+        #{endnum,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myit.ylw.pojo.FreightExample" resultType="java.lang.Integer" >
+    select count(*) from t_freight
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_freight
+    <set >
+      <if test="record.freightid != null" >
+        FreightID = #{record.freightid,jdbcType=INTEGER},
+      </if>
+      <if test="record.productid != null" >
+        ProductID = #{record.productid,jdbcType=INTEGER},
+      </if>
+      <if test="record.beginnum != null" >
+        BeginNum = #{record.beginnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.endnum != null" >
+        EndNum = #{record.endnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        Price = #{record.price,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_freight
+    set FreightID = #{record.freightid,jdbcType=INTEGER},
+      ProductID = #{record.productid,jdbcType=INTEGER},
+      BeginNum = #{record.beginnum,jdbcType=INTEGER},
+      EndNum = #{record.endnum,jdbcType=INTEGER},
+      Price = #{record.price,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
