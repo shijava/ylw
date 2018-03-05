@@ -23,4 +23,8 @@ public interface UserMapper {
     int updateByExampleWithBLOBs(@Param("record") User record, @Param("example") UserExample example);
 
     int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+
+    int checkUsername(String username);
+    int checkEmail(@Param("email") String email);
+    User selectLogin(@Param("username") String username,@Param("password") String password);
 }
