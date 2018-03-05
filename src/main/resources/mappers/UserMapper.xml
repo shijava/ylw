@@ -585,4 +585,19 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  <select id="checkUsername" resultType="int" parameterType="string">
+    SELECT COUNT(1) FROM t_user
+    WHERE UserName=#{username}
+  </select>
+  <select id="checkEmail" resultType="int" parameterType="string">
+    SELECT COUNT(1) FROM t_user
+    WHERE Email=#{email}
+  </select>
+  <select id="selectLogin" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM t_user
+    WHERE UserName=#{username}
+    and UserPass=#{password}
+  </select>
 </mapper>
